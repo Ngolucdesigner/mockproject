@@ -8,9 +8,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ReviewForm {
-    String name;
+    String username;
     double rating;
-    String text;
+    String reviewText;
     int productId;
 
 }
