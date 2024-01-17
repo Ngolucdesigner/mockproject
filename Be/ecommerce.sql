@@ -117,7 +117,9 @@ CREATE TABLE `OrderDetails`(
         order_id INT UNSIGNED,
         product_id INT UNSIGNED,
         quantity INT UNSIGNED,
-        unit_price  INT UNSIGNED
+        unit_price  FLOAT UNSIGNED,
+        FOREIGN KEY(order_id) REFERENCES `orders`(orders_id),
+		FOREIGN KEY(product_id) REFERENCES `products`(productid)
 );
 
 CREATE TABLE `quantity`(
