@@ -2,6 +2,8 @@ package com.anks.tech.ecommerce.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class Customers {
     private String country;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     List<Order> orders;
 
 

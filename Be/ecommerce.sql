@@ -54,7 +54,7 @@ CREATE TABLE `Account`(
     `role`				ENUM('ADMIN', 'EMPLOYEE', 'MANAGER'),
     CreateDate			DATE DEFAULT(now()), -- '2023-02-18'
     UUIDKey				VARCHAR(50) UNIQUE KEY NOT NULL,
-    FOREIGN KEY(avatar) REFERENCES `fileTable`(uuid)
+    FOREIGN KEY(avatar) REFERENCES `fileTable`(uuid) ON DELETE CASCADE
 );
 
 
@@ -73,10 +73,10 @@ CREATE TABLE `products`(
     informationId INT UNSIGNED,
     
     
-    FOREIGN KEY(catagoryId) REFERENCES `category`(categoryid),
-    FOREIGN KEY(uuidUrl) REFERENCES `fileTable`(uuid),
-    FOREIGN KEY(originId) REFERENCES `origin`(id),
-    FOREIGN KEY(informationId) REFERENCES `infomation`(id)
+    FOREIGN KEY(catagoryId) REFERENCES `category`(categoryid) ON DELETE CASCADE,
+    FOREIGN KEY(uuidUrl) REFERENCES `fileTable`(uuid) ON DELETE CASCADE,
+    FOREIGN KEY(originId) REFERENCES `origin`(id) ON DELETE CASCADE,
+    FOREIGN KEY(informationId) REFERENCES `infomation`(id)ON DELETE CASCADE
 );
 
 
@@ -87,7 +87,7 @@ CREATE TABLE `reviews`(
     reviewText TEXT,
     rating FLOAT UNSIGNED,
     productId int UNSIGNED,
-	FOREIGN KEY(productId) REFERENCES `products`(productid)
+	FOREIGN KEY(productId) REFERENCES `products`(productid) ON DELETE CASCADE
 );
 
 
@@ -107,7 +107,7 @@ CREATE TABLE `orders`(
 	customers_id INT UNSIGNED, 
     order_date DATE DEFAULT(now()),
 	total_amount INT UNSIGNED,
-	FOREIGN KEY(customersId) REFERENCES `customers`(customersId)
+	FOREIGN KEY(customers_id) REFERENCES `customers`(customersId) ON DELETE CASCADE
 );
 
 
@@ -118,8 +118,8 @@ CREATE TABLE `OrderDetails`(
         product_id INT UNSIGNED,
         quantity INT UNSIGNED,
         unit_price  FLOAT UNSIGNED,
-        FOREIGN KEY(order_id) REFERENCES `orders`(orders_id),
-		FOREIGN KEY(product_id) REFERENCES `products`(productid)
+        FOREIGN KEY(order_id) REFERENCES `orders`(orders_id) ON DELETE CASCADE,
+		FOREIGN KEY(product_id) REFERENCES `products`(productid) ON DELETE CASCADE
 );
 
 CREATE TABLE `quantity`(
@@ -127,7 +127,7 @@ CREATE TABLE `quantity`(
         totalQuantity INT UNSIGNED,
         totalSale INT UNSIGNED,
         productId INT UNSIGNED,
-        FOREIGN KEY(productId) REFERENCES `products`(productid)
+        FOREIGN KEY(productId) REFERENCES `products`(productid) ON DELETE CASCADE
 );
 
 CREATE TABLE `payments`(
@@ -137,7 +137,7 @@ CREATE TABLE `payments`(
         payment_amount VARCHAR(50),
         payment_method  VARCHAR(50),
         
-        FOREIGN KEY(orders_id) REFERENCES `orders`(orders_id)
+        FOREIGN KEY(orders_id) REFERENCES `orders`(orders_id) ON DELETE CASCADE
         
 );
 
