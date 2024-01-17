@@ -73,8 +73,7 @@ public class Account {
     @JoinColumn(name = "avatar", referencedColumnName = "uuid")
     private FileProduct fileProduct;
 
-    @OneToMany(mappedBy = "account")
-    List<Order> orders;
+
     @PrePersist
     public void prePersist() {
         if (this.createDate == null) {

@@ -25,13 +25,5 @@ public class Order {
 
 
 
-    @ManyToOne
-    @JoinColumn(name = "productId", referencedColumnName = "productid")
-    Product product;
-
-    @ManyToOne
-    @JoinColumn(name = "accountId", referencedColumnName = "AccountID")
-    private Account account;
-
 
 }

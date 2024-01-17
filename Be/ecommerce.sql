@@ -50,13 +50,11 @@ CREATE TABLE `Account`(
     avatar				VARCHAR(100) ,
 	phone				VARCHAR(20) NOT NULL,
     address				VARCHAR(100) NOT NULL,
-    city				VARCHAR(50), 
     `password`			VARCHAR(100) NOT NULL,
-    `role`				ENUM('ADMIN', 'EMPLOYEE', 'MANAGER','CUSTOMERS'),
+    `role`				ENUM('ADMIN', 'EMPLOYEE', 'MANAGER'),
     CreateDate			DATE DEFAULT(now()), -- '2023-02-18'
     UUIDKey				VARCHAR(50) UNIQUE KEY NOT NULL,
-    uuidUrl 			VARCHAR(50),
-    FOREIGN KEY(uuidUrl) REFERENCES `fileTable`(uuid)
+    FOREIGN KEY(avatar) REFERENCES `fileTable`(uuid)
 );
 
 
@@ -73,6 +71,7 @@ CREATE TABLE `products`(
     uuidUrl VARCHAR(50),
     originId INT UNSIGNED,
     informationId INT UNSIGNED,
+    
     
     FOREIGN KEY(catagoryId) REFERENCES `category`(categoryid),
     FOREIGN KEY(uuidUrl) REFERENCES `fileTable`(uuid),
@@ -92,40 +91,54 @@ CREATE TABLE `reviews`(
 );
 
 
+CREATE TABLE `customers`(
+	customersId INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    fullname VARCHAR(50),
+    email    VARCHAR(50),
+    phone		VARCHAR(50),
+    address TEXT,
+    city VARCHAR(50),
+    postalcode INT UNSIGNED,
+    country VARCHAR(50)
+);
 
-
-CREATE TABLE `oder`(
-	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-	accountId INT UNSIGNED, 
-	productId INT UNSIGNED,
-	`status`  ENUM("DONE","WAIT", "COMFIRM"),
-	FOREIGN KEY(productId) REFERENCES `products`(productid),
-	FOREIGN KEY(accountId) REFERENCES `Account`(AccountID)
+CREATE TABLE `orders`(
+	orders_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	customers_id INT UNSIGNED, 
+    order_date DATE DEFAULT(now()),
+	total_amount INT UNSIGNED,
+	FOREIGN KEY(customersId) REFERENCES `customers`(customersId)
 );
 
 
 
+CREATE TABLE `OrderDetails`(
+		OrderDetails_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+        order_id INT UNSIGNED,
+        product_id INT UNSIGNED,
+        quantity INT UNSIGNED,
+        unit_price  INT UNSIGNED
+);
 
-INSERT INTO `Account`(UUIDKey, 					Email 					, Username		, `password`														, 	firtname			,	lastname ,		avatar, 		phone, 		address,		`role`		, 	CreateDate)
-VALUE 				(UUID_TO_BIN(UUID()),			'account1@gmail.com'	,'vanchien1'	, '$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi'	, 	'Nguyen Van'		,	'A'		 ,		NULL  ,				"094422",		"ha noi",		'ADMIN'		,  '2022-03-07'),
-					(UUID_TO_BIN(UUID()),			'account2@gmail.com'	,'vanchien2'	, '$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi'	, 	'Nguyen Van'		,	'B'		 ,		null  ,				"094422",		"Nghe An",		'ADMIN'		,  '2022-03-07'),
-                    (UUID_TO_BIN(UUID()),			'account3@gmail.com'	,'vanchien3'	, '$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi'	, 	'Nguyen Van'		,	'C'		 ,		NULL  ,				"094422",		"ha noi",		'ADMIN'		,  '2022-03-07'),
-                    (UUID_TO_BIN(UUID()),			'account4@gmail.com'	,'vanchien4'	, '$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi'	, 	'Nguyen Van'		,	'D'		 ,		null  ,				"094422",		"Nghe An",		'ADMIN' 	,  '2022-03-07'),
-                    (UUID_TO_BIN(UUID()),			'account5@gmail.com'	,'anks'			, '$2a$10$W2neF9.6Agi6kAKVq8q3fec5dHW8KUA.b0VSIGdIZyUravfLpyIFi'	, 	'Anks'				,	'Anks'	 ,		null  ,				"094422",		"ha noi",		'MANAGER'	,  '2022-03-07');
+CREATE TABLE `quantity`(
+		quantityId  INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+        totalQuantity INT UNSIGNED,
+        totalSale INT UNSIGNED,
+        productId INT UNSIGNED,
+        FOREIGN KEY(productId) REFERENCES `products`(productid)
+);
+
+CREATE TABLE `payments`(
+		paymentId INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+        orders_id INT UNSIGNED,
+        payment_date DATE DEFAULT(now()),
+        payment_amount VARCHAR(50),
+        payment_method  VARCHAR(50),
+        
+        FOREIGN KEY(orders_id) REFERENCES `orders`(orders_id)
+        
+);
 
 
-INSERT INTO `category`(catagory)
-VALUE ("chair"),
-		("MOBILE");
-
-INSERT INTO `products`(productName, imgUrl,price,shortDesc,`description`,avgRating,catagoryId,uuidUrl)
-VALUE
-	("product1", "abcdesf", 12.3, "loremdfas dsafkh hgdsajfh hsidafj syfiusad", "dsafuin sdaihfjb hisadfhm dksufhkmn hfsdjkahf asdfdkfhksdjaf jsadf", 4.8, 1, "7585c750-e86c-470f-8dc7-216c74a60487");
-    
-INSERT INTO `reviews`(userName, reviewText,rating,productId)
-VALUE
-	("ANKS", "ASDJASKLD ASDM DSAFSK DFSAFAS ASDFASD SADFDAS SDFADAS SDAFAS", 4, 1),
-    ("ANdsdfsKS", "ASDJASKLD ASDM DSAFSK DFSAFAS ASDFASD SADFDAS SDFADAS SDAFAS", 5, 1);
-    
 
     
