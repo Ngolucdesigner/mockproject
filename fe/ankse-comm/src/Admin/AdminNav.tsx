@@ -5,7 +5,6 @@ import "../styles/Admin-Nav.scss";
 import { NavLink } from "react-router-dom";
 
 
-
 const user = require("../assets/images/user-icon.png");
 
 const admin__nav = [

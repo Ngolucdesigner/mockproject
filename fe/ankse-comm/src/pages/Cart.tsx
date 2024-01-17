@@ -9,13 +9,14 @@ import { priceFormat } from "../model/FormatVND";
 import { Link, useNavigate } from "react-router-dom";
 import { cartActions } from "../redux/slices/cartSlice";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 type itemCart = {
   id: any;
   imgUrl: any;
   price: number;
   quantity: number;
   productName: any;
-  file: {url:string}|any;
+  file: { url: string } | any;
   detail: (id: any) => void;
   delete: (id: any) => void;
 };
@@ -57,6 +58,11 @@ const Cart = () => {
   const totalAmount: any = useSelector<TReducers>(
     (state) => state.cart.totalAmount
   );
+
+  const totalQuantity: any = useSelector<TReducers>(
+    (state) => state.cart.totalQuantity
+  );
+
   const productDetail = (id: any) => {
     navigate(`/shop/${id}`);
   };
@@ -65,6 +71,9 @@ const Cart = () => {
     dispatch(cartActions.deleteItem(id));
   };
 
+  const handleCheckOut = () => {
+    totalQuantity ? navigate("/checkout") : toast.warning("Product Cart null");
+  };
   return (
     <Helmet title="Cart">
       <CommonSection title="Shopping Cart" />
@@ -122,10 +131,9 @@ const Cart = () => {
                 <motion.button
                   whileTap={{ scale: 1.1 }}
                   className="buy__btn w-100"
+                  onClick={handleCheckOut}
                 >
-                  <Link to={"/checkout"} className="link">
-                    Checkout
-                  </Link>
+                  Checkout
                 </motion.button>
 
                 <motion.button

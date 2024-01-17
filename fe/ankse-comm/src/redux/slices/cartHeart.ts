@@ -44,7 +44,7 @@ const cartHeart = createSlice({
         existingItem.totalPrice = Number(existingItem.totalPrice) + Number(newItem.price);
       }
 
-    //   state.totalAmount = Number(state.heartItems.reduce((total, item) => total));
+      //state.totalAmount = Number(state.heartItems.reduce((total, item) => total));
 
 
       console.log(state.totalQuantity);
