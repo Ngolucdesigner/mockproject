@@ -4,6 +4,7 @@ import com.anks.tech.ecommerce.Entity.FileProduct;
 import com.anks.tech.ecommerce.Respository.IFileProductRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class FileProductServices implements IFileProductServices {
 
     @Autowired

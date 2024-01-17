@@ -7,6 +7,8 @@ import com.anks.tech.ecommerce.Respository.ICategoryRepository;
 import com.anks.tech.ecommerce.Respository.IFileProductRespository;
 import com.anks.tech.ecommerce.Respository.IOriginRespository;
 import com.anks.tech.ecommerce.Respository.IProductRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
@@ -35,10 +37,11 @@ public class ProductServices implements IProductServices {
     @Autowired
     ModelMapper modelMapper;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
     public Page<Product> getAllProduct(Pageable pageable) {
-
-
         return productRepository.findAll(pageable);
     }
 
@@ -72,13 +75,14 @@ public class ProductServices implements IProductServices {
         Origin origin = product.getOrigin();
         originRespository.save(origin);
 
-
     }
 
     @Override
     public void deleteProduct(int id) {
-
-        productRepository.deleteById(id);
+        Product product = entityManager.find(Product.class, id);
+        if(product!=null) {
+            entityManager.remove(product);
+        }
 
     }
 }

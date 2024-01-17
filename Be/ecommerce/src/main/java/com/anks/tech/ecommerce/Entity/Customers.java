@@ -37,7 +37,7 @@ public class Customers {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    List<Order> orders;
+    private List<Order> orders;
 
 
     @PrePersist
