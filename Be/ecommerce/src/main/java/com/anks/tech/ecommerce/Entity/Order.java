@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "`oder`", catalog = "ecommerce")
 @Getter
@@ -13,9 +16,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Order {
     @Id
-    @Column(name = "id")
+    @Column(name = "orders_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int oderId;
 
 
 
@@ -24,6 +27,16 @@ public class Order {
     private Status status;
 
 
+    @Column(name = "order_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date orderDate;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customers customer;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderDetails> orderDetails;
 
 
 }
