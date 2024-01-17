@@ -1,0 +1,38 @@
+.table {
+  tr {
+
+    td {
+      i  {
+        cursor: pointer;
+      }
+      img {
+        width: 80px !important;
+        height: 80px !important;
+        object-fit: contain;
+      }
+    }
+
+    .product__title{
+        cursor: pointer;
+    }
+
+    td,
+    th {
+      color: var(--primary-color);
+    }
+  }
+}
+
+
+.buy__btn {
+  border: none;
+  outline: none;
+
+  padding: 8px 20px;
+  border-radius: 5px;
+  background: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 40px;
+}
