@@ -137,7 +137,7 @@ const Home = () => {
             </Container>
           </section>
 
-          <section className="best__sales">
+          <section className="best__sales mt-0">
             <Container>
               <Row>
                 <Col lg="12" className="text-center">

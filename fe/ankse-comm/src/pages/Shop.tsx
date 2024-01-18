@@ -98,7 +98,7 @@ const Shop = () => {
                 </select>
               </div>
             </Col>
-            <Col lg="3" md="6" className="">
+            <Col lg="3" md="6" className="mb-3">
               <div className="filter__widget ">
                 <select>
                   <option>Soft By</option>
@@ -107,6 +107,7 @@ const Shop = () => {
                 </select>
               </div>
             </Col>
+
             <Col lg="6" md="12">
               <div className="search__box">
                 <input

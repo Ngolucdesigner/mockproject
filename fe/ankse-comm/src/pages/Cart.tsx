@@ -6,7 +6,7 @@ import { Col, Container, Row } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { TReducers } from "../redux/rootReducer";
 import { priceFormat } from "../model/FormatVND";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { cartActions } from "../redux/slices/cartSlice";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
@@ -139,10 +139,11 @@ const Cart = () => {
                 <motion.button
                   whileTap={{ scale: 1.1 }}
                   className="buy__btn w-100"
+                  onClick={()=>navigate("/shop")}
                 >
-                  <Link to={"/shop"} className="link w-100">
+                  
                     Continue Shopping
-                  </Link>
+                  
                 </motion.button>
               </div>
             </Col>
