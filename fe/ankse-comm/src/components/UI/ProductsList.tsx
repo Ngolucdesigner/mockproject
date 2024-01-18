@@ -18,6 +18,7 @@ const ProductsList = (props: data) => {
           imgUrl={item.file?.url}
           productName={item.productName}
           price={item.price}
+          priceSales={item.priceSales}
           category={item.category}
         />
       ))}

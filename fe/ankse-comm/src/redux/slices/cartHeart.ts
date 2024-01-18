@@ -36,6 +36,7 @@ const cartHeart = createSlice({
           category: newItem.category,
           imgUrl: newItem.imgUrl,
           price: newItem.price,
+          priceSales: newItem.priceSales,
           quantity: 1,
           totalPrice: newItem.price,
         });

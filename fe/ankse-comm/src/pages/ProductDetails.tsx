@@ -30,6 +30,8 @@ const ProductDetails = () => {
     productName: "",
     imgUrl: "",
     price: 0,
+    priceSales:0,
+    
     description: "",
     avgRating: 0,
     shortDesc: "",
@@ -90,6 +92,7 @@ const ProductDetails = () => {
     productName,
     imgUrl,
     price,
+    priceSales,
     description,
     avgRating,
     shortDesc,
@@ -106,6 +109,7 @@ const ProductDetails = () => {
         imgUrl: file.url,
         productName,
         price,
+        priceSales,
         file,
       })
     );
@@ -157,6 +161,8 @@ const ProductDetails = () => {
     setload(false);
   }, [id, load]);
 
+
+
   return (
     <Helmet title={productName}>
       <CommonSection title={productName} />
@@ -191,9 +197,12 @@ const ProductDetails = () => {
                   <p>{<span>{avgRating}</span>} Ratings</p>
                 </div>
 
-                <div className="d-flex align-items-center gap-5">
-                  <span className="product__price">{priceFormat(price)}</span>
+                <div className="d-flex align-items-center gap-4">
+                  <span className="product__price">{priceFormat(price - (price *(priceSales/100)))}</span>
+                  <span className="product__price-sales">{priceFormat(price)}</span>
+
                   <span>Category: {category.toUpperCase()}</span>
+
                 </div>
 
                 <p className="mt-3">{shortDesc}</p>

@@ -8,7 +8,7 @@ import { TReducers } from "../redux/rootReducer";
 import { priceFormat } from "../model/FormatVND";
 const Checkout = () => {
   const totalAmount: any = useSelector<TReducers>(
-    (state) => state.cart.totalAmount
+    (state) => state.cart.totalFinal
   );
   const totalQty: any = useSelector<TReducers>(
     (state) => state.cart.totalQuantity

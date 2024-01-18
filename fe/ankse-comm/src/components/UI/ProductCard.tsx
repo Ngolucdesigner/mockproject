@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardBody,
@@ -25,21 +25,29 @@ type item = {
   imgUrl: any;
   productName: string;
   price: number;
+  priceSales :number;
   category: string | "Product";
 };
 
 const ProductCard = (props: item) => {
+
+  const[priceSales, setPriceSales] = useState(0);
+
   const dispatch = useDispatch();
   const cartHeart: any = useSelector<TReducers>(
     (state) => state.heart.heartItems
   );
 
   const addToCart = () => {
+
+    
+
     dispatch(
       cartActions.addItem({
         id: props.id,
         productName: props.productName,
         price: props.price,
+        priceSales: props.priceSales,
         imgUrl: props.imgUrl,
       })
     );
@@ -64,7 +72,13 @@ const ProductCard = (props: item) => {
       toast.error("Product added valid");
     }
   };
+  
 
+  useEffect(()=>{
+    let ck = Number(props.price - Number(props.price)*(Number(props.priceSales)/100))
+    setPriceSales(ck)
+
+  },[])
   return (
     <Col lg="3" md="4" className="mb-2">
       <Card className="product__item">
@@ -91,7 +105,7 @@ const ProductCard = (props: item) => {
           </CardSubtitle>
 
           <CardText className=" card__text d-flex  justify-content-between">
-            <span className="price__sale">{priceFormat(props.price)}</span>
+            <span className="price__sale">{priceFormat(priceSales)}</span>
             <span className="price">{priceFormat(props.price)}</span>
           </CardText>
         </CardBody>

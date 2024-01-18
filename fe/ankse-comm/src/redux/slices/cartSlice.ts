@@ -4,18 +4,24 @@ import { ProductProps } from "../../model/productProps";
 type cartItem = ProductProps & {
   quantity: number;
   totalPrice: number;
+  totalSale: number;
+ 
 };
 
 type CartState = {
   cartItems: cartItem[];
   totalAmount: number;
   totalQuantity: number;
+  totalSalesPrice: number;
+  totalFinal:number
 };
 
 const initialState: CartState = {
   cartItems: [],
   totalAmount: 0,
   totalQuantity: 0,
+  totalSalesPrice:0,
+  totalFinal:0
 };
 
 const cartSlice = createSlice({
@@ -29,6 +35,7 @@ const cartSlice = createSlice({
       );
 
       state.totalQuantity++;
+     
 
       if (!existingItem) {
         state.cartItems.push({
@@ -37,18 +44,26 @@ const cartSlice = createSlice({
           category: newItem.category,
           imgUrl: newItem.imgUrl,
           price: newItem.price,
+          priceSales: newItem.priceSales,
           quantity: 1,
           totalPrice: newItem.price,
+          totalSale: newItem.priceSales
         });
       } else {
         existingItem.quantity++;
         existingItem.totalPrice =
           Number(existingItem.totalPrice) + Number(newItem.price);
+          existingItem.totalSale = Number(existingItem.priceSales) + Number(newItem.priceSales);
       }
       // state.totalAmount = Number(state.cartItems.reduce((total, item) => total));
 
       state.totalAmount = Number(state.cartItems.reduce((total, item)=> Number(total) + Number(item.price)*Number(item.quantity), 0))
-      console.log(state.totalQuantity);
+       
+      state.totalSalesPrice = Number(state.cartItems.reduce((total, item)=>Number(total)+ Number(item.priceSales)*Number(item.quantity),0))
+  
+      state.totalFinal = state.totalAmount - (state.totalAmount*(state.totalSalesPrice/100))
+     
+      console.log(state.totalSalesPrice);
       // console.log(state.cartItems);
       // console.log(newItem);
     },
@@ -62,6 +77,11 @@ const cartSlice = createSlice({
         state.totalQuantity = state.totalQuantity- existingItem.quantity;
       }
       state.totalAmount = Number(state.cartItems.reduce((total, item)=> Number(total) + Number(item.price)*Number(item.quantity), 0))
+     
+      state.totalSalesPrice = Number(state.cartItems.reduce((total, item)=>Number(total)+ Number(item.priceSales)*Number(item.quantity),0))
+
+      
+      state.totalFinal = state.totalAmount - (state.totalAmount*(state.totalSalesPrice/100))
       // state.totalAmount = Number(state.cartItems.reduce((total1, item)=> Number(total1.price) + Number(item.price)*Number(item.quantity)))
       // state.totalAmount = Number(
       //   state.cartItems.reduce((total, item) => total)

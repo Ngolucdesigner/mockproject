@@ -5,6 +5,7 @@ export type ProductProps = {
   imgUrl: any;
   productName: string;
   price: number;
+  priceSales: number;
   category: string;
   shortDesc?: string;
   description?: string;

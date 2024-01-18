@@ -14,6 +14,7 @@ type itemCart = {
   id: any;
   imgUrl: any;
   price: number;
+  
   quantity: number;
   productName: any;
   file: { url: string } | any;
@@ -59,9 +60,14 @@ const Cart = () => {
     (state) => state.cart.totalAmount
   );
 
+
   const totalQuantity: any = useSelector<TReducers>(
     (state) => state.cart.totalQuantity
   );
+
+  const totalSale: any = useSelector<TReducers>((state)=> state.cart.totalSalesPrice)
+
+  const total: any = useSelector<TReducers>((state)=> state.cart.totalFinal)
 
   const productDetail = (id: any) => {
     navigate(`/shop/${id}`);
@@ -119,10 +125,27 @@ const Cart = () => {
               <div>
                 <h6 className="d-flex align-items-center justify-content-between ">
                   Subtotal
-                  <span className="fs-4 fw-bold">
+                  <span className="fs-5 fw-bold">
                     {priceFormat(totalAmount)}
                   </span>
                 </h6>
+
+                <h6 className="d-flex align-items-center justify-content-between ">
+                  Discount
+                  <span className="fs-5 fw-bold">
+                    {totalSale}%
+                  </span>
+                </h6>
+
+                
+                <h6 className="d-flex align-items-center justify-content-between ">
+                  Total
+                  <span className="fs-4 fw-bold">
+                    {priceFormat(total)}
+                  </span>
+                </h6>
+
+
               </div>
               <p className="fs-6 mt-2">
                 Taxes and shipping will calculate in checkout

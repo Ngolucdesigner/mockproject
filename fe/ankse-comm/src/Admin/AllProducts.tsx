@@ -89,6 +89,7 @@ const AllProducts = () => {
                       id={item.id}
                       imgUrl={item.file?.url}
                       imageUrl={item.file?.url}
+                      priceSales={item.priceSales}
                       productName={item.productName}
                       category={item.category}
                       price={item.price}

@@ -93,7 +93,7 @@ const AddProducts = () => {
     formData.append("shortDesc", shortDescription);
     formData.append("description", description);
     formData.append("price", price);
-    formData.append("sale",priceSales);
+    formData.append("sales",priceSales);
     formData.append("category", category);
     formData.append("file", productImg as File);
     formData.append("manufacturer",manufacturer);

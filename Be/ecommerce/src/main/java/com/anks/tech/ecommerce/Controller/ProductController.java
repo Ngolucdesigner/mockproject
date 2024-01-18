@@ -112,6 +112,7 @@ public class ProductController {
     public ResponseEntity<String> createNewProduct(@RequestParam("file") MultipartFile multipartFiles,
                                                    @RequestParam String productName,
                                                    @RequestParam double price,
+                                                   @RequestParam double sales,
                                                    @RequestParam String shortDesc,
                                                    @RequestParam String description,
                                                    @RequestParam String category,
@@ -125,6 +126,7 @@ public class ProductController {
         form.setDescription(description);
         form.setShortDesc(shortDesc);
         form.setPrice(Float.parseFloat(String.valueOf(price)));
+        form.setPriceSales(sales);
         CreateProductForm.Category category1 = new CreateProductForm.Category(category);
         form.setCategory(category1);
 
