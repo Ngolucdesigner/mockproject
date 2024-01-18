@@ -14,10 +14,6 @@ const Checkout = () => {
     (state) => state.cart.totalQuantity
   );
 
-
-  
-
-
   return (
     <Helmet title="Checkout">
       <CommonSection title="Checkout" />

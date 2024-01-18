@@ -81,6 +81,7 @@ public class ProductServices implements IProductServices {
     public void deleteProduct(int id) {
         Product product = entityManager.find(Product.class, id);
         if(product!=null) {
+            product.setOrderDetails(null);
             entityManager.remove(product);
         }
 
