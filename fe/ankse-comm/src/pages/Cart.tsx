@@ -101,19 +101,35 @@ interface BillingFormProps {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   phoneNumber: string;
   setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
+
+  onSubmit: (formData: any) => void;
 }
 
 
-const BillingForm: React.FC<BillingFormProps> = ({ paymentMethod, setPaymentMethod, name, setName, email, setEmail, phoneNumber, setPhoneNumber }) => {
+const BillingForm: React.FC<BillingFormProps> = ({ paymentMethod, setPaymentMethod, name, setName, email, setEmail, phoneNumber, setPhoneNumber, onSubmit  }) => {
 
   const handlePaymentMethodChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(e.target.value as PaymentMethod);
+  };
+
+  const handleSubmit = (values: { name: string; email: string; phoneNumber: string }) => {
+    setName(values.name);
+    setEmail(values.email);
+    setPhoneNumber(values.phoneNumber);
+    const formData = {
+      name: values.name,
+      email: values.email,
+      phoneNumber: values.phoneNumber,
+      paymentMethod,
+    };
+    onSubmit(formData);
   };
 
   return (
     <div className="billing__form">
       <legend>Billing Information</legend>
       <Form className="billing__form">
+        
         <FormGroup className="form__group">
           <Input type="text" placeholder="Enter your name" />
         </FormGroup>
@@ -196,13 +212,7 @@ const Cart = () => {
 
   const handlePayment = () => {
     if (totalQuantity) {
-      const formData = {
-        name,
-        email,
-        phoneNumber,
-        paymentMethod,
-      };
-      console.log("Thông tin thanh toán:", formData);
+      handleFormSubmit({ name, email, phoneNumber });
       navigate("/home");
       setTimeout(() => {
         toast.success("Thanh toán thành công!", {
@@ -218,6 +228,10 @@ const Cart = () => {
     } else if (paymentMethod === 'cash') {
       // Xử lý thanh toán khi nhận hàng
     }
+  };
+
+  const handleFormSubmit = (formData: any) => {
+    console.log("Thông tin thanh toán:", formData);
   };
 
   // const handlePayment = async () => {
@@ -338,6 +352,7 @@ const Cart = () => {
                 setEmail={setEmail}
                 phoneNumber={phoneNumber}
                 setPhoneNumber={setPhoneNumber}
+                onSubmit={handleFormSubmit}
               />
 
               <div>
