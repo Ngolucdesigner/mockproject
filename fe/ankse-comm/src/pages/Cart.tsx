@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Cart.scss";
 import Helmet from "../components/helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
-import { Col, Container, Row } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import { TReducers } from "../redux/rootReducer";
 import { priceFormat } from "../model/FormatVND";
 import { useNavigate } from "react-router-dom";
@@ -13,17 +13,18 @@ import { toast } from "react-toastify";
 import { GrSubtract } from "react-icons/gr";
 import { FaPlus } from "react-icons/fa6";
 
+
 type itemCart = {
   id: any;
   imgUrl: any;
   price: number;
-  
   quantity: number;
   productName: any;
   file: { url: string } | any;
   detail: (id: any) => void;
   delete: (id: any) => void;
 };
+
 
 const PropsCart = (props: itemCart) => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const PropsCart = (props: itemCart) => {
       dispatch(cartActions.updateQuantity({ id: props.id, quantity: props.quantity - 1 }));
     }
   };
+
   return (
     <tr>
       <td>
@@ -87,9 +89,85 @@ const PropsCart = (props: itemCart) => {
   );
 };
 
+
+type PaymentMethod = 'vnpay' | 'cash';
+
+interface BillingFormProps {
+  paymentMethod: PaymentMethod;
+  setPaymentMethod: React.Dispatch<React.SetStateAction<PaymentMethod>>;
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  phoneNumber: string;
+  setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
+}
+
+
+const BillingForm: React.FC<BillingFormProps> = ({ paymentMethod, setPaymentMethod, name, setName, email, setEmail, phoneNumber, setPhoneNumber }) => {
+
+  const handlePaymentMethodChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPaymentMethod(e.target.value as PaymentMethod);
+  };
+
+  return (
+    <div className="billing__form">
+      <legend>Billing Information</legend>
+      <Form className="billing__form">
+        <FormGroup className="form__group">
+          <Input type="text" placeholder="Enter your name" />
+        </FormGroup>
+
+        <FormGroup className="form__group">
+          <Input type="email" placeholder="Enter your email" />
+        </FormGroup>
+
+        <FormGroup className="form__group">
+          <Input type="number" placeholder="Phone number" />
+        </FormGroup>
+
+        <FormGroup className="form__group">
+          <Input type="text" placeholder="Street address" />
+        </FormGroup>
+
+        <FormGroup tag="fieldset">
+          <legend>Phương thức thanh toán</legend>
+          <FormGroup check>
+            <Input
+              type="radio"
+              name="paymentMethod"
+              value="vnpay"
+              checked={paymentMethod === 'vnpay'}
+              onChange={handlePaymentMethodChange}
+            />
+            <Label check>Thanh toán qua VNPAY</Label>
+          </FormGroup>
+          <FormGroup check>
+            <Input
+              type="radio"
+              name="paymentMethod"
+              value="cash"
+              checked={paymentMethod === 'cash'}
+              onChange={handlePaymentMethodChange}
+              defaultChecked
+            />
+            <Label check>Thanh toán khi nhận hàng</Label>
+          </FormGroup>
+        </FormGroup>
+      </Form>
+    </div>
+  );
+};
+
+
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const cartItems: any = useSelector<TReducers>(
     (state) => state.cart.cartItems
@@ -104,9 +182,9 @@ const Cart = () => {
     (state) => state.cart.totalQuantity
   );
 
-  const totalSale: any = useSelector<TReducers>((state)=> state.cart.totalSalesPrice)
+  const totalSale: any = useSelector<TReducers>((state) => state.cart.totalSalesPrice)
 
-  const total: any = useSelector<TReducers>((state)=> state.cart.totalFinal)
+  const total: any = useSelector<TReducers>((state) => state.cart.totalFinal)
 
   const productDetail = (id: any) => {
     navigate(`/shop/${id}`);
@@ -118,6 +196,13 @@ const Cart = () => {
 
   const handlePayment = () => {
     if (totalQuantity) {
+      const formData = {
+        name,
+        email,
+        phoneNumber,
+        paymentMethod,
+      };
+      console.log("Thông tin thanh toán:", formData);
       navigate("/home");
       setTimeout(() => {
         toast.success("Thanh toán thành công!", {
@@ -127,7 +212,60 @@ const Cart = () => {
     } else {
       toast.warning("Product Cart null");
     }
+
+    if (paymentMethod === 'vnpay') {
+      // Xử lý thanh toán qua VNPAY
+    } else if (paymentMethod === 'cash') {
+      // Xử lý thanh toán khi nhận hàng
+    }
   };
+
+  // const handlePayment = async () => {
+  //   if (totalQuantity) {
+  //     // Thu thập dữ liệu từ form
+  //     const formData = {
+  //       name,
+  //       email,
+  //       phoneNumber,
+  //       // ... thêm tất cả các trường khác từ state
+  //     };
+
+  //     try {
+  //       // Thực hiện logic thanh toán hoặc gửi dữ liệu đến API
+
+  //       const response = await fetch('', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify(formData),
+  //       });
+  //       const data = await response.json();
+
+  //       if (data.success) {
+  //         // Xử lý khi thanh toán thành công
+  //         navigate("/home");
+  //         toast.success("Thanh toán thành công!", {
+  //           position: toast.POSITION.TOP_CENTER
+  //         });
+  //       } else {
+  //         // Xử lý khi có lỗi từ phản hồi API
+  //         toast.error(data.message, {
+  //           position: toast.POSITION.TOP_CENTER
+  //         });
+  //       }
+  //     } catch (error) {
+  //       // Xử lý lỗi mạng hoặc lỗi khi gọi API
+  //       toast.error("Có lỗi khi thanh toán. Vui lòng thử lại.", {
+  //         position: toast.POSITION.TOP_CENTER
+  //       });
+  //     }
+  //   } else {
+  //     toast.warning("Product Cart null");
+  //   }
+  // };
+
+
   return (
     <Helmet title="Cart">
       <CommonSection title="Shopping Cart" />
@@ -169,7 +307,7 @@ const Cart = () => {
                 </table>
               )}
             </Col>
-            <Col lg="3">
+            <Col lg="3" className="info__payment">
               <div>
                 <h6 className="d-flex align-items-center justify-content-between ">
                   Subtotal
@@ -177,27 +315,31 @@ const Cart = () => {
                     {priceFormat(totalAmount)}
                   </span>
                 </h6>
-
                 <h6 className="d-flex align-items-center justify-content-between ">
                   Discount
                   <span className="fs-5 fw-bold">
                     {totalSale}%
                   </span>
                 </h6>
-
-                
                 <h6 className="d-flex align-items-center justify-content-between ">
                   Total
                   <span className="fs-4 fw-bold">
                     {priceFormat(total)}
                   </span>
                 </h6>
-
-
               </div>
-              <p className="fs-6 mt-2">
-                Taxes and shipping will calculate in checkout
-              </p>
+
+              <BillingForm
+                paymentMethod={paymentMethod}
+                setPaymentMethod={setPaymentMethod}
+                name={name}
+                setName={setName}
+                email={email}
+                setEmail={setEmail}
+                phoneNumber={phoneNumber}
+                setPhoneNumber={setPhoneNumber}
+              />
+
               <div>
                 <motion.button
                   whileTap={{ scale: 1.1 }}
@@ -210,11 +352,9 @@ const Cart = () => {
                 <motion.button
                   whileTap={{ scale: 1.1 }}
                   className="buy__btn w-100"
-                  onClick={()=>navigate("/shop")}
+                  onClick={() => navigate("/shop")}
                 >
-                  
-                    Continue Shopping
-                  
+                  Continue Shopping
                 </motion.button>
               </div>
             </Col>

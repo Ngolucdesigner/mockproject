@@ -27,14 +27,17 @@
 .buy__btn {
   border: none;
   outline: none;
-
   padding: 8px 20px;
   border-radius: 5px;
   background: var(--primary-color);
   color: #fff;
   cursor: pointer;
   font-size: 1rem;
-  margin-top: 40px;
+  margin-top: 12px;
+}
+
+.billing__form {
+  margin: 2rem 0;
 }
 
 .quantity__btn {
@@ -42,5 +45,11 @@
   margin-left: 10px;
   margin-right: 10px;
   background: transparent;
-  
+}
+
+.info__payment {
+  background-color:rgba(168, 168, 168, 0.15);
+  border-radius: 8px;
+  border: solid 1px #838383;
+  padding: 24px;
 }
