@@ -63,6 +63,7 @@ CREATE TABLE `products`(
     productName VARCHAR(50) NOT NULL,
     imgUrl TEXT NOT NULL,
     price FLOAT UNSIGNED NOT NULL,
+    priceSale FLOAT UNSIGNED DEFAULT(0),
     shortDesc TEXT NOT NULL,
     `description` TEXT NOT NULL,
     avgRating FLOAT ,

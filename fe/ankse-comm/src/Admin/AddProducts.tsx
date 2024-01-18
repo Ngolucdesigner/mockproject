@@ -16,6 +16,7 @@ const AddProducts = () => {
   const [shortDescription, setShortDescription] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [priceSales, setPriceSales] = useState("");
   const [category, setCategory] = useState("");
   const [productImg, setProductImg] = useState<any>();
 
@@ -46,6 +47,14 @@ const AddProducts = () => {
       ? setPrice("0")
       : setPrice(event.target.value);
   };
+
+  const handleChangePriceSales = (event: React.ChangeEvent<HTMLInputElement>) => {
+    Number(event.target.value) < 0
+      ? setPriceSales("0")
+      : setPriceSales(event.target.value);
+  };
+  
+
   const handleChangeCategory = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -84,6 +93,7 @@ const AddProducts = () => {
     formData.append("shortDesc", shortDescription);
     formData.append("description", description);
     formData.append("price", price);
+    formData.append("sale",priceSales);
     formData.append("category", category);
     formData.append("file", productImg as File);
     formData.append("manufacturer",manufacturer);
@@ -176,6 +186,17 @@ const AddProducts = () => {
                           placeholder="VND"
                           value={price}
                           onChange={handleChangePrice}
+                          required
+                        />
+                      </FormGroup>
+
+                      <FormGroup className="form__group w-50">
+                        <span>Sales</span>
+                        <Input
+                          type="number"
+                          placeholder="%"
+                          value={priceSales}
+                          onChange={handleChangePriceSales}
                           required
                         />
                       </FormGroup>

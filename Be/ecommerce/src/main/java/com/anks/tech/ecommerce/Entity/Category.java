@@ -21,4 +21,11 @@ public class Category {
     @Column (name = "catagory", length = 50, nullable = false)
     private String category;
 
+    @PrePersist
+    public void prePersist() {
+        if(this.category==null){
+            this.category="product";
+        }
+    }
+
 }

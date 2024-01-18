@@ -30,6 +30,10 @@ public class Product {
 
     @Column(name = "price", nullable = false)
     private double price;
+
+    @Column(name = "priceSale")
+    private double priceSales;
+
     @Column(name = "shortDesc",columnDefinition = "TEXT", nullable = false)
     private String shortDesc;
     @Column(name = "`description`", columnDefinition = "TEXT",nullable = false)
@@ -58,5 +62,12 @@ public class Product {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<OrderDetails> orderDetails;
 
+    @PrePersist
+    public void prePersist() {
+        if(this.priceSales == 0){
+            this.priceSales=1;
+        }
 
+
+    }
 }
