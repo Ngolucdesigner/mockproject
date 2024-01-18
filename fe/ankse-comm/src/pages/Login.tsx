@@ -25,7 +25,7 @@ const Login = () => {
     console.log({ email: email, pass: pass });
   };
 
-  const loading = true;
+  const loading = false;
 
   return (
     <Helmet title="Login">
@@ -65,7 +65,7 @@ const Login = () => {
                     Login
                   </button>
                   <p>
-                    Don' t have account?{" "}
+                    Don't have account?{" "}
                     <Link to={"/signup"} className="link">
                       Create an account
                     </Link>
