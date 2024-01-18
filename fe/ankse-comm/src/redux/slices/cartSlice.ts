@@ -86,11 +86,27 @@ const cartSlice = createSlice({
       // state.totalAmount = Number(
       //   state.cartItems.reduce((total, item) => total)
       // );
+  },
 
+  updateQuantity: (state, action) => {
+    const itemIndex = state.cartItems.findIndex(item => item.id === action.payload.id);
+    if (itemIndex >= 0) {
+      const newItemQuantity = action.payload.quantity;
+      const difference = newItemQuantity - state.cartItems[itemIndex].quantity;
+      
+      state.cartItems[itemIndex].quantity = newItemQuantity;
+
+      // Cập nhật tổng số lượng và tổng tiền
+      state.totalQuantity += difference;
+      state.totalAmount += difference * state.cartItems[itemIndex].price;
+
+      // Tổng tiền sau khi đã giảm giá
+      state.totalFinal = state.totalAmount - (state.totalAmount * state.totalSalesPrice / 100);
+    }
   },
 }
 });
 
 export const cartActions = cartSlice.actions;
-
+export const { updateQuantity } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom";
 import { cartActions } from "../redux/slices/cartSlice";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import { GrSubtract } from "react-icons/gr";
+import { FaPlus } from "react-icons/fa6";
+
 type itemCart = {
   id: any;
   imgUrl: any;
@@ -23,6 +26,21 @@ type itemCart = {
 };
 
 const PropsCart = (props: itemCart) => {
+  const dispatch = useDispatch();
+  // Hàm để tăng số lượng sản phẩm
+  const increment = () => {
+    // Cập nhật số lượng sản phẩm trong Redux store
+    dispatch(cartActions.updateQuantity({ id: props.id, quantity: props.quantity + 1 }));
+  };
+
+  // Hàm để giảm số lượng sản phẩm
+  const decrement = () => {
+    // Đảm bảo rằng số lượng không thể nhỏ hơn 1
+    if (props.quantity > 1) {
+      // Cập nhật số lượng sản phẩm trong Redux store
+      dispatch(cartActions.updateQuantity({ id: props.id, quantity: props.quantity - 1 }));
+    }
+  };
   return (
     <tr>
       <td>
@@ -37,7 +55,27 @@ const PropsCart = (props: itemCart) => {
         {props.productName}
       </td>
       <td>{priceFormat(props.price)}</td>
-      <td>{props.quantity}</td>
+
+      <td>
+        <div className="quantity__wrapper">
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            className="quantity__btn"
+            onClick={decrement}
+          >
+            <GrSubtract />
+          </motion.button>
+          <span className="quantity__number">{props.quantity}</span>
+          <motion.button
+            whileTap={{ scale: 1.1 }}
+            className="quantity__btn"
+            onClick={increment}
+          >
+            <FaPlus />
+          </motion.button>
+        </div>
+      </td>
+
       <td>
         <motion.i
           whileHover={{ scale: 1.2, color: "#FF0033" }}
@@ -52,6 +90,7 @@ const PropsCart = (props: itemCart) => {
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const cartItems: any = useSelector<TReducers>(
     (state) => state.cart.cartItems
   );
@@ -77,8 +116,17 @@ const Cart = () => {
     dispatch(cartActions.deleteItem(id));
   };
 
-  const handleCheckOut = () => {
-    totalQuantity ? navigate("/checkout") : toast.warning("Product Cart null");
+  const handlePayment = () => {
+    if (totalQuantity) {
+      navigate("/home");
+      setTimeout(() => {
+        toast.success("Thanh toán thành công!", {
+          position: toast.POSITION.TOP_CENTER
+        });
+      }, 500);
+    } else {
+      toast.warning("Product Cart null");
+    }
   };
   return (
     <Helmet title="Cart">
@@ -96,7 +144,7 @@ const Cart = () => {
                       <th>Image</th>
                       <th>Title</th>
                       <th>Price</th>
-                      <th>Qty</th>
+                      <th>Quantity</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
@@ -154,9 +202,9 @@ const Cart = () => {
                 <motion.button
                   whileTap={{ scale: 1.1 }}
                   className="buy__btn w-100"
-                  onClick={handleCheckOut}
+                  onClick={handlePayment}
                 >
-                  Checkout
+                  Confirm Payment
                 </motion.button>
 
                 <motion.button
