@@ -65,9 +65,7 @@ public class Product {
     @PrePersist
     public void prePersist() {
         if(this.priceSales == 0){
-            this.priceSales=1;
+            this.priceSales=0;
         }
-
-
     }
 }
