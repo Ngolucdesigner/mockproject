@@ -1,4 +1,4 @@
-import { Tracing } from "trace_events";
+
 
 export type ProductProps = {
   id:any;  
@@ -17,7 +17,7 @@ export type ProductProps = {
   }[];
   avgRating?: number;
   file?:{
-    id: string,
+    id: any,
     fileName: string,
     fileType: string,
     url: string

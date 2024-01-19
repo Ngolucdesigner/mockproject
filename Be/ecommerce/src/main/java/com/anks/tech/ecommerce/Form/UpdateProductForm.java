@@ -1,65 +1,57 @@
-package com.anks.tech.ecommerce.DTO;
+package com.anks.tech.ecommerce.Form;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.List;
-
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDTO {
 
-    private int id;
+public class UpdateProductForm {
+
+    private int productId;
     private String productName;
     private String imgUrl;
     private double price;
     private double priceSales;
     private String shortDesc;
     private String description;
-    private double avgRating;
-
-    private String category;
-    private int categoryId;
-    List<Review> reviews;
-
-    private File file;
+    private Category category;
+    private FileProduct fileProduct;
     private Origin origin;
-
-
-
     @Getter
     @Setter
     @NoArgsConstructor
-
-    public static class Review {
-        private int reviewId;
-        private String username;
-        private String reviewText;
-        private Double rating;
-
+    @AllArgsConstructor
+    public static  class Category {
+        private int categoryId;
+        private String category;
     }
 
-    @Setter
     @Getter
+    @Setter
     @NoArgsConstructor
-    public  static  class File{
+    @AllArgsConstructor
+    public static class FileProduct{
         private String id;
         private String fileName;
         private String fileType;
-        private String url;
-//        private byte[] data;
+        private byte[] data;
     }
 
     @Getter
     @Setter
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class Origin{
         private int id;
         private String manufacturer;
         private String madeIn;
         private String guarantee;
     }
+
 }

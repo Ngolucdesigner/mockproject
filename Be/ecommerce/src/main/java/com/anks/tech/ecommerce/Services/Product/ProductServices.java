@@ -3,6 +3,7 @@ package com.anks.tech.ecommerce.Services.Product;
 
 import com.anks.tech.ecommerce.Entity.*;
 import com.anks.tech.ecommerce.Form.CreateProductForm;
+import com.anks.tech.ecommerce.Form.UpdateProductForm;
 import com.anks.tech.ecommerce.Respository.ICategoryRepository;
 import com.anks.tech.ecommerce.Respository.IFileProductRespository;
 import com.anks.tech.ecommerce.Respository.IOriginRespository;
@@ -84,6 +85,40 @@ public class ProductServices implements IProductServices {
             product.setOrderDetails(null);
             entityManager.remove(product);
         }
+
+    }
+
+    @Override
+    public void updateProduct(UpdateProductForm form) {
+        try {
+            if(productRepository.existsById(form.getProductId())){
+                Product productUpdate = productRepository.findById(form.getProductId()).get();
+                productUpdate.setOrderDetails(null);
+                productUpdate = modelMapper.map(form,Product.class);
+                productRepository.save(productUpdate);
+            }
+            if(categoryRepository.existsById(form.getCategory().getCategoryId())){
+                Category categoryUpdate = categoryRepository.findById(form.getCategory().getCategoryId()).get();
+                categoryUpdate = modelMapper.map(form.getCategory(), Category.class);
+                categoryRepository.save(categoryUpdate);
+            }
+            if(originRespository.existsById(form.getOrigin().getId())){
+                Origin originUpdate = originRespository.findById(form.getOrigin().getId()).get();
+                originUpdate = modelMapper.map(form.getOrigin(), Origin.class);
+                originRespository.save(originUpdate);
+            }
+            if(fileProductRespository.existsById(form.getFileProduct().getId())){
+                FileProduct fileProductUpdate = fileProductRespository.findById(form.getFileProduct().getId()).get();
+                fileProductUpdate = modelMapper.map(form.getFileProduct(), FileProduct.class);
+                fileProductRespository.save(fileProductUpdate);
+
+            }
+        }
+        catch (Exception exception){
+            System.err.println(exception.toString());
+        }
+
+
 
     }
 }
