@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import * as request from "../Utils/request";
-import { userPops } from "../model/user";
+
 import useGetData from "../custom-hooks/useGetData";
 import Spinner from "react-bootstrap/Spinner";
 import UserItem from "./UserItem";

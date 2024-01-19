@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ProductProps } from "../../model/productProps";
-import { number } from "yup";
+
 
 type cartItem = ProductProps & {
   quantity: number;

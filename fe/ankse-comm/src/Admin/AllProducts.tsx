@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { reloadProduct } from "../redux/slices/loadProduct";
 import MyPagination from "../components/UI/MyPagination";
-import { ProductProps } from "../model/productProps";
+
 import { useNavigate } from "react-router-dom";
 const AllProducts = () => {
 

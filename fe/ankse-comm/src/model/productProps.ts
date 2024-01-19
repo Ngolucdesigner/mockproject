@@ -1,4 +1,4 @@
-import { Tracing } from "trace_events";
+
 
 export type ProductProps = {
   id:any;  

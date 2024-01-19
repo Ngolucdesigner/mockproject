@@ -143,6 +143,7 @@ const AddProducts = () => {
     formData.append("guarantee", guarantee);
 
     setLoading(true);
+
     if (id) {
       formData.append("originId", productDetail.origin?.id);
       formData.append("fileId", productDetail.file?.id);
@@ -155,6 +156,7 @@ const AddProducts = () => {
             setLoading(false);
           })
           .catch(() => {
+            setLoading(false);
             toast.error("Product fail update!");
           });
       } catch (error) {

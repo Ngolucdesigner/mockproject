@@ -54,8 +54,8 @@ public class Product {
     private Origin origin;
 
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<Review> reviews;
 
     @OneToMany(mappedBy = "product")
