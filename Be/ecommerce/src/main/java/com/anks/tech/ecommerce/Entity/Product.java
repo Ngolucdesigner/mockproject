@@ -41,24 +41,24 @@ public class Product {
     @Column(name = "avgRating", nullable = false)
     private double avgRating;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "catagoryId", referencedColumnName = "categoryid")
     private Category category;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "uuidUrl", referencedColumnName = "uuid")
     private FileProduct fileProduct;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "originId" ,referencedColumnName = "id")
     private Origin origin;
 
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Review> reviews;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "product")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<OrderDetails> orderDetails;
 

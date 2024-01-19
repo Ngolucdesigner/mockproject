@@ -1,5 +1,5 @@
 // import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import Spinner from "react-bootstrap/Spinner";
@@ -8,25 +8,64 @@ import * as request from "../Utils/request";
 import { categoryList } from "../model/categoryData";
 
 import "../styles/AddProduct.scss";
+import { useLocation, useParams } from "react-router-dom";
+import { ProductProps } from "../model/productProps";
 
 const options = categoryList.slice(1);
 
 const AddProducts = () => {
+  const location = useLocation();
 
+  const { id } = useParams();
 
   const [title, setTitle] = useState("");
-  const [shortDescription, setShortDescription] = useState("");
-  const [description, setDescription] = useState("");
+  const [shortDescription, setShortDescription] = useState<any>();
+  const [description, setDescription] = useState<any>("");
   const [price, setPrice] = useState("");
   const [priceSales, setPriceSales] = useState("");
   const [category, setCategory] = useState("");
   const [productImg, setProductImg] = useState<any>();
 
-  const [manufacturer, setManufacturer] = useState("");
-  const [madeIn, setMadeIn] = useState("");
-  const [guarantee, setGuarantee] = useState("");
+  const [manufacturer, setManufacturer] = useState<any>("");
+  const [madeIn, setMadeIn] = useState<any>("");
+  const [guarantee, setGuarantee] = useState<any>("");
 
   const [loading, setLoading] = useState(false);
+
+  const [productDetail, setProductDetail] = useState<
+    ProductProps & { categoryId: string }
+  >({
+    id: "",
+    productName: "",
+    imgUrl: "",
+    price: 0,
+    priceSales: 0,
+    description: "",
+    avgRating: 0,
+    shortDesc: "",
+    reviews: [
+      {
+        reviewId: 0,
+        username: "",
+        rating: 0,
+        reviewText: "",
+      },
+    ],
+    category: "",
+    categoryId: "",
+    file: {
+      id: "",
+      fileType: "",
+      url: "",
+      fileName: "",
+    },
+    origin: {
+      id: "",
+      manufacturer: "",
+      madeIn: "",
+      guarantee: "",
+    },
+  });
 
   const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -50,12 +89,13 @@ const AddProducts = () => {
       : setPrice(event.target.value);
   };
 
-  const handleChangePriceSales = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangePriceSales = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     Number(event.target.value) < 0
       ? setPriceSales("0")
       : setPriceSales(event.target.value);
   };
-  
 
   const handleChangeCategory = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -95,35 +135,102 @@ const AddProducts = () => {
     formData.append("shortDesc", shortDescription);
     formData.append("description", description);
     formData.append("price", price);
-    formData.append("sales",priceSales);
+    formData.append("sales", priceSales);
     formData.append("category", category);
     formData.append("file", productImg as File);
-    formData.append("manufacturer",manufacturer);
-    formData.append("madeIn",madeIn);
-    formData.append("guarantee",guarantee);
-    setLoading(true);
-    try {
-      request
-        .post1<ResponseType>(
-          "products/new-products",
-          { headers: config },
-          formData
-        )
-        .then((response) => {
-          // Handle the successful response here
+    formData.append("manufacturer", manufacturer);
+    formData.append("madeIn", madeIn);
+    formData.append("guarantee", guarantee);
 
-          toast.success("Product successfully added");
-          setLoading(false);
-        })
-        .catch((error) => {
-          setLoading(false);
-          // Handle any errors that occurred during the request
-          toast.error("Product fail added!");
-        });
-    } catch (error) {
-      console.error(error);
+    setLoading(true);
+    if (id) {
+      formData.append("originId", productDetail.origin?.id);
+      formData.append("fileId", productDetail.file?.id);
+      formData.append("categoryId", productDetail.categoryId);
+      try {
+        request
+          .put1(`products/update-product/${id}`, { headers: config }, formData)
+          .then(() => {
+            toast.success("Product successfully update");
+            setLoading(false);
+          })
+          .catch(() => {
+            toast.error("Product fail update!");
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      try {
+        request
+          .post1<ResponseType>(
+            "products/new-products",
+            { headers: config },
+            formData
+          )
+          .then((response) => {
+            // Handle the successful response here
+
+            toast.success("Product successfully added");
+            setLoading(false);
+          })
+          .catch((error) => {
+            setLoading(false);
+            // Handle any errors that occurred during the request
+            toast.error("Product fail added!");
+          });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
+
+  const getProductById = async () => {
+    try {
+      await request
+        .get(`products/${Number(id)}`, { headers: config })
+        .then((res) => {
+          setProductDetail(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    // setTitle("");
+    // setPrice("");
+    // setPriceSales("");
+    // setCategory("");
+    // setShortDescription("");
+    // setDescription("");
+
+    // setManufacturer("");
+    // setMadeIn("");
+    // setGuarantee("");
+
+    if (id) {
+      getProductById();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (productDetail) {
+      setTitle(productDetail.productName);
+      setPrice(productDetail.price.toString());
+      setPriceSales(productDetail.priceSales.toString());
+      setCategory(productDetail.category);
+      setShortDescription(productDetail.shortDesc);
+      setDescription(productDetail.description);
+
+      setManufacturer(productDetail.origin?.manufacturer);
+      setMadeIn(productDetail.origin?.madeIn);
+      setGuarantee(productDetail.origin?.guarantee);
+    }
+  }, [productDetail]);
 
   return (
     <section>
@@ -137,7 +244,11 @@ const AddProducts = () => {
               </h5>
             ) : (
               <>
-                <h4 className="mb-5">Add products</h4>
+                <h4 className="mb-5">
+                  {location.pathname.startsWith("/dashboard/edit-product")
+                    ? "Edit products"
+                    : "Add products"}
+                </h4>
                 <Form onSubmit={handleSubmit}>
                   <div className="container__product">
                     <FormGroup className="form__group">
@@ -219,6 +330,27 @@ const AddProducts = () => {
                         </select>
                       </FormGroup>
                     </div>
+                    {id ? (
+                      <div className="d-flex align-items-center justify-content-center">
+                        <FormGroup
+                          style={{
+                            width: "15rem",
+                            height: "15rem",
+                          }}
+                        >
+                          <img
+                            style={{
+                              objectFit: "cover",
+                              width: "100%",
+                              height: "100%",
+                            }}
+                            src={productDetail?.file?.url}
+                          ></img>
+                        </FormGroup>
+                      </div>
+                    ) : (
+                      ""
+                    )}
 
                     <div>
                       <FormGroup className="form__group">
@@ -274,7 +406,9 @@ const AddProducts = () => {
                     </FormGroup>
                   </div>
 
-                  <button className="buy__btn ">Add product</button>
+                  <button className="buy__btn ">
+                    {id ? "Update" : "Add product"}
+                  </button>
                 </Form>
               </>
             )}

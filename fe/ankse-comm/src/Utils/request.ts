@@ -40,6 +40,11 @@ export const delete1 = async <T>(path: string, options?: RequestOptions): Promis
     return response.data;
 };
 
-
+export const put1 = async <T>(path: string, options?: RequestOptions, data?: any): Promise<T> => {
+    const response: AxiosResponse<T> = await request.put(path, data, {
+        headers: options?.headers || {}
+    });
+    return response.data;
+};
 
 export default request;

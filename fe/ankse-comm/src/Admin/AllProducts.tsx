@@ -13,7 +13,11 @@ import { useDispatch } from "react-redux";
 import { reloadProduct } from "../redux/slices/loadProduct";
 import MyPagination from "../components/UI/MyPagination";
 import { ProductProps } from "../model/productProps";
+import { useNavigate } from "react-router-dom";
 const AllProducts = () => {
+
+    const navigate = useNavigate();
+
    const products = useGetData();
    const dispatch = useDispatch();
 
@@ -52,7 +56,9 @@ const AllProducts = () => {
       console.error(error);
     }
   };
-  const handleEdit = (id: any) => {};
+  const handleEdit = (id: any) => {
+    navigate(`/dashboard/edit-product/${id}`)
+  };
 
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);

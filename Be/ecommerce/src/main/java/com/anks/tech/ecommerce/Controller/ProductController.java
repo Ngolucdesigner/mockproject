@@ -5,6 +5,7 @@ import com.anks.tech.ecommerce.DTO.ProductDTO;
 
 import com.anks.tech.ecommerce.Entity.Product;
 import com.anks.tech.ecommerce.Form.CreateProductForm;
+import com.anks.tech.ecommerce.Form.UpdateProductForm;
 import com.anks.tech.ecommerce.Services.Product.IProductServices;
 import com.anks.tech.ecommerce.Utils.FileDownloadUtil;
 import com.anks.tech.ecommerce.Utils.FileUploadUtils;
@@ -150,6 +151,52 @@ public class ProductController {
         return new ResponseEntity<>("Create successfully", HttpStatus.CREATED);
     }
 
+    @PutMapping("/update-product/{id}")
+    public  ResponseEntity<String> updateProduct(@PathVariable int id,
+                                                 @RequestParam String fileId,
+                                                 @RequestParam("file") MultipartFile multipartFiles,
+                                                 @RequestParam String productName,
+                                                 @RequestParam double price,
+                                                 @RequestParam double sales,
+                                                 @RequestParam String shortDesc,
+                                                 @RequestParam String description,
+                                                 @RequestParam int categoryId,
+                                                 @RequestParam String category,
+                                                 @RequestParam int originId,
+                                                 @RequestParam String manufacturer,
+                                                 @RequestParam String madeIn,
+                                                 @RequestParam String guarantee
+                                                 )throws IOException
+    {
+        UpdateProductForm form = new UpdateProductForm();
+
+        form.setProductId(id);
+        form.setProductName(productName);
+        form.setPrice(price);
+        form.setPriceSales(sales);
+        form.setShortDesc(shortDesc);
+        form.setDescription(description);
+        form.setImgUrl("src/main/resources/static/img/");
+
+        UpdateProductForm.Category updateCategory = new UpdateProductForm.Category(categoryId,category);
+        UpdateProductForm.Origin updateOrigin =new UpdateProductForm.Origin(originId,manufacturer,madeIn,guarantee);
+
+        form.setCategory(updateCategory);
+        form.setOrigin(updateOrigin);
+
+        String fileName = StringUtils.cleanPath(multipartFiles.getOriginalFilename());
+        UpdateProductForm.FileProduct fileUpdate = new UpdateProductForm.FileProduct();
+
+        fileUpdate.setFileType(multipartFiles.getContentType());
+        fileUpdate.setFileName(fileName);
+        fileUpdate.setId(fileId);
+        fileUpdate.setData(multipartFiles.getBytes());
+        form.setFileProduct(fileUpdate);
+
+        System.out.println(form.getProductName() +" " + form.getProductId() + " "+ form.getOrigin().getId() +" " + form.getFileProduct().getId());
+       productServices.updateProduct(form);
+        return ResponseEntity.ok().body("Update Successfully!");
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable int id){
@@ -180,9 +227,10 @@ public class ProductController {
 
         CreateProductForm.Category category1 = new CreateProductForm.Category(category);
         form.setCategory(category1);
-//        form.setImgUrl(Base64.getEncoder().encodeToString(multipartFiles.getBytes()));
+        form.setImgUrl(Base64.getEncoder().encodeToString(multipartFiles.getBytes()));
         form.setImgUrl(imgUrl);
         FileUploadUtils.saveFile(uploadDir, fileName, multipartFiles);
+
 
 
 //        productServices.createProduct(form);
