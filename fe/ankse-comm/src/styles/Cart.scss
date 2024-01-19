@@ -1,6 +1,9 @@
 .table {
   tr {
+
     td {
+
+      
       i {
         cursor: pointer;
       }
@@ -17,6 +20,7 @@
 
     td,
     th {
+      vertical-align: middle; 
       color: var(--primary-color);
     }
   }

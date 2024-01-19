@@ -9,9 +9,11 @@ import { categoryList } from "../model/categoryData";
 
 import "../styles/AddProduct.scss";
 
-const options = categoryList;
+const options = categoryList.slice(1);
 
 const AddProducts = () => {
+
+
   const [title, setTitle] = useState("");
   const [shortDescription, setShortDescription] = useState("");
   const [description, setDescription] = useState("");

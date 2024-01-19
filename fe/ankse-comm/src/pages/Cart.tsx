@@ -61,7 +61,7 @@ const PropsCart = (props: itemCart) => {
       >
         {props.productName}
       </td>
-      <td>{priceFormat(props.price)}</td>
+      <td >{priceFormat(props.price)}</td>
 
       <td>
         <div className="quantity__wrapper">
@@ -140,6 +140,8 @@ const BillingForm: React.FC<BillingFormProps> = ({
       phoneNumber: values.phoneNumber,
       paymentMethod,
     };
+
+    
     onSubmit(formData);
   };
 
