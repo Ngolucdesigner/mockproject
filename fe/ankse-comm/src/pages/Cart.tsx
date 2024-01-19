@@ -13,7 +13,6 @@ import { toast } from "react-toastify";
 import { GrSubtract } from "react-icons/gr";
 import { FaPlus } from "react-icons/fa6";
 
-
 type itemCart = {
   id: any;
   imgUrl: any;
@@ -25,13 +24,14 @@ type itemCart = {
   delete: (id: any) => void;
 };
 
-
 const PropsCart = (props: itemCart) => {
   const dispatch = useDispatch();
   // Hàm để tăng số lượng sản phẩm
   const increment = () => {
     // Cập nhật số lượng sản phẩm trong Redux store
-    dispatch(cartActions.updateQuantity({ id: props.id, quantity: props.quantity + 1 }));
+    dispatch(
+      cartActions.updateQuantity({ id: props.id, quantity: props.quantity + 1 })
+    );
   };
 
   // Hàm để giảm số lượng sản phẩm
@@ -39,7 +39,12 @@ const PropsCart = (props: itemCart) => {
     // Đảm bảo rằng số lượng không thể nhỏ hơn 1
     if (props.quantity > 1) {
       // Cập nhật số lượng sản phẩm trong Redux store
-      dispatch(cartActions.updateQuantity({ id: props.id, quantity: props.quantity - 1 }));
+      dispatch(
+        cartActions.updateQuantity({
+          id: props.id,
+          quantity: props.quantity - 1,
+        })
+      );
     }
   };
 
@@ -89,8 +94,7 @@ const PropsCart = (props: itemCart) => {
   );
 };
 
-
-type PaymentMethod = 'vnpay' | 'cash';
+type PaymentMethod = "vnpay" | "cash";
 
 interface BillingFormProps {
   paymentMethod: PaymentMethod;
@@ -105,14 +109,28 @@ interface BillingFormProps {
   onSubmit: (formData: any) => void;
 }
 
-
-const BillingForm: React.FC<BillingFormProps> = ({ paymentMethod, setPaymentMethod, name, setName, email, setEmail, phoneNumber, setPhoneNumber, onSubmit  }) => {
-
-  const handlePaymentMethodChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+const BillingForm: React.FC<BillingFormProps> = ({
+  paymentMethod,
+  setPaymentMethod,
+  name,
+  setName,
+  email,
+  setEmail,
+  phoneNumber,
+  setPhoneNumber,
+  onSubmit,
+}) => {
+  const handlePaymentMethodChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setPaymentMethod(e.target.value as PaymentMethod);
   };
 
-  const handleSubmit = (values: { name: string; email: string; phoneNumber: string }) => {
+  const handleSubmit = (values: {
+    name: string;
+    email: string;
+    phoneNumber: string;
+  }) => {
     setName(values.name);
     setEmail(values.email);
     setPhoneNumber(values.phoneNumber);
@@ -129,7 +147,6 @@ const BillingForm: React.FC<BillingFormProps> = ({ paymentMethod, setPaymentMeth
     <div className="billing__form">
       <legend>Billing Information</legend>
       <Form className="billing__form">
-        
         <FormGroup className="form__group">
           <Input type="text" placeholder="Enter your name" />
         </FormGroup>
@@ -153,7 +170,7 @@ const BillingForm: React.FC<BillingFormProps> = ({ paymentMethod, setPaymentMeth
               type="radio"
               name="paymentMethod"
               value="vnpay"
-              checked={paymentMethod === 'vnpay'}
+              checked={paymentMethod === "vnpay"}
               onChange={handlePaymentMethodChange}
             />
             <Label check>Thanh toán qua VNPAY</Label>
@@ -163,7 +180,7 @@ const BillingForm: React.FC<BillingFormProps> = ({ paymentMethod, setPaymentMeth
               type="radio"
               name="paymentMethod"
               value="cash"
-              checked={paymentMethod === 'cash'}
+              checked={paymentMethod === "cash"}
               onChange={handlePaymentMethodChange}
               defaultChecked
             />
@@ -175,15 +192,14 @@ const BillingForm: React.FC<BillingFormProps> = ({ paymentMethod, setPaymentMeth
   );
 };
 
-
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("cash");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const cartItems: any = useSelector<TReducers>(
     (state) => state.cart.cartItems
@@ -193,14 +209,15 @@ const Cart = () => {
     (state) => state.cart.totalAmount
   );
 
-
   const totalQuantity: any = useSelector<TReducers>(
     (state) => state.cart.totalQuantity
   );
 
-  const totalSale: any = useSelector<TReducers>((state) => state.cart.totalSalesPrice)
+  const totalSale: any = useSelector<TReducers>(
+    (state) => state.cart.totalSalesPrice
+  );
 
-  const total: any = useSelector<TReducers>((state) => state.cart.totalFinal)
+  const total: any = useSelector<TReducers>((state) => state.cart.totalFinal);
 
   const productDetail = (id: any) => {
     navigate(`/shop/${id}`);
@@ -216,16 +233,16 @@ const Cart = () => {
       navigate("/home");
       setTimeout(() => {
         toast.success("Thanh toán thành công!", {
-          position: toast.POSITION.TOP_CENTER
+          position: toast.POSITION.TOP_CENTER,
         });
       }, 500);
     } else {
       toast.warning("Product Cart null");
     }
 
-    if (paymentMethod === 'vnpay') {
+    if (paymentMethod === "vnpay") {
       // Xử lý thanh toán qua VNPAY
-    } else if (paymentMethod === 'cash') {
+    } else if (paymentMethod === "cash") {
       // Xử lý thanh toán khi nhận hàng
     }
   };
@@ -279,7 +296,6 @@ const Cart = () => {
   //   }
   // };
 
-
   return (
     <Helmet title="Cart">
       <CommonSection title="Shopping Cart" />
@@ -331,15 +347,11 @@ const Cart = () => {
                 </h6>
                 <h6 className="d-flex align-items-center justify-content-between ">
                   Discount
-                  <span className="fs-5 fw-bold">
-                    {totalSale}%
-                  </span>
+                  <span className="fs-5 fw-bold">{totalSale}%</span>
                 </h6>
                 <h6 className="d-flex align-items-center justify-content-between ">
                   Total
-                  <span className="fs-4 fw-bold">
-                    {priceFormat(total)}
-                  </span>
+                  <span className="fs-4 fw-bold">{priceFormat(total)}</span>
                 </h6>
               </div>
 

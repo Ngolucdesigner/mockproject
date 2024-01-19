@@ -1,8 +1,7 @@
 .table {
   tr {
-
     td {
-      i  {
+      i {
         cursor: pointer;
       }
       img {
@@ -12,8 +11,8 @@
       }
     }
 
-    .product__title{
-        cursor: pointer;
+    .product__title {
+      cursor: pointer;
     }
 
     td,
@@ -22,7 +21,6 @@
     }
   }
 }
-
 
 .buy__btn {
   border: none;
@@ -38,6 +36,12 @@
 
 .billing__form {
   margin: 2rem 0;
+
+
+    input {
+      border: solid 0.5px rgba(191, 191, 191, 0.15) !important;
+    }
+  
 }
 
 .quantity__btn {
@@ -48,8 +52,9 @@
 }
 
 .info__payment {
-  background-color:rgba(168, 168, 168, 0.15);
+  background-color: rgba(232, 232, 232, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 8px;
-  border: solid 1px #838383;
+  border: none;
   padding: 24px;
 }
