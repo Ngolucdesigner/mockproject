@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 const Signup = () => {
   const [email, setEmail] = useState<string>();
 
-  const [pass, setPass] = useState<string>();
+  const [password, setPassword] = useState<string>();
 
-  const [user, setUser] = useState<string>();
+  const [username, setUsername] = useState<string>();
 
   const [img, setImg] = useState<any>();
 
@@ -18,20 +18,30 @@ const Signup = () => {
   };
 
   const handleChangePass = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPass(event.target.value);
+    setPassword(event.target.value);
   };
 
   const handleChangeUser = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser(event.target.value);
+    setUsername(event.target.value);
   };
 
   const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     setImg(event.target.files);
   };
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log({ email: email, pass: pass, user: user });
+    const formData = new FormData();
+    if (username) formData.append('username', username);
+    if (email) formData.append('email', email);
+    if (password) formData.append('password', password);
+    if (img && img[0]) formData.append('avatar', img[0]);
+
+
+    const response = await fetch('http://localhost:8080/api/v1/accounts/new-account', {
+      method: 'POST',
+      body: formData
+    });
   };
 
   return (
@@ -46,7 +56,7 @@ const Signup = () => {
                   <Input
                     type="text"
                     placeholder="Username"
-                    value={user}
+                    value={username}
                     onChange={handleChangeUser}
                   />
                 </FormGroup>
@@ -64,13 +74,13 @@ const Signup = () => {
                   <Input
                     type="password"
                     placeholder="enter your password"
-                    value={pass}
+                    value={password}
                     onChange={handleChangePass}
                   />
                 </FormGroup>
 
                 <FormGroup className="form__group">
-                  <Input type="file"  onChange={handleChangeFile} />
+                  <Input type="file" onChange={handleChangeFile} />
                 </FormGroup>
 
                 <button type="submit" className="buy__btn auth__btn">
