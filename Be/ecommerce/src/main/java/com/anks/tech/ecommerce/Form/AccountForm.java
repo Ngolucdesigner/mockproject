@@ -13,7 +13,7 @@ public class AccountForm {
 
     private String userName;
     private String email;
-    private String firtName;
+    private String firstName;
     private String lastName;
     private String address;
     private String phone;
@@ -21,10 +21,10 @@ public class AccountForm {
     private String role;
     private FileProduct fileProduct;
 
-    public AccountForm(String userName, String email, String firtName, String lastName, String address, String phone, String password, String role) {
+    public AccountForm(String userName, String email, String firstName, String lastName, String address, String phone, String password, String role) {
         this.userName = userName;
         this.email = email;
-        this.firtName = firtName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;

@@ -3,7 +3,7 @@ package com.anks.tech.ecommerce.Controller;
 import com.anks.tech.ecommerce.DTO.AccountDTO;
 import com.anks.tech.ecommerce.Entity.Account;
 import com.anks.tech.ecommerce.Form.AccountForm;
-import com.anks.tech.ecommerce.Services.Account.IAccountServices;
+import com.anks.tech.ecommerce.Services.Account.IAccountService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class AccountController {
 
     @Autowired
-    private IAccountServices accountServices;
+    private IAccountService accountServices;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -56,7 +56,6 @@ public class AccountController {
             accountDTO.setFile(avatar);
         });
 
-
         return ResponseEntity.ok().body(new PageImpl<>(accountDTOS, pageable, accountPage.getTotalElements()));
     }
 
@@ -65,7 +64,7 @@ public class AccountController {
             @RequestParam("avatar") MultipartFile multipartFile,
             @RequestParam String userName,
             @RequestParam String email,
-            @RequestParam String firtName,
+            @RequestParam String firstName,
             @RequestParam String lastName,
             @RequestParam String address,
             @RequestParam String phone,
@@ -73,7 +72,7 @@ public class AccountController {
             @RequestParam String role
     ) throws IOException {
 
-        AccountForm form = new AccountForm(userName,email,firtName,lastName,address,phone,password,role);
+        AccountForm form = new AccountForm(userName,email,firstName,lastName,address,phone,password,role);
 
         AccountForm.FileProduct fileAvatar= new AccountForm.FileProduct();
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());

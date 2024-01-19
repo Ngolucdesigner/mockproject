@@ -10,10 +10,4 @@ public class Configuaration {
     public ModelMapper initModelMapper() {
         return new ModelMapper();
     }
-//    @Bean
-//    public PasswordEncoder encoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-
-
 }

@@ -30,18 +30,18 @@ public class Account {
     private int id;
 
     @Column(name = "Username", length = 50, nullable = false, unique = true)
-    private String userName;
+    private String username;
 
     @Column(name = "Email", length = 50, nullable = false, unique = true)
     private String email;
 
-    @Column(name = "firtname", length = 50, nullable = false)
-    private String firtName;
+    @Column(name = "firstname", length = 50, nullable = false)
+    private String firstName;
 
     @Column(name = "lastname", length = 50, nullable = false)
     private String lastName;
 
-    @Formula("concat(firtname,' ',lastname)")
+    @Formula("concat(firstname,' ',lastname)")
     private String fullName;
 
 
@@ -80,7 +80,7 @@ public class Account {
             this.createDate = new Date();
         }
         if (this.role == null) {
-            this.role = Role.CUSTOMERS;
+            this.role = Role.CUSTOMER;
         }
         if(this.getUUIDKey()==null){
             this.UUIDKey = UUID.randomUUID().toString();
