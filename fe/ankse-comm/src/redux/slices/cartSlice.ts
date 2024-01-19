@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ProductProps } from "../../model/productProps";
+import { number } from "yup";
 
 type cartItem = ProductProps & {
   quantity: number;
@@ -31,7 +32,7 @@ const cartSlice = createSlice({
     addItem: (state, action) => {
       const newItem = action.payload;
       const existingItem = state.cartItems.find(
-        (item) => item.id === newItem.id
+        (item) => Number(item.id) === Number(newItem.id)
       );
 
       state.totalQuantity++;

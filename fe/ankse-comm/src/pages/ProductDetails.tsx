@@ -10,13 +10,14 @@ import { motion } from "framer-motion";
 import "../styles/ProductDetails.scss";
 import ProductsList from "../components/UI/ProductsList";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../redux/slices/cartSlice";
 import { toast } from "react-toastify";
 import useGetData from "../custom-hooks/useGetData";
 
 import { ProductProps } from "../model/productProps";
 import * as request from "../Utils/request";
+import { TReducers } from "../redux/rootReducer";
 
 const ProductDetails = () => {
   const [tab, setTab] = useState("desc");
@@ -103,7 +104,9 @@ const ProductDetails = () => {
   }: any = product;
 
   const addToCart = () => {
+
     dispatch(
+      
       cartActions.addItem({
         id,
         imgUrl: file.url,
