@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +18,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/v1/accounts", produces = "application/json")
+@RequestMapping(value = "/api/v1", produces = "application/json")
 @ResponseBody
 @CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500", "http://localhost:3000"})
 
@@ -32,12 +34,12 @@ public class AccountController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping("/hello")
+    @GetMapping("/accounts/hello")
     String hello() {
         return "Hello word!";
     }
 
-    @GetMapping
+    @GetMapping("/accounts")
     public ResponseEntity<Page<AccountDTO>> getAllAccounts(Pageable pageable) {
         Page<Account> accountPage = accountServices.getAllAccounts(pageable);
         List<Account> accounts = accountPage.getContent();
@@ -59,7 +61,7 @@ public class AccountController {
         return ResponseEntity.ok().body(new PageImpl<>(accountDTOS, pageable, accountPage.getTotalElements()));
     }
 
-    @PostMapping("/new-account")
+    @PostMapping("/signup")
     public ResponseEntity<String> createNewAccount(
             @RequestParam("avatar") MultipartFile multipartFile,
             @RequestParam String userName,
@@ -83,6 +85,15 @@ public class AccountController {
 
         accountServices.createNewAccount(form);
 
+        if (form == null) {
+            return new ResponseEntity<>("Cannot create null user!", HttpStatus.BAD_REQUEST);
+        }
+
         return ResponseEntity.ok().body("Create successfully!");
+    }
+
+    @GetMapping("accounts/{id}")
+    public Optional<Account> getAccountById (@PathVariable Integer id) {
+        return accountServices.getAccountById(id);
     }
 }

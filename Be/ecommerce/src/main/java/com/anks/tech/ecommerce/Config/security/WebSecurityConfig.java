@@ -23,7 +23,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig {
+public class WebSecurityConfig {
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -43,9 +43,9 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/api/v1/auth/**")
-                        .permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers("/api/v1/accounts/**", "/api/v1/dashboard/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/auth/**", "/api/v1/signup/**").permitAll()
+                        .anyRequest().hasAnyRole("ADMIN", "CUSTOMER"))
                 .httpBasic(withDefaults());
         return http.build();
     }

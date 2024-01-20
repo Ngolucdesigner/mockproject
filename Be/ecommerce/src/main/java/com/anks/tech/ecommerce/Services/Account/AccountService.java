@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -53,6 +54,12 @@ public class AccountService implements IAccountService {
 
         FileProduct fileAvatar = account.getFileProduct();
         fileProductRespository.save(fileAvatar);
+    }
+
+    @Override
+    public Optional<Account> getAccountById(Integer id) {
+        Optional<Account> account = accountRepository.findById(id);
+        return account;
     }
 
     @Override
