@@ -64,7 +64,7 @@ public class AccountController {
     @PostMapping("/signup")
     public ResponseEntity<String> createNewAccount(
             @RequestParam("avatar") MultipartFile multipartFile,
-            @RequestParam String userName,
+            @RequestParam String username,
             @RequestParam String email,
             @RequestParam String firstName,
             @RequestParam String lastName,
@@ -74,7 +74,7 @@ public class AccountController {
             @RequestParam String role
     ) throws IOException {
 
-        AccountForm form = new AccountForm(userName,email,firstName,lastName,address,phone,password,role);
+        AccountForm form = new AccountForm(username,email,firstName,lastName,address,phone,password,role);
 
         AccountForm.FileProduct fileAvatar= new AccountForm.FileProduct();
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());

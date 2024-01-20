@@ -22,17 +22,17 @@ import java.util.UUID;
 public class Account {
 
 
-    @Column(name = "AccountId")
+    @Column(name = "accountId")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //  @GeneratedValue(generator = "uuid2")
 //  @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private int id;
 
-    @Column(name = "Username", length = 50, nullable = false, unique = true)
+    @Column(name = "username", length = 50, nullable = false, unique = true)
     private String username;
 
-    @Column(name = "Email", length = 50, nullable = false, unique = true)
+    @Column(name = "email", length = 50, nullable = false, unique = true)
     private String email;
 
     @Column(name = "firstname", length = 50, nullable = false)

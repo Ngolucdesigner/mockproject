@@ -1,4 +1,5 @@
 package com.anks.tech.ecommerce.Config.security;
+import com.anks.tech.ecommerce.filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -28,6 +30,9 @@ public class WebSecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -43,10 +48,10 @@ public class WebSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/api/v1/accounts/**", "/api/v1/dashboard/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/accounts/**", "/api/v1/dashboard/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/v1/auth/**", "/api/v1/signup/**").permitAll()
-                        .anyRequest().hasAnyRole("ADMIN", "CUSTOMER"))
-                .httpBasic(withDefaults());
+                        .anyRequest().hasAnyAuthority("ADMIN", "CUSTOMER"))
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
