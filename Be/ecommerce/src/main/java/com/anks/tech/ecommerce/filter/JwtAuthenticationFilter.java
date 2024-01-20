@@ -2,6 +2,7 @@ package com.anks.tech.ecommerce.filter;
 
 import com.anks.tech.ecommerce.Config.security.JwtUtil;
 import com.anks.tech.ecommerce.Services.Account.AccountService;
+import com.anks.tech.ecommerce.Services.CustomUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,7 +22,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private AccountService accountDetailsService;
+    private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -49,7 +50,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // Mỗi lần get token thì validate nó
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails accountDetails = accountDetailsService.loadUserByUsername(username);
+            UserDetails accountDetails = customUserDetailsService.loadUserByUsername(username);
 
             // Nếu token hợp lệ
             if (jwtUtil.validateToken(token, accountDetails)) {

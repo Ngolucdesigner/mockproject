@@ -3,7 +3,7 @@ package com.anks.tech.ecommerce.Controller;
 import com.anks.tech.ecommerce.DTO.AuthRequest;
 import com.anks.tech.ecommerce.DTO.AuthRespone;
 import com.anks.tech.ecommerce.Config.security.JwtUtil;
-import com.anks.tech.ecommerce.Services.Account.AccountService;
+import com.anks.tech.ecommerce.Services.CustomUserDetailsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,10 +26,11 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private AccountService accountService;
+    private JwtUtil jwtUtil;
 
     @Autowired
-    private JwtUtil jwtUtil;
+    private CustomUserDetailsService customUserDetailsService;
+
 
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthRequest authRequest) throws Exception {
@@ -41,7 +42,7 @@ public class AuthController {
             throw new Exception("Incorrect username or password");
         }
 
-        final UserDetails userDetails = accountService
+        final UserDetails userDetails = customUserDetailsService
                 .loadUserByUsername(authRequest.getUsername());
 
         final String jwt = jwtUtil.generateToken(userDetails);

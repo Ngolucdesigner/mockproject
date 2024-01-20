@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.Optional;
 
-public interface IAccountService extends UserDetailsService {
+public interface IAccountService {
 
     Page<Account> getAllAccounts(Pageable pageable);
     void createNewAccount (AccountForm form);

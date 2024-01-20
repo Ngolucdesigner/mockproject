@@ -1,4 +1,5 @@
 package com.anks.tech.ecommerce.Config.security;
+import com.anks.tech.ecommerce.Services.CustomUserDetailsService;
 import com.anks.tech.ecommerce.filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,6 +33,9 @@ public class WebSecurityConfig {
 
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {

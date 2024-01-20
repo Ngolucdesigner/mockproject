@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +31,9 @@ public class AccountController {
 
     @Autowired
     private IAccountService accountServices;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -74,7 +78,9 @@ public class AccountController {
             @RequestParam String role
     ) throws IOException {
 
-        AccountForm form = new AccountForm(username,email,firstName,lastName,address,phone,password,role);
+        String encodedPassword = passwordEncoder.encode(password);
+
+        AccountForm form = new AccountForm(username,email,firstName,lastName,address,phone,encodedPassword,role);
 
         AccountForm.FileProduct fileAvatar= new AccountForm.FileProduct();
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());

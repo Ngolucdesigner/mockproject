@@ -17,6 +17,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,9 @@ public class AccountService implements IAccountService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public Page<Account> getAllAccounts(Pageable pageable) {
         return accountRepository.findAll(pageable);
@@ -43,16 +47,21 @@ public class AccountService implements IAccountService {
     @Override
     public void createNewAccount(AccountForm form) {
         TypeMap typeMap = modelMapper.getTypeMap(AccountForm.class, Account.class);
+
         if (typeMap == null) {
             modelMapper.addMappings(new PropertyMap<AccountForm, Account>() {
                 @Override
                 protected void configure() {
-                    skip(destination.getId());
+                    skip(destination.getPassword()); //bỏ qua mapping password
                 }
             });
         }
 
         Account account = modelMapper.map(form, Account.class);
+
+        // Mã hóa mật khẩu và set nó sau khi mapping
+        String encodedPassword = passwordEncoder.encode(form.getPassword());
+        account.setPassword(encodedPassword);
         accountRepository.save(account);
 
         FileProduct fileAvatar = account.getFileProduct();
@@ -63,16 +72,5 @@ public class AccountService implements IAccountService {
     public Optional<Account> getAccountById(Integer id) {
         Optional<Account> account = accountRepository.findById(id);
         return account;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("username " + username + " not found!"));
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(account.getRole().name()));
-
-        return new User(account.getUsername(), account.getPassword(), authorities);
     }
 }
