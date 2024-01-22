@@ -27,13 +27,14 @@ const Login = () => {
 
     const response = await fetch('http://localhost:8080/api/v1/auth/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
     });
 
     const data = await response.json();
+
     if (response.ok) {
-      localStorage.setItem('token', data.jwt);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('isLoggedIn', 'true');
       navigate('/home');
     } else {
       setTimeout(() => {
@@ -42,40 +43,7 @@ const Login = () => {
         });
       }, 500);
     }
-
-    // const loginData = {
-    //     username: username,
-    //     password: password
-    // };
-
-    // try {
-    //     const response = await fetch('/api/v1/login', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(loginData)
-    //     });
-
-    //     const data = await response.json();
-    //     if (response.ok) {
-    //         localStorage.setItem('token', data.jwt); // Lưu JWT vào localStorage
-    //     } else {
-    //         // Xử lý lỗi
-    //     }
-    // } catch (error) {
-    //     console.error('Error during login:', error);
-    // }
-  };
-
-  // const token = localStorage.getItem('token');
-  // if (token) {
-  //   fetch('/some-protected-route', {
-  //       headers: {
-  //           'Authorization': `Bearer ${token}`
-  //       }
-  //   });
-  // }
+  }
 
   const loading = false;
 

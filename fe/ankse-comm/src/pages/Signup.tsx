@@ -2,9 +2,11 @@ import React, { useState } from "react";
 
 import Helmet from "../components/helmet/Helmet";
 import { Col, Container, Form, FormGroup, Input, Row } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState<string>();
 
   const [password, setPassword] = useState<string>();
@@ -26,8 +28,18 @@ const Signup = () => {
   };
 
   const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setImg(event.target.files);
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        // Sử dụng type assertion để khẳng định e.target không phải là null
+        const target = e.target as FileReader;
+        setImg(target.result);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
   };
+  
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -38,10 +50,32 @@ const Signup = () => {
     if (img && img[0]) formData.append('avatar', img[0]);
 
 
-    const response = await fetch('http://localhost:8080/api/v1/accounts/new-account', {
-      method: 'POST',
-      body: formData
-    });
+    try {
+      const response = await fetch('http://localhost:8080/api/v1/signup', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        const imageUrl = img && img[0] ? URL.createObjectURL(img[0]) : '';
+        const formDataObject = {
+          username: username,
+          email: email,
+          // Không lưu mật khẩu trong localStorage vì lý do bảo mật
+          avatar: img && img[0] ? URL.createObjectURL(img[0]) : ''
+        };
+  
+        localStorage.setItem('formData', JSON.stringify(formDataObject));
+        localStorage.setItem('isLoggedIn', 'true');
+        navigate("/home");
+      } else {
+        console.error('Đăng ký không thành công');
+      }
+    } catch (error) {
+      console.error('Lỗi khi gửi yêu cầu đăng ký:', error);
+    }
   };
 
   return (

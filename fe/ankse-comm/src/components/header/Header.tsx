@@ -36,12 +36,15 @@ const nav__Links = [
 
 const Header = () => {
 
+  // Kiểm tra trạng thái đăng nhập từ localStorage
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
   const totalQuantity = useSelector(
     (state: TReducers) => state.cart.totalQuantity
   );
 
   const totalHeart = useSelector(
-    (state:TReducers)=>state.heart.totalQuantity
+    (state: TReducers) => state.heart.totalQuantity
   )
 
 
@@ -51,6 +54,7 @@ const Header = () => {
   const profileActionRef = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
+
   const stickyHeaderFunc = () => {
     const handleScroll = () => {
       if (
@@ -69,6 +73,7 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   };
+
   useEffect(() => {
     stickyHeaderFunc();
   });
@@ -81,7 +86,14 @@ const Header = () => {
     navigate("/cart");
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('isLoggedIn');
+    navigate('/login');
+  };
+
   const currentUser = false;
+  const userImage = localStorage.getItem('userImage') || user; // 'user' là ảnh mặc định
   return (
     <header className="header" ref={headerRef}>
       <Container>
@@ -107,7 +119,7 @@ const Header = () => {
                       className={
                         navClass => navClass.isActive ? "nav__active link" : "link"
                       }
-                      
+
                     >
                       {item.display}
                     </NavLink>
@@ -131,9 +143,9 @@ const Header = () => {
                 <span onClick={toggleProfileActions}>
                   <motion.img
                     whileTap={{ scale: 1.2 }}
-                    src={user}
-                    alt=""
-                    
+                    src={userImage}
+                    alt="User Avatar"
+
                   />
                 </span>
 
@@ -142,8 +154,8 @@ const Header = () => {
                   ref={profileActionRef}
                   onClick={toggleProfileActions}
                 >
-                  {currentUser ? (
-                    <span>Logout</span>
+                  {isLoggedIn ? (
+                    <span onClick={handleLogout}>Logout</span>
                   ) : (
                     <div className="d-flex align-items-center justify-content-center flex-column">
                       <Link to={"/signup"} className="link">Sign up</Link>
