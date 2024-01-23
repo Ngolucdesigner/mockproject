@@ -17,6 +17,7 @@ type itemCart = {
   id: any;
   imgUrl: any;
   price: number;
+  priceSales: number;
   quantity: number;
   productName: any;
   file: { url: string } | any;
@@ -30,27 +31,36 @@ const PropsCart = (props: itemCart) => {
   const increment = () => {
     // Cập nhật số lượng sản phẩm trong Redux store
     dispatch(
-      cartActions.updateQuantity({ id: props.id, quantity: props.quantity + 1 })
+      // cartActions.updateQuantity({ id: props.id, quantity: props.quantity + 1 })
+      cartActions.addItem({
+        id: props.id,
+        productName: props.productName,
+        price: props.price,
+        priceSales: props.priceSales,
+        imgUrl: props.imgUrl,
+      })
     );
   };
 
   // Hàm để giảm số lượng sản phẩm
   const decrement = () => {
     // Đảm bảo rằng số lượng không thể nhỏ hơn 1
-    if (props.quantity > 1) {
+     if (props.quantity > 1) {
       // Cập nhật số lượng sản phẩm trong Redux store
       dispatch(
-        cartActions.updateQuantity({
-          id: props.id,
-          quantity: props.quantity - 1,
-        })
+        cartActions.decreaseQuantity(props.id)
+        // cartActions.updateQuantity({
+        //   id: props.id,
+        //   quantity: props.quantity-1,
+        //   priceSales: props.priceSales
+        // })
       );
     }
   };
 
   return (
     <tr>
-      <td>
+      <td className="cart__img">
         <img src={props.imgUrl} alt="product" />
       </td>
       <td
@@ -61,7 +71,7 @@ const PropsCart = (props: itemCart) => {
       >
         {props.productName}
       </td>
-      <td >{priceFormat(props.price)}</td>
+      <td>{priceFormat(props.price)}</td>
 
       <td>
         <div className="quantity__wrapper">
@@ -94,7 +104,9 @@ const PropsCart = (props: itemCart) => {
   );
 };
 
+
 type PaymentMethod = "vnpay" | "cash";
+
 
 interface BillingFormProps {
   paymentMethod: PaymentMethod;
@@ -141,7 +153,6 @@ const BillingForm: React.FC<BillingFormProps> = ({
       paymentMethod,
     };
 
-    
     onSubmit(formData);
   };
 
@@ -253,50 +264,7 @@ const Cart = () => {
     console.log("Thông tin thanh toán:", formData);
   };
 
-  // const handlePayment = async () => {
-  //   if (totalQuantity) {
-  //     // Thu thập dữ liệu từ form
-  //     const formData = {
-  //       name,
-  //       email,
-  //       phoneNumber,
-  //       // ... thêm tất cả các trường khác từ state
-  //     };
 
-  //     try {
-  //       // Thực hiện logic thanh toán hoặc gửi dữ liệu đến API
-
-  //       const response = await fetch('', {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify(formData),
-  //       });
-  //       const data = await response.json();
-
-  //       if (data.success) {
-  //         // Xử lý khi thanh toán thành công
-  //         navigate("/home");
-  //         toast.success("Thanh toán thành công!", {
-  //           position: toast.POSITION.TOP_CENTER
-  //         });
-  //       } else {
-  //         // Xử lý khi có lỗi từ phản hồi API
-  //         toast.error(data.message, {
-  //           position: toast.POSITION.TOP_CENTER
-  //         });
-  //       }
-  //     } catch (error) {
-  //       // Xử lý lỗi mạng hoặc lỗi khi gọi API
-  //       toast.error("Có lỗi khi thanh toán. Vui lòng thử lại.", {
-  //         position: toast.POSITION.TOP_CENTER
-  //       });
-  //     }
-  //   } else {
-  //     toast.warning("Product Cart null");
-  //   }
-  // };
 
   return (
     <Helmet title="Cart">
@@ -311,7 +279,7 @@ const Cart = () => {
                 <table className="table boder">
                   <thead>
                     <tr>
-                      <th>Image</th>
+                      <th className="cart__img">Image</th>
                       <th>Title</th>
                       <th>Price</th>
                       <th>Quantity</th>
@@ -327,6 +295,7 @@ const Cart = () => {
                           id={item.id}
                           imgUrl={item.imgUrl}
                           price={item.price}
+                          priceSales={item.priceSales}
                           productName={item.productName}
                           quantity={item.quantity}
                           file={item.file}
@@ -349,7 +318,7 @@ const Cart = () => {
                 </h6>
                 <h6 className="d-flex align-items-center justify-content-between ">
                   Discount
-                  <span className="fs-5 fw-bold">{totalSale}%</span>
+                  <span className="fs-5 fw-bold">{priceFormat(totalSale)}</span>
                 </h6>
                 <h6 className="d-flex align-items-center justify-content-between ">
                   Total

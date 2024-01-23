@@ -1,7 +1,7 @@
 export type userPops = {
     id:number,
     accountId:string,  
-    userName:string,
+    username:string,
     email: string,
     fullName: string,
     avatar?: any,
