@@ -1,13 +1,13 @@
 package com.anks.tech.ecommerce.Services.Product;
 
 
-import com.anks.tech.ecommerce.Entity.*;
-import com.anks.tech.ecommerce.Form.CreateProductForm;
-import com.anks.tech.ecommerce.Form.UpdateProductForm;
-import com.anks.tech.ecommerce.Respository.ICategoryRepository;
-import com.anks.tech.ecommerce.Respository.IFileProductRespository;
-import com.anks.tech.ecommerce.Respository.IOriginRespository;
-import com.anks.tech.ecommerce.Respository.IProductRepository;
+import com.anks.tech.ecommerce.entity.*;
+import com.anks.tech.ecommerce.form.CreateProductForm;
+import com.anks.tech.ecommerce.form.UpdateProductForm;
+import com.anks.tech.ecommerce.repository.ICategoryRepository;
+import com.anks.tech.ecommerce.repository.IFileProductRepository;
+import com.anks.tech.ecommerce.repository.IOriginRepository;
+import com.anks.tech.ecommerce.repository.IProductRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.modelmapper.ModelMapper;
@@ -19,8 +19,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class ProductServices implements IProductServices {
@@ -31,10 +29,10 @@ public class ProductServices implements IProductServices {
     private ICategoryRepository categoryRepository;
 
     @Autowired
-     private IFileProductRespository fileProductRespository;
+     private IFileProductRepository fileProductRespository;
 
     @Autowired
-    private IOriginRespository originRespository;
+    private IOriginRepository originRespository;
     @Autowired
     ModelMapper modelMapper;
 

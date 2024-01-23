@@ -1,6 +1,6 @@
 package com.anks.tech.ecommerce.Services.auth;
 
-import com.anks.tech.ecommerce.Config.security.JwtUtil;
+import com.anks.tech.ecommerce.config.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

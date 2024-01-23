@@ -1,28 +1,21 @@
 package com.anks.tech.ecommerce.Services.Account;
 
-import com.anks.tech.ecommerce.Entity.Account;
+import com.anks.tech.ecommerce.entity.Account;
 
-import com.anks.tech.ecommerce.Entity.FileProduct;
-import com.anks.tech.ecommerce.Form.AccountForm;
-import com.anks.tech.ecommerce.Respository.IAccountRepository;
-import com.anks.tech.ecommerce.Respository.IFileProductRespository;
+import com.anks.tech.ecommerce.entity.FileProduct;
+import com.anks.tech.ecommerce.form.AccountForm;
+import com.anks.tech.ecommerce.repository.IAccountRepository;
+import com.anks.tech.ecommerce.repository.IFileProductRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,7 +25,7 @@ public class AccountService implements IAccountService {
     @Autowired
     private IAccountRepository accountRepository;
     @Autowired
-    private IFileProductRespository fileProductRespository;
+    private IFileProductRepository fileProductRespository;
     @Autowired
     private ModelMapper modelMapper;
 

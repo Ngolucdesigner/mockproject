@@ -1,7 +1,7 @@
 package com.anks.tech.ecommerce.Services;
 
-import com.anks.tech.ecommerce.Entity.Account;
-import com.anks.tech.ecommerce.Respository.IAccountRepository;
+import com.anks.tech.ecommerce.entity.Account;
+import com.anks.tech.ecommerce.repository.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

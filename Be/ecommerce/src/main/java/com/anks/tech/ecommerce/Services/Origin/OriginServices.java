@@ -1,10 +1,8 @@
 package com.anks.tech.ecommerce.Services.Origin;
 
-import com.anks.tech.ecommerce.Entity.Origin;
-import com.anks.tech.ecommerce.Entity.Review;
-import com.anks.tech.ecommerce.Form.CreateOriginForm;
-import com.anks.tech.ecommerce.Form.ReviewForm;
-import com.anks.tech.ecommerce.Respository.IOriginRespository;
+import com.anks.tech.ecommerce.entity.Origin;
+import com.anks.tech.ecommerce.form.CreateOriginForm;
+import com.anks.tech.ecommerce.repository.IOriginRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
@@ -20,7 +18,7 @@ public class OriginServices implements IOriginServices{
     @Autowired
     private  ModelMapper modelMapper;
     @Autowired
-    private  IOriginRespository originRespository;
+    private IOriginRepository originRespository;
     @Override
     public Page<Origin> getAllOrigin(Pageable pageable) {
         return originRespository.findAll(pageable);

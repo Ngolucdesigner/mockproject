@@ -1,7 +1,7 @@
 package com.anks.tech.ecommerce.Services.FileProduct;
 
-import com.anks.tech.ecommerce.Entity.FileProduct;
-import com.anks.tech.ecommerce.Respository.IFileProductRespository;
+import com.anks.tech.ecommerce.entity.FileProduct;
+import com.anks.tech.ecommerce.repository.IFileProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class FileProductServices implements IFileProductServices {
 
     @Autowired
-    private IFileProductRespository fileProductRespository;
+    private IFileProductRepository fileProductRespository;
     @Override
     public FileProduct store(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());

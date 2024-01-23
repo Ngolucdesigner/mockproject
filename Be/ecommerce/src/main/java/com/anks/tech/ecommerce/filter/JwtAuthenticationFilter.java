@@ -1,7 +1,6 @@
 package com.anks.tech.ecommerce.filter;
 
-import com.anks.tech.ecommerce.Config.security.JwtUtil;
-import com.anks.tech.ecommerce.Services.Account.AccountService;
+import com.anks.tech.ecommerce.config.security.JwtUtil;
 import com.anks.tech.ecommerce.Services.CustomUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
