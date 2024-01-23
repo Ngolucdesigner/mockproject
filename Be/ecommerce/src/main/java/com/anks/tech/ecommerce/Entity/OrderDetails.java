@@ -2,30 +2,29 @@ package com.anks.tech.ecommerce.Entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Data
-@Table(name = "`OrderDetails`", catalog = "ecommerce")
-@Setter
-@Getter
+@Table(name = "`orderDetails`", catalog = "ecommerce")
 @NoArgsConstructor
-public class OrderDetails {
+@AllArgsConstructor
 
+public class OrderDetails {
     @Id
-    @Column(name = "OrderDetails_id")
+    @Column(name = "orderDetailsId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int OrderDetailsId;
+    private int orderDetailsId;
+
+    @Column(name = "productQuantity")
+    private int productQuantity;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "orderId")
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "productId")
     private Product product;
 
 }

@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/v1", produces = "application/json")
 @ResponseBody
-@CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500", "http://localhost:3000"})
+@CrossOrigin(origins = {"http://127.0.0.1:3000", "http://localhost:3000"})
 
 public class AccountController {
 
@@ -66,16 +66,16 @@ public class AccountController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> createNewAccount(
+    public ResponseEntity<?> createNewAccount(
             @RequestParam("avatar") MultipartFile multipartFile,
             @RequestParam String username,
             @RequestParam String email,
-            @RequestParam String firstName,
-            @RequestParam String lastName,
-            @RequestParam String address,
-            @RequestParam String phone,
             @RequestParam String password,
-            @RequestParam String role
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String address,
+            @RequestParam(required = false) String phone,
+            @RequestParam(required = false) String role
     ) throws IOException {
 
         String encodedPassword = passwordEncoder.encode(password);
@@ -95,7 +95,7 @@ public class AccountController {
             return new ResponseEntity<>("Cannot create null user!", HttpStatus.BAD_REQUEST);
         }
 
-        return ResponseEntity.ok().body("Create successfully!");
+        return new ResponseEntity<>(form, HttpStatus.CREATED);
     }
 
     @GetMapping("accounts/{id}")

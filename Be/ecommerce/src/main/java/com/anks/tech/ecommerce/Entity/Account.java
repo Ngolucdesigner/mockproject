@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "`Account`", catalog = "ecommerce")
+@Table(name = "`account`", catalog = "ecommerce")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -22,12 +22,12 @@ import java.util.UUID;
 public class Account {
 
 
-    @Column(name = "accountId")
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //  @GeneratedValue(generator = "uuid2")
 //  @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    private int id;
+    private int accountId;
 
     @Column(name = "username", length = 50, nullable = false, unique = true)
     private String username;
@@ -35,10 +35,10 @@ public class Account {
     @Column(name = "email", length = 50, nullable = false, unique = true)
     private String email;
 
-    @Column(name = "firstname", length = 50, nullable = false)
+    @Column(name = "firstname", length = 50)
     private String firstName;
 
-    @Column(name = "lastname", length = 50, nullable = false)
+    @Column(name = "lastname", length = 50)
     private String lastName;
 
     @Formula("concat(firstname,' ',lastname)")

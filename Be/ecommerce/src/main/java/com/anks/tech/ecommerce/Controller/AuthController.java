@@ -1,7 +1,7 @@
 package com.anks.tech.ecommerce.Controller;
 
 import com.anks.tech.ecommerce.DTO.AuthRequest;
-import com.anks.tech.ecommerce.DTO.AuthRespone;
+import com.anks.tech.ecommerce.DTO.AuthResponse;
 import com.anks.tech.ecommerce.Config.security.JwtUtil;
 import com.anks.tech.ecommerce.Services.CustomUserDetailsService;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +47,8 @@ public class AuthController {
 
         final String jwt = jwtUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthRespone(jwt));
+        AuthResponse authResponse = new AuthResponse(jwt, userDetails);
+
+        return ResponseEntity.ok(authResponse);
     }
 }

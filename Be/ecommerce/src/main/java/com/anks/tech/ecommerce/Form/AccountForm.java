@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AccountForm {
 
-    private String userName;
+    private String username;
     private String email;
     private String firstName;
     private String lastName;
@@ -21,8 +21,8 @@ public class AccountForm {
     private String role;
     private FileProduct fileProduct;
 
-    public AccountForm(String userName, String email, String firstName, String lastName, String address, String phone, String password, String role) {
-        this.userName = userName;
+    public AccountForm(String username, String email, String firstName, String lastName, String address, String phone, String password, String role) {
+        this.username = username;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
