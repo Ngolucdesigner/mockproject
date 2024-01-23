@@ -46,7 +46,7 @@ const User = () => {
                   {dataUser.useData.map((item: any) => (
                     <UserItem
                       key={item.id}
-                      userName={item.userName}
+                      userName={item.username}
                       email={item.email}
                       address={item.address}
                       img={item.file.url}
