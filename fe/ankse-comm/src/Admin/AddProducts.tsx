@@ -30,6 +30,21 @@ const AddProducts = () => {
   const [madeIn, setMadeIn] = useState<any>("");
   const [guarantee, setGuarantee] = useState<any>("");
 
+
+  const [wattage, setWattage] = useState<any>("");
+  const [noise, setNoise] = useState<any>("");
+  const [technology, setTechnology] = useState<any>("");
+
+  const [level, setLevel] = useState<any>("");
+  const [mode, setMode] = useState<any>("");
+  const [accessory, setAccessory] = useState<any>("");
+
+  const [size, setSize] = useState<any>("");
+  const [weight, setWeight] = useState<any>("");
+  const [color, setColor] = useState<any>("");
+  const [functionP, setFunctionP] = useState<any>("");
+
+
   const [loading, setLoading] = useState(false);
 
   const [productDetail, setProductDetail] = useState<
@@ -65,6 +80,20 @@ const AddProducts = () => {
       madeIn: "",
       guarantee: "",
     },
+    information:{
+      id: "",
+      wattage: "",
+      noise: "",
+      technology: "",
+      level: "",
+      mode: "",
+      accessory: "",
+      size: "",
+      weight: "",
+      color: "",
+      otherFunction: "", 
+    }
+
   });
 
   const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,7 +127,7 @@ const AddProducts = () => {
   };
 
   const handleChangeCategory = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setCategory(event.target.value);
   };
@@ -112,13 +141,57 @@ const AddProducts = () => {
     setManufacturer(event.target.value);
   };
 
+  const handleGuarantee = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGuarantee(event.target.value);
+  };
+
   const handleMadeIn = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMadeIn(event.target.value);
   };
 
-  const handleGuarantee = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGuarantee(event.target.value);
+
+
+  const handleWattage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setWattage(event.target.value);
   };
+
+  const handleNoise = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNoise(event.target.value);
+  };
+
+  const handleTechnology = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTechnology(event.target.value);
+  };
+
+  const handleLevel = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLevel(event.target.value);
+  };
+
+  const handleMode = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMode(event.target.value);
+  };
+
+  const handleAccessory = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAccessory(event.target.value);
+  };
+
+  const handleSize = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSize(event.target.value);
+  };
+
+  const handleWeight = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setWeight(event.target.value);
+  };
+
+  const handleColor = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setColor(event.target.value);
+  };
+
+  const handleFunction = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFunctionP(event.target.value);
+  };
+
+
 
   const config = {
     // withCredentials: true,
@@ -142,12 +215,38 @@ const AddProducts = () => {
     formData.append("madeIn", madeIn);
     formData.append("guarantee", guarantee);
 
+
+    const dataInfo : { [key: string]: any } ={
+      wattage: wattage,
+      noise: noise,
+      technology: technology,
+      level: level,
+      mode: mode,
+      accessory: accessory,
+      size:size,
+      weight: weight,
+      color: color,
+      otherFunction: functionP
+
+    }
+    formData.append("information", JSON.stringify(dataInfo));
+
+
+
     setLoading(true);
 
     if (id) {
+
       formData.append("originId", productDetail.origin?.id);
       formData.append("fileId", productDetail.file?.id);
       formData.append("categoryId", productDetail.categoryId);
+
+      formData.delete("information");
+      dataInfo.id= productDetail.information?.id;
+      formData.append("information", JSON.stringify(dataInfo));
+
+      console.log(productDetail.file?.id)
+
       try {
         request
           .put1(`products/update-product/${id}`, { headers: config }, formData)
@@ -203,16 +302,6 @@ const AddProducts = () => {
   };
 
   useEffect(() => {
-    // setTitle("");
-    // setPrice("");
-    // setPriceSales("");
-    // setCategory("");
-    // setShortDescription("");
-    // setDescription("");
-
-    // setManufacturer("");
-    // setMadeIn("");
-    // setGuarantee("");
 
     if (id) {
       getProductById();
@@ -227,12 +316,24 @@ const AddProducts = () => {
       setCategory(productDetail.category);
       setShortDescription(productDetail.shortDesc);
       setDescription(productDetail.description);
-
       setManufacturer(productDetail.origin?.manufacturer);
       setMadeIn(productDetail.origin?.madeIn);
       setGuarantee(productDetail.origin?.guarantee);
+
+      setWattage(productDetail.information?.wattage);
+      setNoise(productDetail.information?.noise);
+      setTechnology(productDetail.information?.technology);
+      setAccessory(productDetail.information?.accessory);
+      setWeight(productDetail.information?.weight);
+      setColor(productDetail.information?.color);
+      setMode(productDetail.information?.mode);
+      setLevel(productDetail.information?.level);
+      setFunctionP(productDetail.information?.otherFunction);
+      setSize(productDetail.information?.size);
+
     }
   }, [productDetail]);
+
 
   return (
     <section>
@@ -254,7 +355,7 @@ const AddProducts = () => {
                 <Form onSubmit={handleSubmit}>
                   <div className="container__product">
                     <FormGroup className="form__group">
-                      <span>Product Name</span>
+                      <span>Tên sản phẩm</span>
                       <Input
                         type="text"
                         placeholder="Product name"
@@ -264,7 +365,7 @@ const AddProducts = () => {
                       />
                     </FormGroup>
                     <FormGroup className="form__group">
-                      <span>Short description</span>
+                      <span>Mô tả</span>
 
                       <Col>
                         <Input
@@ -279,7 +380,7 @@ const AddProducts = () => {
                     </FormGroup>
 
                     <FormGroup className="form__group">
-                      <span>Description</span>
+                      <span>thông tin chi tiết</span>
 
                       <Col>
                         <Input
@@ -295,7 +396,7 @@ const AddProducts = () => {
 
                     <div className="d-flex align-items-center justify-content-between gap-5">
                       <FormGroup className="form__group w-50">
-                        <span>Price</span>
+                        <span>Đơn giá</span>
                         <Input
                           type="number"
                           placeholder="VND"
@@ -317,9 +418,11 @@ const AddProducts = () => {
                       </FormGroup>
 
                       <FormGroup className="form__group w-50">
-                        <span>Category</span>
-                        <select
+                        <span>Loại sản phẩm</span>
+                        <Input
                           className="w-100 p-2"
+                          name="select"
+                          type="select"
                           value={category}
                           onChange={handleChangeCategory}
                           required
@@ -329,7 +432,7 @@ const AddProducts = () => {
                               {item.option}
                             </option>
                           ))}
-                        </select>
+                        </Input>
                       </FormGroup>
                     </div>
                     {id ? (
@@ -356,8 +459,9 @@ const AddProducts = () => {
 
                     <div>
                       <FormGroup className="form__group">
-                        <span>Product Image</span>
+                        <span>Hình ảnh</span>
                         <Input
+                         
                           type="file"
                           onChange={handleChangeImg}
                           required
@@ -365,11 +469,12 @@ const AddProducts = () => {
                       </FormGroup>
                     </div>
                   </div>
+
                   <div className="product__info-container">
                     <h5>Thông tin Sản phẩm</h5>
 
                     <FormGroup row>
-                      <Label sm={2}>Manufacturer</Label>
+                      <Label sm={2}>Thương hiệu</Label>
                       <Col>
                         <Input
                           placeholder="Thương hiệu"
@@ -382,7 +487,7 @@ const AddProducts = () => {
                     </FormGroup>
 
                     <FormGroup row>
-                      <Label sm={2}>Made In</Label>
+                      <Label sm={2}>Xuất xứ</Label>
                       <Col>
                         <Input
                           placeholder="Nơi sản xuất"
@@ -395,7 +500,7 @@ const AddProducts = () => {
                     </FormGroup>
 
                     <FormGroup row>
-                      <Label sm={2}>Guarantee</Label>
+                      <Label sm={2}>Bảo hành</Label>
                       <Col>
                         <Input
                           placeholder="Bảo hành"
@@ -404,6 +509,83 @@ const AddProducts = () => {
                           onChange={handleGuarantee}
                           required
                         />
+                      </Col>
+                    </FormGroup>
+                  </div>
+
+                  <div className="product__info-container">
+                    <h5>Thông số sản phẩm</h5>
+
+          
+                      <FormGroup row>
+                        <Label sm={2}>Công suất</Label>
+                        <Col>
+                          <Input placeholder="Wat" type="text" value={wattage} onChange={handleWattage} required />
+                        </Col>
+                      </FormGroup>
+
+                      <FormGroup row>
+                        <Label sm={2}>Độ ồn</Label>
+                        <Col>
+                          <Input placeholder="Db" type="text" value={noise} onChange={handleNoise} required />
+                        </Col>
+                      </FormGroup>
+
+                
+
+                    <FormGroup row >
+                      <Label sm={2}>Công nghệ</Label>
+                      <Col>
+                        <Input placeholder="Công nghệ" type="text" value={technology} onChange={handleTechnology} required />
+                      </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                      <Label sm={2}>Level</Label>
+                      <Col>
+                        <Input placeholder="Level" type="text" value={level||''} onChange={handleLevel}  />
+                      </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                      <Label sm={2}>Chế độ</Label>
+                      <Col>
+                        <Input placeholder="Chế độ hoạt động" type="text" value={mode||''} onChange={handleMode}  />
+                      </Col>
+                    </FormGroup>
+
+
+                    <FormGroup row>
+                      <Label sm={2}>Phụ kiện</Label>
+                      <Col>
+                        <Input placeholder="Phụ kiện" type="text"  value={accessory||''} onChange={handleAccessory}  />
+                      </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                      <Label sm={2}>Kích thước</Label>
+                      <Col>
+                        <Input placeholder="Cân nặng" type="text" value={size} onChange={handleSize} required />
+                      </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                      <Label sm={2}>Cân nặng</Label>
+                      <Col>
+                        <Input placeholder="Cân nặng" type="text" value={weight} onChange={handleWeight} required />
+                      </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                      <Label sm={2}>Màu sắc</Label>
+                      <Col>
+                        <Input placeholder="Màu sắc" type="text" value={color} onChange={handleColor} required />
+                      </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                      <Label sm={2}>Chức năng</Label>
+                      <Col>
+                        <Input placeholder="Chức năng" type="text" value={functionP} onChange={handleFunction}  />
                       </Col>
                     </FormGroup>
                   </div>

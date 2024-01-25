@@ -45,6 +45,10 @@ public class Product {
     @JoinColumn(name = "catagoryId", referencedColumnName = "categoryid")
     private Category category;
 
+    @OneToOne(cascade = CascadeType.REMOVE,orphanRemoval = true)
+    @JoinColumn(name = "informationId", referencedColumnName = "id")
+    private Information information;
+
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "uuidUrl", referencedColumnName = "uuid")
     private FileProduct fileProduct;

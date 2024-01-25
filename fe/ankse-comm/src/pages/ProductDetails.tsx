@@ -18,7 +18,6 @@ import useGetData from "../custom-hooks/useGetData";
 import { ProductProps } from "../model/productProps";
 import * as request from "../Utils/request";
 
-
 const ProductDetails = () => {
   const [tab, setTab] = useState("desc");
   const [rating, setRating] = useState(0);
@@ -31,8 +30,8 @@ const ProductDetails = () => {
     productName: "",
     imgUrl: "",
     price: 0,
-    priceSales:0,
-    
+    priceSales: 0,
+
     description: "",
     avgRating: 0,
     shortDesc: "",
@@ -51,12 +50,26 @@ const ProductDetails = () => {
       url: "",
       fileName: "",
     },
-    origin:{
+    origin: {
       id: "",
       manufacturer: "",
       madeIn: "",
-      guarantee: ""
-    }
+      guarantee: "",
+    },
+
+    information: {
+      id: "",
+      wattage: "",
+      noise: "",
+      technology: "",
+      level: "",
+      mode: "",
+      accessory: "",
+      size: "",
+      weight: "",
+      color: "",
+      otherFunction: "",
+    },
   });
 
   const config = {
@@ -100,13 +113,12 @@ const ProductDetails = () => {
     reviews,
     category,
     file,
-    origin
+    origin,
+    information,
   }: any = product;
 
   const addToCart = () => {
-
     dispatch(
-      
       cartActions.addItem({
         id,
         imgUrl: file.url,
@@ -164,8 +176,6 @@ const ProductDetails = () => {
     setload(false);
   }, [id, load]);
 
-
-
   return (
     <Helmet title={productName}>
       <CommonSection title={productName} />
@@ -201,11 +211,14 @@ const ProductDetails = () => {
                 </div>
 
                 <div className="d-flex align-items-center gap-4">
-                  <span className="product__price">{priceFormat(price - (price *(priceSales/100)))}</span>
-                  <span className="product__price-sales">{priceFormat(price)}</span>
+                  <span className="product__price">
+                    {priceFormat(price - price * (priceSales / 100))}
+                  </span>
+                  <span className="product__price-sales">
+                    {priceFormat(price)}
+                  </span>
 
                   <span>Category: {category.toUpperCase()}</span>
-
                 </div>
 
                 <p className="mt-3">{shortDesc}</p>
@@ -364,51 +377,59 @@ const ProductDetails = () => {
                       <tbody>
                         <tr>
                           <td>Công suất</td>
-                          <td>50W</td>
+                          <td>{information.wattage}</td>
                         </tr>
-                        <tr>
-                          <td>Độ ồn</td>
-                          <td>45db</td>
-                        </tr>
-                        <tr>
-                          <td>Bộ lọc bụi cho máy</td>
-                          <td>Màng lọc HEPA, Màng lọc thô</td>
-                        </tr>
-                        <tr>
-                          <td>Mức độ lọc</td>
-                          <td>3 mức độ : Ngủ - Trung bình - Cao</td>
-                        </tr>
-                        <tr>
-                          <td>Chế độ hoạt động</td>
-                          <td>Chế độ lọc Haze</td>
-                        </tr>
+                        {information.noise ? (
+                          <tr>
+                            <td>Độ ồn</td>
+                            <td>{information.noise}</td>
+                          </tr>
+                        ) : null}
+                        {information.accessory ? (
+                          <tr>
+                            <td>Bộ lọc bụi cho máy</td>
+                            <td>{information.accessory}</td>
+                          </tr>
+                        ) : null}
+                        {information.level ? (
+                          <tr>
+                            <td>Mức độ lọc</td>
+                            <td>{information.level}</td>
+                          </tr>
+                        ) : null}
+                        {information.mode ? (
+                          <tr>
+                            <td>Chế độ hoạt động</td>
+                            <td>{information.mode}</td>
+                          </tr>
+                        ) : null}
+
                         <tr>
                           <td>Công nghệ</td>
-                          <td>Plasmacluster ion</td>
+                          <td>{information.technology}</td>
                         </tr>
                         <tr>
                           <td>Kích thước</td>
-                          <td>411 x 431 x 211 (CxRxS mm)</td>
+                          <td>{information.size}</td>
                         </tr>
                         <tr>
                           <td>Trọng lượng</td>
-                          <td>4 kg</td>
+                          <td>{information.weight}</td>
                         </tr>
                         <tr>
                           <td>Màu sắc</td>
-                          <td>Đen</td>
+                          <td>{information.color}</td>
                         </tr>
-                        <tr>
-                          <td>Tiện ích</td>
-                          <td>
-                            <ul className="p-0">
-                              <li>Hẹn giờ</li>
-                              <li>Đèn báo cấp độ quạt</li>
-                              <li>Tự khởi động lại</li>
-                              <li>Đèn báo thay bộ lọc</li>
-                            </ul>
-                          </td>
-                        </tr>
+                        {information.otherFunction ? (
+                          <tr>
+                            <td>Tiện ích</td>
+                            <td>
+                              <ul className="p-0">
+                                <li>{information.otherFunction}</li>
+                              </ul>
+                            </td>
+                          </tr>
+                        ) : null}
                       </tbody>
                     </Table>
                   </Col>

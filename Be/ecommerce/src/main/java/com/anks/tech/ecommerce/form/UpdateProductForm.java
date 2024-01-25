@@ -23,6 +23,7 @@ public class UpdateProductForm {
     private Category category;
     private FileProduct fileProduct;
     private Origin origin;
+    private InformationForm informationForm;
     @Getter
     @Setter
     @NoArgsConstructor

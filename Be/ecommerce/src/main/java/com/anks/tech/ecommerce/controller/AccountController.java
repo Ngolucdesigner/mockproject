@@ -50,16 +50,19 @@ public class AccountController {
 
         List<AccountDTO> accountDTOS = accounts.stream().map(account -> modelMapper.map(account, AccountDTO.class)).collect(Collectors.toList());
 
+
         accountDTOS.forEach(accountDTO -> {
-            String fileDowloadUrl = ServletUriComponentsBuilder
-                    .fromCurrentContextPath().path("/api/v1/products/files/")
-                    .path(accountDTO.getFile().getId()).toUriString();
-            AccountDTO.File avatar = new AccountDTO.File();
-            avatar.setUrl(fileDowloadUrl);
-            avatar.setFileName(accountDTO.getFile().getFileName());
-            avatar.setId(accountDTO.getFile().getId());
-            avatar.setFileType(accountDTO.getFile().getFileType());
-            accountDTO.setFile(avatar);
+            if(accountDTO.getFile()!=null) {
+                String fileDowloadUrl = ServletUriComponentsBuilder
+                        .fromCurrentContextPath().path("/api/v1/products/files/")
+                        .path(accountDTO.getFile().getId()).toUriString();
+                AccountDTO.File avatar = new AccountDTO.File();
+                avatar.setUrl(fileDowloadUrl);
+                avatar.setFileName(accountDTO.getFile().getFileName());
+                avatar.setId(accountDTO.getFile().getId());
+                avatar.setFileType(accountDTO.getFile().getFileType());
+                accountDTO.setFile(avatar);
+            }
         });
 
         return ResponseEntity.ok().body(new PageImpl<>(accountDTOS, pageable, accountPage.getTotalElements()));

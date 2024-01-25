@@ -19,6 +19,7 @@ public class CreateProductForm {
     private Category category;
     private FileProduct fileProduct;
     private Origin origin;
+    private InformationForm informationForm;
     @Getter
     @Setter
     @NoArgsConstructor
@@ -46,5 +47,7 @@ public class CreateProductForm {
         private String madeIn;
         private String guarantee;
     }
+
+
 
 }

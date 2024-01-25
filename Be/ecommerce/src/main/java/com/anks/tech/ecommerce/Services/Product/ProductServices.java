@@ -4,10 +4,7 @@ package com.anks.tech.ecommerce.Services.Product;
 import com.anks.tech.ecommerce.entity.*;
 import com.anks.tech.ecommerce.form.CreateProductForm;
 import com.anks.tech.ecommerce.form.UpdateProductForm;
-import com.anks.tech.ecommerce.repository.ICategoryRepository;
-import com.anks.tech.ecommerce.repository.IFileProductRepository;
-import com.anks.tech.ecommerce.repository.IOriginRepository;
-import com.anks.tech.ecommerce.repository.IProductRepository;
+import com.anks.tech.ecommerce.repository.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.modelmapper.ModelMapper;
@@ -33,6 +30,10 @@ public class ProductServices implements IProductServices {
 
     @Autowired
     private IOriginRepository originRespository;
+
+    @Autowired
+    private IInformationRespository informationRespository;
+
     @Autowired
     ModelMapper modelMapper;
 
@@ -74,6 +75,8 @@ public class ProductServices implements IProductServices {
         Origin origin = product.getOrigin();
         originRespository.save(origin);
 
+        Information information = modelMapper.map(product.getInformation(), Information.class);
+        informationRespository.save(information);
     }
 
     @Override
@@ -89,6 +92,8 @@ public class ProductServices implements IProductServices {
     @Override
     public void updateProduct(UpdateProductForm form) {
         try {
+            System.out.println(form.getInformationForm().toString());
+
             if(productRepository.existsById(form.getProductId())){
                 Product productUpdate = productRepository.findById(form.getProductId()).get();
                 productUpdate.setOrderDetails(null);
@@ -110,6 +115,13 @@ public class ProductServices implements IProductServices {
                 fileProductUpdate = modelMapper.map(form.getFileProduct(), FileProduct.class);
                 fileProductRespository.save(fileProductUpdate);
 
+            }
+
+            if (informationRespository.existsById(form.getInformationForm().getId())){
+                Information informationUpdate = informationRespository.findById(form.getInformationForm().getId()).get();
+                informationUpdate = modelMapper.map(form.getInformationForm(), Information.class);
+
+                informationRespository.save(informationUpdate);
             }
         }
         catch (Exception exception){

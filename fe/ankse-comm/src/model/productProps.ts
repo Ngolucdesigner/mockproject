@@ -28,6 +28,18 @@ export type ProductProps = {
     madeIn: string,
     guarantee: string
 
-
+  };
+  information?:{
+    id: any,
+    wattage: string,
+    noise: string,
+    technology: string,
+    level: string,
+    mode: string,
+    accessory: string,
+    size: string,
+    weight: string,
+    color: string,
+    otherFunction: string, 
   }
 };

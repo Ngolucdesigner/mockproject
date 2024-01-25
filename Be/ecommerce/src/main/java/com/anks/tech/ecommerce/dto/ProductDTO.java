@@ -1,6 +1,7 @@
 package com.anks.tech.ecommerce.dto;
 
 
+
 import lombok.*;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class ProductDTO {
 
     private File file;
     private Origin origin;
+    private Information information;
 
 
 
@@ -61,5 +63,34 @@ public class ProductDTO {
         private String manufacturer;
         private String madeIn;
         private String guarantee;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    public  static  class  Information{
+
+        private int id;
+
+        private String wattage;
+
+        private String noise;
+
+        private String technology;
+
+        private String level;
+
+        private String mode;
+
+        private String accessory;
+
+        private String size;
+
+        private String Weight;
+
+        private String color;
+
+        private String otherFunction;
+
     }
 }

@@ -4,13 +4,18 @@ import com.anks.tech.ecommerce.dto.ProductDTO;
 
 import com.anks.tech.ecommerce.entity.Product;
 import com.anks.tech.ecommerce.form.CreateProductForm;
+import com.anks.tech.ecommerce.form.InformationForm;
 import com.anks.tech.ecommerce.form.UpdateProductForm;
 import com.anks.tech.ecommerce.Services.Product.IProductServices;
 import com.anks.tech.ecommerce.Utils.FileDownloadUtil;
 import com.anks.tech.ecommerce.Utils.FileUploadUtils;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
+
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -50,15 +55,9 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> getAllProducts(Pageable pageable) {
 
-        FileDownloadUtil downloadUtil = new FileDownloadUtil();
 
         Page<Product> productPage = productServices.getAllProduct(pageable);
         List<Product> products = productPage.getContent();
-
-        products.forEach(product -> {
-            Resource resource = new ClassPathResource(product.getImgUrl());
-            System.out.println(resource);
-        });
 
 
         List<ProductDTO> productDTOS = products.stream().map(product -> modelMapper.map(product, ProductDTO.class)).collect(Collectors.toList());
@@ -68,7 +67,6 @@ public class ProductController {
             String fileDowloadUrl = ServletUriComponentsBuilder
                     .fromCurrentContextPath().path("/api/v1/products/files/")
                     .path(file.getFile().getId()).toUriString();
-
 
             ProductDTO.File file1 = new ProductDTO.File();
             file1.setUrl(fileDowloadUrl);
@@ -118,8 +116,14 @@ public class ProductController {
                                                    @RequestParam String category,
                                                    @RequestParam String manufacturer,
                                                    @RequestParam String madeIn,
-                                                   @RequestParam String guarantee
+                                                   @RequestParam String guarantee,
+                                                   @RequestParam String information
+
+
     ) throws IOException {
+
+
+        ObjectMapper objectMapper = new ObjectMapper();
         CreateProductForm form = new CreateProductForm();
 
         form.setProductName(productName);
@@ -129,6 +133,10 @@ public class ProductController {
         form.setPriceSales(sales);
         CreateProductForm.Category category1 = new CreateProductForm.Category(category);
         form.setCategory(category1);
+
+
+        InformationForm informationForm = objectMapper.readValue(information, InformationForm.class);
+        form.setInformationForm(informationForm);
 
         form.setImgUrl("src/main/resources/static/img/");
         String fileName = StringUtils.cleanPath(multipartFiles.getOriginalFilename());
@@ -164,9 +172,12 @@ public class ProductController {
                                                  @RequestParam int originId,
                                                  @RequestParam String manufacturer,
                                                  @RequestParam String madeIn,
-                                                 @RequestParam String guarantee
+                                                 @RequestParam String guarantee,
+                                                 @RequestParam String information
+
                                                  )throws IOException
     {
+        ObjectMapper objectMapper = new ObjectMapper();
         UpdateProductForm form = new UpdateProductForm();
 
         form.setProductId(id);
@@ -182,6 +193,15 @@ public class ProductController {
 
         form.setCategory(updateCategory);
         form.setOrigin(updateOrigin);
+        System.out.println("information: "+information);
+
+
+        InformationForm informationForm = objectMapper.readValue(information, InformationForm.class);
+
+
+        form.setInformationForm(informationForm);
+
+
 
         String fileName = StringUtils.cleanPath(multipartFiles.getOriginalFilename());
         UpdateProductForm.FileProduct fileUpdate = new UpdateProductForm.FileProduct();
@@ -189,10 +209,13 @@ public class ProductController {
         fileUpdate.setFileType(multipartFiles.getContentType());
         fileUpdate.setFileName(fileName);
         fileUpdate.setId(fileId);
+
+        System.out.println("fileId: "+fileUpdate.getId());
+
         fileUpdate.setData(multipartFiles.getBytes());
         form.setFileProduct(fileUpdate);
 
-        System.out.println(form.getProductName() +" " + form.getProductId() + " "+ form.getOrigin().getId() +" " + form.getFileProduct().getId());
+
        productServices.updateProduct(form);
         return ResponseEntity.ok().body("Update Successfully!");
     }
@@ -209,9 +232,8 @@ public class ProductController {
                                                     @RequestParam String shortDesc,
                                                     @RequestParam String description,
                                                     @RequestParam String category
-
-
     ) throws IOException {
+
         CreateProductForm form = new CreateProductForm();
         String fileName = StringUtils.cleanPath(multipartFiles.getOriginalFilename());
         long size = multipartFiles.getSize();
@@ -234,7 +256,7 @@ public class ProductController {
 
 //        productServices.createProduct(form);
 
-        System.out.println(form.getProductName() + " " + form.getShortDesc() + " " + form.getImgUrl());
+
         return new ResponseEntity<>("Create successfully", HttpStatus.CREATED);
     }
 
