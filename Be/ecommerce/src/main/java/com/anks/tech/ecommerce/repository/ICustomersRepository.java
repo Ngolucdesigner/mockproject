@@ -1,7 +1,7 @@
-//package com.anks.tech.ecommerce.Respository;
-//
-//import com.anks.tech.ecommerce.Entity.Customers;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//
-//public interface ICustomersRepository extends JpaRepository<Customers,Integer> {
-//}
+package com.anks.tech.ecommerce.repository;
+
+import com.anks.tech.ecommerce.entity.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ICustomersRepository extends JpaRepository<Customer,Integer> {
+}
