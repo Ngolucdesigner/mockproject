@@ -1,7 +1,7 @@
 package com.anks.tech.ecommerce.controller;
 
 
-import com.anks.tech.ecommerce.dto.FileProductDTO;
+import com.anks.tech.ecommerce.DTO.FileProductDTO;
 import com.anks.tech.ecommerce.entity.FileProduct;
 import com.anks.tech.ecommerce.Services.FileProduct.IFileProductServices;
 import org.modelmapper.ModelMapper;
@@ -17,8 +17,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/v1/products/files", produces = {"application/json"})
 @ResponseBody
+
+@RequestMapping(value = "products/files", produces = {"application/json"})
 @CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500", "http://localhost:3000"})
 
 public class FileProductController {
@@ -48,7 +49,7 @@ public class FileProductController {
         List<FileProductDTO> files = fileProductServices.getAllFiles().map(dbFile -> {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
-                    .path("/files/")
+                    .path("products/files/")
                     .path(dbFile.getId())
                     .toUriString();
 
@@ -63,8 +64,10 @@ public class FileProductController {
     }
 
     @GetMapping("/{id}")
+
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
         FileProduct fileDB = fileProductServices.getFile(id);
+
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getFileName() + "\"")

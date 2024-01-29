@@ -1,4 +1,4 @@
-package com.anks.tech.ecommerce.dto;
+package com.anks.tech.ecommerce.DTO;
 
 import com.anks.tech.ecommerce.entity.Enum.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;

@@ -44,16 +44,12 @@ const PropsCart = (props: itemCart) => {
 
   // Hàm để giảm số lượng sản phẩm
   const decrement = () => {
-    // Đảm bảo rằng số lượng không thể nhỏ hơn 1
+
      if (props.quantity > 1) {
-      // Cập nhật số lượng sản phẩm trong Redux store
+
       dispatch(
         cartActions.decreaseQuantity(props.id)
-        // cartActions.updateQuantity({
-        //   id: props.id,
-        //   quantity: props.quantity-1,
-        //   priceSales: props.priceSales
-        // })
+
       );
     }
   };
@@ -241,6 +237,7 @@ const Cart = () => {
   };
 
   const handlePayment = () => {
+    
     if (totalQuantity) {
       handleFormSubmit({ name, email, phoneNumber });
       navigate("/home");

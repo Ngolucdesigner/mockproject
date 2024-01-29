@@ -1,4 +1,4 @@
-package com.anks.tech.ecommerce.dto;
+package com.anks.tech.ecommerce.DTO;
 
 import lombok.*;
 

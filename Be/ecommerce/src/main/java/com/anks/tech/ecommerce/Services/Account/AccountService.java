@@ -12,7 +12,7 @@ import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,8 +29,8 @@ public class AccountService implements IAccountService {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @Override
     public Page<Account> getAllAccounts(Pageable pageable) {
@@ -53,7 +53,7 @@ public class AccountService implements IAccountService {
         Account account = modelMapper.map(form, Account.class);
 
         // Mã hóa mật khẩu và set nó sau khi mapping
-        String encodedPassword = passwordEncoder.encode(form.getPassword());
+        String encodedPassword = form.getPassword();
         account.setPassword(encodedPassword);
         accountRepository.save(account);
 

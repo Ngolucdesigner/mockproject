@@ -6,5 +6,5 @@ import com.anks.tech.ecommerce.entity.OrderDetails;
 import java.util.List;
 
 public interface IOrderDetailsService {
-    List<OrderDetails> getOrderDetailsByOrder(Order order);
+
 }

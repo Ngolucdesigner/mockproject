@@ -12,11 +12,5 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class OrderDetailsService implements IOrderDetailsService {
-    @Autowired
-    private IOrderDetailRepository orderDetailsRepository;
 
-    @Override
-    public List<OrderDetails> getOrderDetailsByOrder(Order order) {
-        return orderDetailsRepository.findByOrder(order);
-    }
 }

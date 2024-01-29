@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
+import com.anks.tech.ecommerce.Entity.Customers;
 import java.util.Date;
 import java.util.List;
 
@@ -33,10 +33,10 @@ public class Order {
     private double totalPrice;
 
     @ManyToOne
-    @JoinColumn(name = "accountId")
-    private Account account;
+    @JoinColumn(name = "customersId")
+    private Customers customers;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<OrderDetails> orderDetails;
 

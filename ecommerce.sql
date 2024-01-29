@@ -1,0 +1,147 @@
+DROP DATABASE IF EXISTS ecommerce;
+CREATE DATABASE ecommerce;
+USE ecommerce;
+
+
+CREATE TABLE `category`(
+	categoryid int UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    catagory VARCHAR(50) not null
+);
+
+CREATE TABLE `fileTable`(
+	uuid	 VARCHAR(50) PRIMARY KEY NOT NULL,
+	imgdata  LONGBLOB,
+	imgname	 VARCHAR(50) NOT NULL,
+    typeImg  VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE `infomation`(
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    wattage VARCHAR(10),
+    noise VARCHAR(10),
+	technology VARCHAR(100),
+    `level` VARCHAR(200),
+    `mode` VARCHAR(300),
+	accessory VARCHAR(200),
+    size 		varchar(100),
+    Weight 		VARCHAR(10),
+    color		VARCHAR(50),
+    funtion     text
+);
+
+CREATE TABLE `origin`(
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    manufacturer VARCHAR(50),
+    madeIn VARCHAR(50),
+	guarantee VARCHAR(50)
+);
+
+
+DROP TABLE IF EXISTS `account`;
+
+CREATE TABLE `account`(
+	id			INT UNSIGNED PRIMARY KEY AUTO_INCREMENT ,
+    email				VARCHAR(50) UNIQUE KEY NOT NULL,
+    username			VARCHAR(50) UNIQUE KEY NOT NULL,
+    lastname			VARCHAR(50) NOT NULL,
+    firstname			VARCHAR(50) NOT NULL,
+    avatar				VARCHAR(100) ,
+	phone				VARCHAR(20) NOT NULL,
+    address				VARCHAR(100) NOT NULL,
+    `password`			VARCHAR(100) NOT NULL,
+    `role`				ENUM('ADMIN', 'CUSTOMER'),
+    CreateDate			DATE DEFAULT(now()), -- '2023-02-18'
+    UUIDKey				VARCHAR(50) UNIQUE KEY,
+    FOREIGN KEY(avatar) REFERENCES `fileTable`(uuid) ON DELETE CASCADE
+);
+
+INSERT INTO `account` (id, email, username, lastname, firstname, phone, address, `password`, `role` ,UUIDKey)
+VALUES (1, 'nguyenxuandung707@gmail.com', 'dung8anx', 'Dũng', 'Nguyễn Xuân', '0358123444', 'Hà Nội', '$2a$12$sMgQX5HiISo2YuIffw50.Ofmdkg4HaACw98ilQscoFhcY5bDqA.3i', 'CUSTOMER', '112233'),
+	   (2, 'admin@gmail.com', 'admin', 'Admin', 'Nguyễn Xuân', '0358123555', 'Hà Nội', '$2a$12$sMgQX5HiISo2YuIffw50.Ofmdkg4HaACw98ilQscoFhcY5bDqA.3i', 'ADMIN', '221133');
+
+
+CREATE TABLE `products`(
+	id int UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    productName VARCHAR(50) NOT NULL,
+    imgUrl TEXT NOT NULL,
+    price FLOAT UNSIGNED NOT NULL,
+    priceSale FLOAT UNSIGNED DEFAULT(0),
+    shortDesc TEXT NOT NULL,
+    `description` TEXT NOT NULL,
+    avgRating FLOAT,
+    
+    catagoryId INT UNSIGNED,
+    uuidUrl VARCHAR(50),
+    originId INT UNSIGNED,
+    informationId INT UNSIGNED,
+    
+    FOREIGN KEY(catagoryId) REFERENCES `category`(categoryid) ON DELETE CASCADE,
+    FOREIGN KEY(uuidUrl) REFERENCES `fileTable`(uuid) ON DELETE CASCADE,
+    FOREIGN KEY(originId) REFERENCES `origin`(id) ON DELETE CASCADE,
+    FOREIGN KEY(informationId) REFERENCES `infomation`(id)ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE `reviews`(
+	reviewid int UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50),
+    reviewText TEXT,
+    rating FLOAT UNSIGNED,
+    productId int UNSIGNED,
+	FOREIGN KEY(productId) REFERENCES `products`(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE `customers`(
+	customersId INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    fullname VARCHAR(50),
+    email    VARCHAR(50),
+    phone		VARCHAR(50),
+    address TEXT,
+    city VARCHAR(50),
+    postalcode INT UNSIGNED,
+    country VARCHAR(50)
+);
+
+CREATE TABLE `orders`(
+	orderId 			INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	customersId 	INT UNSIGNED, 
+    `date` 		DATE DEFAULT(now()),
+	totalPrice 	FLOAT UNSIGNED,
+    `status`	ENUM ('PENDING', 'SHIPPING', 'COMPLETED'),	
+	FOREIGN KEY (customersId) REFERENCES `customers`(customersId) ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE `orderDetails`(
+		orderDetailsId 				INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+        orderId 		INT UNSIGNED,
+        productId 		INT UNSIGNED,
+        productQuantity INT UNSIGNED,
+        
+        price			FLOAT UNSIGNED,
+        price_salse			FLOAT UNSIGNED,
+        FOREIGN KEY(orderId) REFERENCES `orders`(orderId) ON DELETE CASCADE,
+		FOREIGN KEY(productId) REFERENCES `products`(id) ON DELETE CASCADE
+);
+
+CREATE TABLE `quantity`(
+		quantityId  INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+        totalQuantity INT UNSIGNED,
+        totalSale INT UNSIGNED,
+        productId INT UNSIGNED,
+        FOREIGN KEY(productId) REFERENCES `products`(id) ON DELETE CASCADE
+);
+
+CREATE TABLE `payments`(
+		paymentId INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+        orders_id INT UNSIGNED,
+        payment_date DATE DEFAULT(now()),
+        payment_amount VARCHAR(50),
+        payment_method  VARCHAR(50),
+        
+        FOREIGN KEY(orders_id) REFERENCES `orders`(orderId) ON DELETE CASCADE
+        
+);

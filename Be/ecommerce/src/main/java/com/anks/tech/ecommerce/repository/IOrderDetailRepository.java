@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface IOrderDetailRepository extends JpaRepository<OrderDetails, Integer> {
-    List<OrderDetails> findByOrder (Order order);
+
 }

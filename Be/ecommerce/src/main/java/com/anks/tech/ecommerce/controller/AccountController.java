@@ -1,6 +1,6 @@
 package com.anks.tech.ecommerce.controller;
 
-import com.anks.tech.ecommerce.dto.AccountDTO;
+import com.anks.tech.ecommerce.DTO.AccountDTO;
 import com.anks.tech.ecommerce.entity.Account;
 import com.anks.tech.ecommerce.form.AccountForm;
 import com.anks.tech.ecommerce.Services.Account.IAccountService;
@@ -11,7 +11,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,8 +32,8 @@ public class AccountController {
     @Autowired
     private IAccountService accountServices;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -81,7 +81,7 @@ public class AccountController {
             @RequestParam(required = false) String role
     ) throws IOException {
 
-        String encodedPassword = passwordEncoder.encode(password);
+        String encodedPassword = password;
 
         AccountForm form = new AccountForm(username,email,firstName,lastName,address,phone,encodedPassword,role);
 

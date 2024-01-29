@@ -1,6 +1,6 @@
 package com.anks.tech.ecommerce.controller;
 
-import com.anks.tech.ecommerce.dto.ProductDTO;
+import com.anks.tech.ecommerce.DTO.ProductDTO;
 
 import com.anks.tech.ecommerce.entity.Product;
 import com.anks.tech.ecommerce.form.CreateProductForm;
@@ -10,7 +10,6 @@ import com.anks.tech.ecommerce.Services.Product.IProductServices;
 import com.anks.tech.ecommerce.Utils.FileDownloadUtil;
 import com.anks.tech.ecommerce.Utils.FileUploadUtils;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.modelmapper.ModelMapper;
@@ -53,6 +52,7 @@ public class ProductController {
     }
 
     @GetMapping
+
     public ResponseEntity<Page<ProductDTO>> getAllProducts(Pageable pageable) {
 
 
@@ -65,7 +65,7 @@ public class ProductController {
 
         productDTOS.forEach(file -> {
             String fileDowloadUrl = ServletUriComponentsBuilder
-                    .fromCurrentContextPath().path("/api/v1/products/files/")
+                    .fromCurrentContextPath().path("products/files/")
                     .path(file.getFile().getId()).toUriString();
 
             ProductDTO.File file1 = new ProductDTO.File();
@@ -73,6 +73,7 @@ public class ProductController {
             file1.setId(file.getFile().getId());
             file1.setFileName(file.getFile().getFileName());
             file1.setFileType(file.getFile().getFileType());
+
             file.setFile(file1);
 
         });
@@ -86,7 +87,7 @@ public class ProductController {
         ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
 
         String fileDowloadUrl = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/v1/products/files/")
+                .fromCurrentContextPath().path("/products/files/")
                 .path(productDTO.getFile().getId()).toUriString();
 
         ProductDTO.File file1 = new ProductDTO.File();
@@ -193,7 +194,7 @@ public class ProductController {
 
         form.setCategory(updateCategory);
         form.setOrigin(updateOrigin);
-        System.out.println("information: "+information);
+
 
 
         InformationForm informationForm = objectMapper.readValue(information, InformationForm.class);
