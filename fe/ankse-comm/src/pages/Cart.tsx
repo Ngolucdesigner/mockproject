@@ -173,7 +173,7 @@ const BillingForm: React.FC<BillingFormProps> = ({
         </FormGroup>
 
         <FormGroup className="form__group">
-          <Input type="text" placeholder="Street address" />
+          <Input type="text" placeholder="Address" />
         </FormGroup>
 
         <FormGroup tag="fieldset">

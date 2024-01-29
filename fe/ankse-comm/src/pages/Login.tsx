@@ -38,7 +38,7 @@ const Login = () => {
       navigate('/home');
     } else {
       setTimeout(() => {
-        toast.success("Đăng nhập thất bại!", {
+        toast.warn("Đăng nhập thất bại!", {
           position: toast.POSITION.TOP_CENTER
         });
       }, 500);
