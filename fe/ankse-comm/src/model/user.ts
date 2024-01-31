@@ -10,6 +10,7 @@ export type userPops = {
     role?: string,
     createDate?: number,
     file?:{
+      fileId:string,
       url:string
     }
   };

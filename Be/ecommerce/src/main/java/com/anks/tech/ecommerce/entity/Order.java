@@ -6,8 +6,12 @@ import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import com.anks.tech.ecommerce.Entity.Customers;
+
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 @Entity
 @Data
@@ -32,9 +36,13 @@ public class Order {
     @Column(name = "totalPrice")
     private double totalPrice;
 
+    @Column(name = "payment")
+    private String paymentMethod;
+
     @ManyToOne
     @JoinColumn(name = "customersId")
     private Customers customers;
+
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
@@ -42,8 +50,20 @@ public class Order {
 
     @PrePersist
     public void prePersist() {
+        Date date = new Date();
+        TimeZone gmtPlus7 = TimeZone.getTimeZone("Asia/Ho_Chi_Minh");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(gmtPlus7);
+        String dateFormat = sdf.format(date);
         if (this.orderDate == null) {
-            this.orderDate = new Date();
+            try {
+                this.orderDate =  sdf.parse(dateFormat);
+                System.err.println(sdf.parse(dateFormat));
+            }
+            catch (Exception e){
+                System.err.println(e.toString());
+            }
+
         }
     }
 }

@@ -13,6 +13,10 @@ import { toast } from "react-toastify";
 import { GrSubtract } from "react-icons/gr";
 import { FaPlus } from "react-icons/fa6";
 
+import Spinner from "react-bootstrap/Spinner";
+
+import * as request from "../Utils/request";
+
 type itemCart = {
   id: any;
   imgUrl: any;
@@ -44,13 +48,8 @@ const PropsCart = (props: itemCart) => {
 
   // Hàm để giảm số lượng sản phẩm
   const decrement = () => {
-
-     if (props.quantity > 1) {
-
-      dispatch(
-        cartActions.decreaseQuantity(props.id)
-
-      );
+    if (props.quantity > 1) {
+      dispatch(cartActions.decreaseQuantity(props.id));
     }
   };
 
@@ -100,115 +99,117 @@ const PropsCart = (props: itemCart) => {
   );
 };
 
+type PaymentMethod = "vnPay" | "cash";
 
-type PaymentMethod = "vnpay" | "cash";
+// interface BillingFormProps {
+//   paymentMethod: PaymentMethod;
+//   setPaymentMethod: React.Dispatch<React.SetStateAction<PaymentMethod>>;
+//   name: string;
+//   setName: React.Dispatch<React.SetStateAction<string>>;
+//   email: string;
+//   setEmail: React.Dispatch<React.SetStateAction<string>>;
+//   phoneNumber: string;
+//   setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
 
+//   onSubmit: (formData: any) => void;
+// }
 
-interface BillingFormProps {
-  paymentMethod: PaymentMethod;
-  setPaymentMethod: React.Dispatch<React.SetStateAction<PaymentMethod>>;
-  name: string;
-  setName: React.Dispatch<React.SetStateAction<string>>;
-  email: string;
-  setEmail: React.Dispatch<React.SetStateAction<string>>;
-  phoneNumber: string;
-  setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
+// const BillingForm: React.FC<BillingFormProps> = ({
+//   paymentMethod,
+//   setPaymentMethod,
+//   name,
+//   setName,
+//   email,
+//   setEmail,
+//   phoneNumber,
+//   setPhoneNumber,
+//   onSubmit,
+// }) => {
+//   const handlePaymentMethodChange = (
+//     e: React.ChangeEvent<HTMLInputElement>
+//   ) => {
+//     setPaymentMethod(e.target.value as PaymentMethod);
+//   };
 
-  onSubmit: (formData: any) => void;
-}
+//   const handleSubmit = (values: {
+//     name: string;
+//     email: string;
+//     phoneNumber: string;
+//   }) => {
+//     setName(values.name);
+//     setEmail(values.email);
+//     setPhoneNumber(values.phoneNumber);
+//     const formData = {
+//       name: values.name,
+//       email: values.email,
+//       phoneNumber: values.phoneNumber,
+//       paymentMethod,
+//     };
 
-const BillingForm: React.FC<BillingFormProps> = ({
-  paymentMethod,
-  setPaymentMethod,
-  name,
-  setName,
-  email,
-  setEmail,
-  phoneNumber,
-  setPhoneNumber,
-  onSubmit,
-}) => {
-  const handlePaymentMethodChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setPaymentMethod(e.target.value as PaymentMethod);
-  };
+//     onSubmit(formData);
+//   };
 
-  const handleSubmit = (values: {
-    name: string;
-    email: string;
-    phoneNumber: string;
-  }) => {
-    setName(values.name);
-    setEmail(values.email);
-    setPhoneNumber(values.phoneNumber);
-    const formData = {
-      name: values.name,
-      email: values.email,
-      phoneNumber: values.phoneNumber,
-      paymentMethod,
-    };
+//   return (
+//     <div className="billing__form">
+//       <legend>Billing Information</legend>
+//       <Form className="billing__form">
+//         <FormGroup className="form__group">
+//           <Input type="text" placeholder="Enter your name" />
+//         </FormGroup>
 
-    onSubmit(formData);
-  };
+//         <FormGroup className="form__group">
+//           <Input type="email" placeholder="Enter your email" />
+//         </FormGroup>
 
-  return (
-    <div className="billing__form">
-      <legend>Billing Information</legend>
-      <Form className="billing__form">
-        <FormGroup className="form__group">
-          <Input type="text" placeholder="Enter your name" />
-        </FormGroup>
+//         <FormGroup className="form__group">
+//           <Input type="number" placeholder="Phone number" />
+//         </FormGroup>
 
-        <FormGroup className="form__group">
-          <Input type="email" placeholder="Enter your email" />
-        </FormGroup>
+//         <FormGroup className="form__group">
+//           <Input type="text" placeholder="Street address" />
+//         </FormGroup>
 
-        <FormGroup className="form__group">
-          <Input type="number" placeholder="Phone number" />
-        </FormGroup>
-
-        <FormGroup className="form__group">
-          <Input type="text" placeholder="Street address" />
-        </FormGroup>
-
-        <FormGroup tag="fieldset">
-          <legend>Phương thức thanh toán</legend>
-          <FormGroup check>
-            <Input
-              type="radio"
-              name="paymentMethod"
-              value="vnpay"
-              checked={paymentMethod === "vnpay"}
-              onChange={handlePaymentMethodChange}
-            />
-            <Label check>Thanh toán qua VNPAY</Label>
-          </FormGroup>
-          <FormGroup check>
-            <Input
-              type="radio"
-              name="paymentMethod"
-              value="cash"
-              checked={paymentMethod === "cash"}
-              onChange={handlePaymentMethodChange}
-              defaultChecked
-            />
-            <Label check>Thanh toán khi nhận hàng</Label>
-          </FormGroup>
-        </FormGroup>
-      </Form>
-    </div>
-  );
-};
+//         <FormGroup tag="fieldset">
+//           <legend>Phương thức thanh toán</legend>
+//           <FormGroup check>
+//             <Input
+//               type="radio"
+//               name="paymentMethod"
+//               value="vnpay"
+//               checked={paymentMethod === "vnpay"}
+//               onChange={handlePaymentMethodChange}
+//             />
+//             <Label check>Thanh toán qua VNPAY</Label>
+//           </FormGroup>
+//           <FormGroup check>
+//             <Input
+//               type="radio"
+//               name="paymentMethod"
+//               value="cash"
+//               checked={paymentMethod === "cash"}
+//               onChange={handlePaymentMethodChange}
+//               defaultChecked
+//             />
+//             <Label check>Thanh toán khi nhận hàng</Label>
+//           </FormGroup>
+//         </FormGroup>
+//       </Form>
+//     </div>
+//   );
+// };
 
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("cash");
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+
+  const [loading, setLoading] = useState(false);
 
   const cartItems: any = useSelector<TReducers>(
     (state) => state.cart.cartItems
@@ -236,32 +237,90 @@ const Cart = () => {
     dispatch(cartActions.deleteItem(id));
   };
 
-  const handlePayment = () => {
-    
+  const changeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+  const changePhoneNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumber(event.target.value);
+  };
+  const changeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+  const changeAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress(event.target.value);
+  };
+
+  const handlePaymentMethodChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setPaymentMethod(e.target.value as PaymentMethod);
+  };
+
+  const config = {
+    // withCredentials: true,
+    "Content-Type": "application/json",
+    // Authorization: "Basic " + localStorage.getItem("cookie"),
+    // 'Access-Control-Allow-Origin': false ,
+  };
+
+  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     if (totalQuantity) {
-      handleFormSubmit({ name, email, phoneNumber });
-      navigate("/home");
-      setTimeout(() => {
-        toast.success("Thanh toán thành công!", {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      }, 500);
+      const dataOrder: { [key: string]: any } = {
+        fullName: name,
+        email: email,
+        phone: phoneNumber,
+        address: address,
+        city: "",
+      };
+
+      const orderDetail: { [key: string]: any } = {
+        status: "PENDING",
+        orderDate: "",
+        totalPrice: total,
+        paymentMethod: paymentMethod,
+      };
+
+      type productOrderDetail = {
+        productQuantity: any;
+        productId: any;
+      };
+
+      const orderProduct: productOrderDetail[] = [];
+
+      cartItems.map((item: any) => {
+        const itemP: productOrderDetail = {
+          productId: item.id,
+          productQuantity: item.quantity,
+        };
+        orderProduct.push(itemP);
+      });
+
+      orderDetail.orderDetailForms = orderProduct;
+
+      dataOrder.orderForm = orderDetail;
+      setLoading(true);
+      try {
+        request
+          .post1("customer/new-order", { headers: config }, dataOrder)
+          .then((res) => {
+            toast.success("Đặt hàng thành công!");
+            sessionStorage.clear();
+            
+            dispatch((cartActions.deleteAllItems()));
+
+            navigate("/shop");
+            setLoading(false);
+          });
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
     } else {
-      toast.warning("Product Cart null");
-    }
-
-    if (paymentMethod === "vnpay") {
-      // Xử lý thanh toán qua VNPAY
-    } else if (paymentMethod === "cash") {
-      // Xử lý thanh toán khi nhận hàng
+      toast.warning("Không có sản phẩm trong giỏ hàng");
     }
   };
-
-  const handleFormSubmit = (formData: any) => {
-    console.log("Thông tin thanh toán:", formData);
-  };
-
-
 
   return (
     <Helmet title="Cart">
@@ -270,7 +329,12 @@ const Cart = () => {
         <Container>
           <Row>
             <Col lg="9">
-              {cartItems.length === 0 ? (
+              {loading ? (
+                <h5 className="d-flex align-items-center justify-content-center  gap-2">
+                  <Spinner animation="border" variant="info" />
+                  <span>Loading...</span>
+                </h5>
+              ) : cartItems.length === 0 ? (
                 <h2 className="fs-4 text-center"> No Items Added the cart</h2>
               ) : (
                 <table className="table boder">
@@ -322,7 +386,7 @@ const Cart = () => {
                   <span className="fs-4 fw-bold">{priceFormat(total)}</span>
                 </h6>
               </div>
-
+              {/* 
               <BillingForm
                 paymentMethod={paymentMethod}
                 setPaymentMethod={setPaymentMethod}
@@ -333,17 +397,90 @@ const Cart = () => {
                 phoneNumber={phoneNumber}
                 setPhoneNumber={setPhoneNumber}
                 onSubmit={handleFormSubmit}
-              />
+              /> */}
+
+              <div className="billing__form">
+                <legend>Billing Information</legend>
+                <Form className="billing__form" onSubmit={handleFormSubmit}>
+                  <FormGroup className="form__group">
+                    <Input
+                      type="text"
+                      placeholder="Enter your name"
+                      value={name}
+                      onChange={changeName}
+                      required
+                    />
+                  </FormGroup>
+
+                  <FormGroup className="form__group">
+                    <Input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={changeEmail}
+                      required
+                    />
+                  </FormGroup>
+
+                  <FormGroup className="form__group">
+                    <Input
+                      type="number"
+                      placeholder="Phone number"
+                      value={phoneNumber}
+                      onChange={changePhoneNumber}
+                      required
+                    />
+                  </FormGroup>
+
+                  <FormGroup className="form__group">
+                    <Input
+                      type="text"
+                      placeholder="Street address"
+                      value={address}
+                      onChange={changeAddress}
+                      required
+                    />
+                  </FormGroup>
+
+                  <FormGroup tag="fieldset" >
+                    <legend>Phương thức thanh toán</legend>
+                    <FormGroup check>
+                      <Input
+                        type="radio"
+                        name="paymentMethod"
+                        value={"vnPay"}
+
+                        checked={paymentMethod === "vnPay"}
+                        onChange={handlePaymentMethodChange}
+                        disabled
+                        
+                      />
+                      <Label check>Thanh toán qua VNPAY</Label>
+                    </FormGroup>
+                    <FormGroup check>
+                      <Input
+                        type="radio"
+                        name="paymentMethod"
+                        value={"cash"}
+                        // defaultChecked
+                        checked={paymentMethod === "cash"}
+                        onChange={handlePaymentMethodChange}
+                      />
+                      <Label check>Thanh toán khi nhận hàng</Label>
+                    </FormGroup>
+                  </FormGroup>
+
+                  <motion.button
+                    whileTap={{ scale: 1.1 }}
+                    className="buy__btn w-100"
+                    type="submit"
+                  >
+                    Confirm Payment
+                  </motion.button>
+                </Form>
+              </div>
 
               <div>
-                <motion.button
-                  whileTap={{ scale: 1.1 }}
-                  className="buy__btn w-100"
-                  onClick={handlePayment}
-                >
-                  Confirm Payment
-                </motion.button>
-
                 <motion.button
                   whileTap={{ scale: 1.1 }}
                   className="buy__btn w-100"

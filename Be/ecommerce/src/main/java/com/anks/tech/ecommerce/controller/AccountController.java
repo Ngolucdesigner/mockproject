@@ -56,6 +56,7 @@ public class AccountController {
                 String fileDowloadUrl = ServletUriComponentsBuilder
                         .fromCurrentContextPath().path("/api/v1/products/files/")
                         .path(accountDTO.getFile().getId()).toUriString();
+
                 AccountDTO.File avatar = new AccountDTO.File();
                 avatar.setUrl(fileDowloadUrl);
                 avatar.setFileName(accountDTO.getFile().getFileName());

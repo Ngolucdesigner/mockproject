@@ -13,6 +13,7 @@ public class OrderDetailForm {
 
 
     private int productQuantity;
+
     private int orderId;
     private int productId;
 

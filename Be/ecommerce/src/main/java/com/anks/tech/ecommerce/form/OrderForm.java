@@ -19,6 +19,7 @@ public class OrderForm {
     private String status;
     private Date orderDate;
     private double totalPrice;
+    private String paymentMethod;
     private List<OrderDetailForm> orderDetailForms;
 
 }

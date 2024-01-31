@@ -49,7 +49,7 @@ const User = () => {
                       userName={item.username}
                       email={item.email}
                       address={item.address}
-                      img={item.file.url}
+                      img={item.file?.url}
                       phone= {item.phone}
                       delete={()=>handleDelete}
                       edit={()=>handleEdit}

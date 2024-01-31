@@ -19,6 +19,12 @@ public class OrderDetails {
     @Column(name = "productQuantity")
     private int productQuantity;
 
+    @Column(name = "price")
+    private Double price;
+
+    @Column(name = "price_sales")
+    private Double priceSales;
+
     @ManyToOne
     @JoinColumn(name = "orderId")
     private Order order;

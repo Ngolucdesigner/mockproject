@@ -101,6 +101,16 @@ const cartSlice = createSlice({
       // );
     },
 
+    deleteAllItems: (state) => {
+      state.cartItems = [];
+      state.totalQuantity = 0;
+      state.totalAmount = 0;
+      state.totalSalesPrice = 0;
+      state.totalFinal = 0;
+
+      sessionStorage.removeItem("cartState");
+    },
+
     decreaseQuantity: (state, action) => {
       const id = action.payload;
       const existingItem = state.cartItems.find((item) => item.id === id);
