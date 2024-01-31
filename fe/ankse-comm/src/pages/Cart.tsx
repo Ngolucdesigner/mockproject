@@ -117,7 +117,8 @@ interface BillingFormProps {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   phoneNumber: string;
   setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
-
+  address: string;
+  setAddress: React.Dispatch<React.SetStateAction<string>>;
   onSubmit: (formData: any) => void;
 }
 
@@ -130,6 +131,8 @@ const BillingForm: React.FC<BillingFormProps> = ({
   setEmail,
   phoneNumber,
   setPhoneNumber,
+  address,
+  setAddress,
   onSubmit,
 }) => {
   const handlePaymentMethodChange = (
@@ -138,18 +141,29 @@ const BillingForm: React.FC<BillingFormProps> = ({
     setPaymentMethod(e.target.value as PaymentMethod);
   };
 
-  const handleSubmit = (values: {
-    name: string;
-    email: string;
-    phoneNumber: string;
-  }) => {
-    setName(values.name);
-    setEmail(values.email);
-    setPhoneNumber(values.phoneNumber);
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumber(e.target.value);
+  };
+
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     const formData = {
-      name: values.name,
-      email: values.email,
-      phoneNumber: values.phoneNumber,
+      name,
+      email,
+      phoneNumber,
+      address,
       paymentMethod,
     };
 
@@ -159,21 +173,40 @@ const BillingForm: React.FC<BillingFormProps> = ({
   return (
     <div className="billing__form">
       <legend>Billing Information</legend>
-      <Form className="billing__form">
+      <Form className="billing__form" onSubmit={handleSubmit}>
         <FormGroup className="form__group">
-          <Input type="text" placeholder="Enter your name" />
+          <Input 
+            type="text" 
+            placeholder="Enter your name" 
+            value={name}
+            onChange={handleNameChange}/>
         </FormGroup>
 
         <FormGroup className="form__group">
-          <Input type="email" placeholder="Enter your email" />
+          <Input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={handleEmailChange}
+          />
         </FormGroup>
 
         <FormGroup className="form__group">
-          <Input type="number" placeholder="Phone number" />
+          <Input
+            type="number"
+            placeholder="Phone number"
+            value={phoneNumber}
+            onChange={handlePhoneNumberChange}
+          />
         </FormGroup>
 
         <FormGroup className="form__group">
-          <Input type="text" placeholder="Address" />
+          <Input
+            type="text"
+            placeholder="Address"
+            value={address}
+            onChange={handleAddressChange}
+          />
         </FormGroup>
 
         <FormGroup tag="fieldset">
@@ -213,6 +246,7 @@ const Cart = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
 
   const cartItems: any = useSelector<TReducers>(
     (state) => state.cart.cartItems
@@ -242,7 +276,29 @@ const Cart = () => {
 
   const handlePayment = () => {
     if (totalQuantity) {
-      handleFormSubmit({ name, email, phoneNumber });
+      const formData = {
+        name,
+        email,
+        phoneNumber,
+        address
+      };
+      
+      fetch("http://localhost:8080/api/v1/customers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Response from server:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+
+      handleFormSubmit(formData);
       navigate("/home");
       setTimeout(() => {
         toast.success("Thanh toán thành công!", {
@@ -253,11 +309,11 @@ const Cart = () => {
       toast.warning("Product Cart null");
     }
 
-    if (paymentMethod === "vnpay") {
-      // Xử lý thanh toán qua VNPAY
-    } else if (paymentMethod === "cash") {
-      // Xử lý thanh toán khi nhận hàng
-    }
+    // if (paymentMethod === "vnpay") {
+    //   // Xử lý thanh toán qua VNPAY
+    // } else if (paymentMethod === "cash") {
+    //   // Xử lý thanh toán khi nhận hàng
+    // }
   };
 
   const handleFormSubmit = (formData: any) => {
@@ -335,6 +391,8 @@ const Cart = () => {
                 setEmail={setEmail}
                 phoneNumber={phoneNumber}
                 setPhoneNumber={setPhoneNumber}
+                address={address}
+                setAddress={setAddress}
                 onSubmit={handleFormSubmit}
               />
 
