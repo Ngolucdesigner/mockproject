@@ -26,7 +26,7 @@ const UserItem = (props: userProps) => {
       <td>{props.phone}</td>
       <td>{props.address}</td>
       <td>
-        <button className="btn btn-danger">Delete</button>
+        <button className="btn btn-danger m-1">Delete</button>
         <button className="btn btn-primary">Edit</button>
       </td>
     </tr>

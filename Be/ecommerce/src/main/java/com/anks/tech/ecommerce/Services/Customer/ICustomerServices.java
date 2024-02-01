@@ -10,5 +10,5 @@ public interface ICustomerServices {
    public Customers getCustomerById(int id);
 
    public void createOder(CustomerForm form);
-
+   public void deleteOder(int id);
 }

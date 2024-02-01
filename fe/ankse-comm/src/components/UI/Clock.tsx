@@ -8,7 +8,7 @@ const Clock = () => {
   let interval: NodeJS.Timeout;
 
   const countDown = () => {
-    const destination = new Date("Jan 30, 2024").getTime();
+    const destination = new Date("Feb 30, 2024").getTime();
 
     interval = setInterval(() => {
       const now = new Date().getTime();

@@ -5,11 +5,19 @@ import Spinner from "react-bootstrap/Spinner";
 
 import "../styles/Dashboard.scss";
 import useGetData from "../custom-hooks/useGetData";
+import { useSelector } from "react-redux";
+import { TReducers } from "../redux/rootReducer";
+import { priceFormat } from "../model/FormatVND";
 
 const Dashboard = () => {
   const totalElementsProduct = useGetData().totalElementsProduct;
   const totalElementsAccount = useGetData().totalElementsAccount;
-
+  const totalOrder: any = useSelector<TReducers>((state)=>
+    state.quantity.quantityOder
+  )
+  const totalSales : any = useSelector<TReducers>((state)=>
+  state.quantity.quantitySales
+)
   return (
     <>
       <section>
@@ -18,13 +26,13 @@ const Dashboard = () => {
             <Col className="lg-3">
               <div className="revenue__box">
                 <h5>Total Sales</h5>
-                <span>$1234</span>
+                <span>{priceFormat(totalSales)}</span>
               </div>
             </Col>
             <Col className="lg-3">
               <div className="order__box">
                 <h5>Orders</h5>
-                <span>56775</span>
+                <span>{totalOrder}</span>
               </div>
             </Col>
             <Col className="lg-3">

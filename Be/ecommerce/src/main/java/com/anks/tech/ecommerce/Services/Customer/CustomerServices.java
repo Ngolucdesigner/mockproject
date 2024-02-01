@@ -78,4 +78,9 @@ public class CustomerServices implements ICustomerServices{
 
     }
 
+    @Override
+    public void deleteOder(int id) {
+        customersRepository.deleteById(id);
+    }
+
 }

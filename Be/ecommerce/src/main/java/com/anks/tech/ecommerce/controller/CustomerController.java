@@ -1,6 +1,7 @@
 package com.anks.tech.ecommerce.controller;
 
 import com.anks.tech.ecommerce.DTO.CustomerDTO;
+import com.anks.tech.ecommerce.Services.Customer.CustomerServices;
 import com.anks.tech.ecommerce.Services.Customer.ICustomerServices;
 import com.anks.tech.ecommerce.form.CustomerForm;
 import org.modelmapper.ModelMapper;
@@ -51,5 +52,10 @@ public class CustomerController {
         customerServices.createOder(form);
 
         return ResponseEntity.ok().body("create order successfully!");
+    }
+    @DeleteMapping("/delete/{id}")
+    public  ResponseEntity<String> deleteOrder(@PathVariable int id){
+        customerServices.deleteOder(id);
+        return ResponseEntity.ok().body("Delete successfully!");
     }
 }

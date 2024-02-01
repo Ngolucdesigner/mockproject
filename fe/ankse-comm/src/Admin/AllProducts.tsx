@@ -45,11 +45,12 @@ const AllProducts = () => {
         .delete1(path, { headers: config })
         .then((res) => {
           reload();
-          toast.success("delete successfully");
+          toast.success("Delete successfully");
           setLoading(false);
         })
         .catch((error) => {
           console.error(error);
+          toast.error("Delete False");
           setLoading(false);
         });
     } catch (error) {

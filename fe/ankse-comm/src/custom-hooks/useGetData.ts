@@ -65,12 +65,12 @@ const useGetData = () => {
   useEffect(() => {
     getAllAccount();
     getAllProducts();
-  }, []);
-
-  useEffect(() => {
-    getAllAccount();
-    getAllProducts();
   }, [reload]);
+
+  // useEffect(() => {
+  //   getAllAccount();
+  //   getAllProducts();
+  // }, [reload]);
 
   return {
     useData,

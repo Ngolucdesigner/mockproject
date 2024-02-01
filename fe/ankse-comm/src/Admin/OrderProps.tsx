@@ -29,6 +29,8 @@ type propsItem = {
   phone: string;
   address: string;
   orders: order[];
+  delete: (id:any)=>void
+  detail: (id:any)=>void
 };
 
 const OrderProps = (props: propsItem) => {
@@ -53,8 +55,8 @@ const OrderProps = (props: propsItem) => {
       <td>{props.orders.map((item) => item.status)}</td>
 
       <td>
-        <button className="btn btn-danger">Delete</button>
-        <button className="btn btn-primary">Detail</button>
+        <button className="btn btn-danger m-1" onClick={()=> props.delete(props.customersId)}>Delete</button>
+        <button className="btn btn-primary m-1" onClick={()=> props.detail(props.customersId)}>Detail</button>
       </td>
     </tr>
   );
