@@ -15,6 +15,7 @@ import AddProducts from "../Admin/AddProducts";
 import Dashboard from "../Admin/Dashboard";
 import User from "../Admin/User";
 import Order from "../Admin/Order";
+import OrderDetail from "../Admin/OrderDetail";
 
 const Routers = () => {
   return (
@@ -37,6 +38,7 @@ const Routers = () => {
         <Route path="dashboard/add-product" element={<AddProducts />} />
         <Route path="dashboard/users" element={<User/>} />
         <Route path="dashboard/order" element={<Order/>} />
+        <Route path="dashboard/order/order-detail/:id" element={<OrderDetail/>} />
       </Route>
 
       {/* <Route path="checkout" element={

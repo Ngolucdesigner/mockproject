@@ -44,7 +44,7 @@ const useGetData = () => {
         notReload();
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -58,7 +58,7 @@ const useGetData = () => {
         notReload();
       })
       .catch((err) => {
-        console.log(err.status);
+        console.error(err.status);
       });
   };
 

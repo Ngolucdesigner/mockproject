@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Spinner from "react-bootstrap/Spinner";
 import { useDispatch } from "react-redux";
 import { quantity } from "../redux/slices/order";
+import { useNavigate } from "react-router-dom";
 
 type productDetail = {
   id: any;
@@ -43,9 +44,10 @@ const Order = () => {
 
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [quantityOrder, setQuantityOrder] = useState();
-  const [salesOrder, setSalesOrder] = useState();
+  
 
   const config = {
     // withCredentials: true,
@@ -66,7 +68,7 @@ const Order = () => {
           setLoading(false);
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
           setReload(false);
           setLoading(false);
         });
@@ -88,7 +90,7 @@ const Order = () => {
         })
         .catch((error) => {
           toast.error("Delete False");
-          console.log(error);
+          console.error(error);
           setLoading(false);
         });
     } catch (error) {
@@ -104,7 +106,9 @@ const Order = () => {
   dispatch(quantity.quantityOrder(quantityOrder));
   dispatch(quantity.quantitySales(totalPrice));
 
-  const detail = (id: any) => {};
+  const detail = (id: any) => {
+    navigate(`order-detail/${id}`)
+  };
 
   useEffect(() => {
     getAllOrder();
