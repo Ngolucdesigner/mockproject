@@ -110,9 +110,11 @@ public class ProductServices implements IProductServices {
                 originUpdate = modelMapper.map(form.getOrigin(), Origin.class);
                 originRespository.save(originUpdate);
             }
+
             if(fileProductRespository.existsById(form.getFileProduct().getId())){
                 FileProduct fileProductUpdate = fileProductRespository.findById(form.getFileProduct().getId()).get();
                 fileProductUpdate = modelMapper.map(form.getFileProduct(), FileProduct.class);
+
                 fileProductRespository.save(fileProductUpdate);
 
             }

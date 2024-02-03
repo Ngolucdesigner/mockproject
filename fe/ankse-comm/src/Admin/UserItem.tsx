@@ -1,13 +1,14 @@
 import React from "react";
 
 type userProps = {
+  id:any,
   img: string;
   userName: string;
   email: string;
   phone: string;
   address: string;
-  delete: () => void;
-  edit: () => void;
+  delete: (id:any) => void;
+  edit: (id:any) => void;
 };
 
 const UserItem = (props: userProps) => {
@@ -26,8 +27,8 @@ const UserItem = (props: userProps) => {
       <td>{props.phone}</td>
       <td>{props.address}</td>
       <td>
-        <button className="btn btn-danger m-1">Delete</button>
-        <button className="btn btn-primary">Edit</button>
+        <button className="btn btn-danger m-1" onClick={()=>props.delete(props.id)}>Delete</button>
+        <button className="btn btn-primary" onClick={()=>props.edit(props.id)}>Edit</button>
       </td>
     </tr>
   );

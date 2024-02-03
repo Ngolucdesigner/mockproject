@@ -1,5 +1,5 @@
 export type MyPaginationProps = {
-    currentPage: number|1;
-    totalPages: number|1;
+    currentPage: number;
+    totalPages: number;
     onPageChange: (pageNumber: number) => void;
 }

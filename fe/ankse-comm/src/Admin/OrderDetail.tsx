@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, Container, Row, Table } from 'reactstrap';
 import Spinner from "react-bootstrap/Spinner";
 const OrderDetail = () => {
@@ -42,9 +42,11 @@ const OrderDetail = () => {
                     />
                   ))} */}
                 </tbody>
-              </Ta>
+              </Table>
             )}
                     </Col>
+
+                    
                 </Row>
             </Container>
             

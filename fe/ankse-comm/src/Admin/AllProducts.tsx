@@ -14,6 +14,7 @@ import { reloadProduct } from "../redux/slices/loadProduct";
 import MyPagination from "../components/UI/MyPagination";
 
 import { useNavigate } from "react-router-dom";
+import { changePage } from "../redux/slices/page";
 const AllProducts = () => {
 
     const navigate = useNavigate();
@@ -63,8 +64,12 @@ const AllProducts = () => {
 
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
-    console.log(page);
+   
+    dispatch(changePage.addPage(pageNumber))
+    reload();
   };
+
+  
 
 
   // console.log(products.products);

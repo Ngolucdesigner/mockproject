@@ -8,7 +8,7 @@ const initialState = {
 }
 
 const isLogin = createSlice({
-  name: "isLogin",
+  name: "login",
   initialState,
   reducers: {
       isLogin:(state, action)=>{
@@ -18,6 +18,6 @@ const isLogin = createSlice({
   }
 });
 
-export const {} = isLogin.actions
+export const login = isLogin.actions
 
 export default isLogin.reducer

@@ -5,17 +5,48 @@ import * as request from "../Utils/request";
 import useGetData from "../custom-hooks/useGetData";
 import Spinner from "react-bootstrap/Spinner";
 import UserItem from "./UserItem";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { reloadProduct } from "../redux/slices/loadProduct";
 const User = () => {
   const [loading, setLoading] = useState(false);
 
   const dataUser = useGetData();
+  const dispatch = useDispatch();
+  const config = {
+    // withCredentials: true,
+    "Content-Type": "application/auto",
+    // Authorization: "Basic " + localStorage.getItem("cookie"),
+    // 'Access-Control-Allow-Origin': false ,
+  };
+  
+  const reload = () => {
+    dispatch(reloadProduct.reloadProduct(true));
+  };
 
-  const handleDelete = ()=>{
 
-  }
-  const handleEdit=()=>{
+  const handleDelete = (id: any) => {
+    setLoading(true);
+    const path = "accounts/delete/" + id;
+    try {
+      request
+        .delete1(path, { headers: config })
+        .then((res) => {
+          reload();
+          toast.success("Delete successfully");
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error("Delete False");
+          setLoading(false);
+        });
+    } catch (error) {
+      console.error(error);
+    }
 
-  }
+  };
+  const handleEdit = (id: any) => {};
   return (
     <section>
       <Container>
@@ -43,18 +74,18 @@ const User = () => {
                 </h5>
               ) : (
                 <tbody>
-                  {dataUser.useData.map((item: any) => (
+                  {dataUser.useData.map((item: any, index) => (
                     <UserItem
-                      key={item.id}
+                      key={index}
+                      id={item.id}
                       userName={item.username}
                       email={item.email}
                       address={item.address}
                       img={item.file?.url}
-                      phone= {item.phone}
-                      delete={()=>handleDelete}
-                      edit={()=>handleEdit}
+                      phone={item.phone}
+                      delete={() => handleDelete(item.id)}
+                      edit={() => handleEdit(item.id)}
                     />
-                 
                   ))}
                 </tbody>
               )}

@@ -67,4 +67,9 @@ public class AccountService implements IAccountService {
         return account;
     }
 
+    @Override
+    public void deleteAccountByid(int id) {
+        accountRepository.deleteById(id);
+    }
+
 }

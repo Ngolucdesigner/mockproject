@@ -21,6 +21,9 @@ const useGetData = () => {
 
   const dispatch = useDispatch();
 
+
+  const page = useSelector((state:TReducers)=>state.changePage.page)
+
   const notReload = () => {
     dispatch(reloadProduct.reloadProduct(false));
   };
@@ -64,7 +67,7 @@ const useGetData = () => {
 
   useEffect(() => {
     getAllAccount();
-    getAllProducts();
+    getAllProducts(Number(page));
   }, [reload]);
 
   // useEffect(() => {

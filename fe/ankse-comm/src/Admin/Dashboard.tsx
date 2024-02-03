@@ -32,7 +32,11 @@ const Dashboard = () => {
             <Col className="lg-3">
               <div className="order__box">
                 <h5>Orders</h5>
-                <span>{totalOrder}</span>
+                {totalOrder ? (
+                  <span>{totalOrder}</span>
+                ) : (
+                  <Spinner animation="border" variant="info" />
+                )}
               </div>
             </Col>
             <Col className="lg-3">

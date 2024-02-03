@@ -17,63 +17,79 @@ import Clock from "../components/UI/Clock";
 import useGetData from "../custom-hooks/useGetData";
 import { trending } from "../model/categoryTrending/trending";
 import { homeData } from "../assets/data/home";
-
+import { useDispatch } from "react-redux";
+import { changePage } from "../redux/slices/page";
+import MyPagination from "../components/UI/MyPagination";
+import { reloadProduct } from "../redux/slices/loadProduct";
 
 const heroImg = require("../assets/images/hero-img.png");
 const counterImg = require("../assets/images/counter-timer-img.png");
 
 const Home = () => {
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+
   const year = new Date().getFullYear();
 
   const [loading, setLoading] = useState(false);
 
-  const products = useGetData().products;
+  const products = useGetData();
 
-  const [trendingProduct, setTrendingProduct] =
-    useState<Array<ProductProps>>(products);
+  const [trendingProduct, setTrendingProduct] = useState<Array<ProductProps>>(
+    products.products
+  );
 
-  const [BestSalesProduct, setBestSalesProduct] =
-    useState<Array<ProductProps>>(products);
+  const [BestSalesProduct, setBestSalesProduct] = useState<Array<ProductProps>>(
+    products.products
+  );
 
-  const [airPurifierProduct, setAirPurifierProduct] =
-    useState<Array<ProductProps>>(products);
+  const [airPurifierProduct, setAirPurifierProduct] = useState<Array<ProductProps>>(products.products);
 
-  const [dehumidifiersProduct, setDehumidifiersProduct] =
-    useState<Array<ProductProps>>(products);
+  const [dehumidifiersProduct, setDehumidifiersProduct] = useState<Array<ProductProps>>(products.products);
 
-  const [robotProduct, setRobotProduct] =
-    useState<Array<ProductProps>>(products);
+  const [robotProduct, setRobotProduct] = useState<Array<ProductProps>>(
+    products.products
+  );
 
-  const [SterilizerProduct, setSterilizerProduct] =
-    useState<Array<ProductProps>>(products);
+  const [SterilizerProduct, setSterilizerProduct] = useState<Array<ProductProps>>(products.products);
 
-  const [milkWarmerProduct, setMilkWarmerProduct] =
-    useState<Array<ProductProps>>(products);
+  const [milkWarmerProduct, setMilkWarmerProduct] = useState<Array<ProductProps>>(products.products);
+
+  const reload = () => {
+    dispatch(reloadProduct.reloadProduct(true));
+  };
+
+  const handlePageChange = (pageNumber: number) => {
+    setPage(pageNumber);
+
+    dispatch(changePage.addPage(pageNumber));
+    reload();
+  };
 
   useEffect(() => {
-    const filteredTrendingProduct = products.filter(
+    const filteredTrendingProduct = products.products.filter(
       (item) => item.category === trending.trending.toString()
     );
 
-    const filteredBestSalesProduct = products.filter(
+    const filteredBestSalesProduct = products.products.filter(
       (item) => item.category === trending.bestSales.toString()
     );
-    const filteredAirPurifier = products.filter(
+    const filteredAirPurifier = products.products.filter(
       (item) => item.category === trending.product[0].value
     );
 
-    const filteredDehumidifiers = products.filter(
+    const filteredDehumidifiers = products.products.filter(
       (item) => item.category === trending.product[1].value
     );
-    const filteredRobot = products.filter(
+    const filteredRobot = products.products.filter(
       (item) => item.category === trending.product[2].value
     );
 
-    const filteredSterilizer = products.filter(
+    const filteredSterilizer = products.products.filter(
       (item) => item.category === trending.product[3].value
     );
 
-    const filteredMilkWarmer = products.filter(
+    const filteredMilkWarmer = products.products.filter(
       (item) => item.category === trending.product[4].value
     );
 
@@ -85,12 +101,12 @@ const Home = () => {
     setSterilizerProduct(filteredSterilizer);
     setMilkWarmerProduct(filteredMilkWarmer);
 
-    if (products.length) {
+    if (products.products.length) {
       setLoading(false);
     } else {
       setLoading(true);
     }
-  }, [products]);
+  }, [products.products]);
 
   return (
     <Helmet title={"Home"}>
@@ -133,6 +149,12 @@ const Home = () => {
                   <h2 className="section__title">Trending Products</h2>
                 </Col>
                 <ProductsList products={trendingProduct} />
+
+                <MyPagination
+                  currentPage={page}
+                  totalPages={Number(products.totalPagesProduct)}
+                  onPageChange={handlePageChange}
+                />
               </Row>
             </Container>
           </section>

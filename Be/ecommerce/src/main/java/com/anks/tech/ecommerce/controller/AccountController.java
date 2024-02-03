@@ -106,4 +106,10 @@ public class AccountController {
     public Optional<Account> getAccountById (@PathVariable Integer id) {
         return accountServices.getAccountById(id);
     }
+
+    @DeleteMapping("accounts/delete/{id}")
+    public ResponseEntity<String> deleteAccountById(@PathVariable int id){
+        accountServices.deleteAccountByid(id);
+        return ResponseEntity.ok().body("Delete successfully!");
+    }
 }

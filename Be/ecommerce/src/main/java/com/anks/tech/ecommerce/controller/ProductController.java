@@ -198,18 +198,16 @@ public class ProductController {
 
 
         InformationForm informationForm = objectMapper.readValue(information, InformationForm.class);
-
-
         form.setInformationForm(informationForm);
 
 
 
         String fileName = StringUtils.cleanPath(multipartFiles.getOriginalFilename());
         UpdateProductForm.FileProduct fileUpdate = new UpdateProductForm.FileProduct();
-
+        fileUpdate.setId(fileId);
         fileUpdate.setFileType(multipartFiles.getContentType());
         fileUpdate.setFileName(fileName);
-        fileUpdate.setId(fileId);
+
 
         System.out.println("fileId: "+fileUpdate.getId());
 
