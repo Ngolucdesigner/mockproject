@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { number } from 'yup';
+
 
 
 type propsPage ={

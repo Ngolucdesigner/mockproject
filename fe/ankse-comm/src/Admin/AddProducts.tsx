@@ -194,7 +194,7 @@ const AddProducts = () => {
     setFunctionP(event.target.value);
   };
 
-  
+
   const reload = () => {
     dispatch(reloadProduct.reloadProduct(true));
   };

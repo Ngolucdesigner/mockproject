@@ -3,6 +3,8 @@ import { Col, Container, Row, Table } from 'reactstrap';
 import Spinner from "react-bootstrap/Spinner";
 const OrderDetail = () => {
     const [loading, setLoading] = useState(false);
+
+    
     return (
         <section>
             <Container>
@@ -18,14 +20,11 @@ const OrderDetail = () => {
               <Table responsive>
                 <thead>
                   <tr>
-                    <th>Id</th>
+                    <th>customersId</th>
                     <th>Customer</th>
                     <th>Phone</th>
                     <th>Address</th>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>email</th>
                   </tr>
                 </thead>
                 <tbody>
