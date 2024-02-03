@@ -68,7 +68,7 @@ const cartSlice = createSlice({
      
       state.totalFinal = state.totalAmount - state.totalSalesPrice;
 
-      console.log(state.totalFinal);
+     
 
       sessionStorage.setItem("cartState", JSON.stringify(state));
       // console.log(state.cartItems);

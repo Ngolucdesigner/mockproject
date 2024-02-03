@@ -44,7 +44,7 @@ public class CustomerServices implements ICustomerServices{
 
     @Override
     public Customers getCustomerById(int id) {
-        return null;
+        return customersRepository.findById(id).get();
     }
 
     @Override

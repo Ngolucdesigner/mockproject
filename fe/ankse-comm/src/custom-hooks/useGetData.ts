@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { userPops } from "../model/user";
 import * as request from "../Utils/request";
 import { ProductProps } from "../model/productProps";
@@ -12,10 +12,17 @@ const useGetData = () => {
   const [useData, setUseData] = useState<Array<userPops>>([]);
 
   const [products, setProducts] = useState<Array<ProductProps>>([]);
-  const [totalPagesProduct, setTotalPagesProduct] = useState("");
+  const [totalPagesProduct, setTotalPagesProduct] = useState<string>("");
   const [totalElementsProduct, setTotalElementsProduct] = useState("");
   const [totalPagesAccount, setTotalPagesAccount] = useState("");
   const [totalElementsAccount, setTotalElementsAccount] = useState("");
+
+
+
+  const notReload = () => {
+    dispatch(reloadProduct.reloadProduct(false));
+  };
+
 
   const reload = useSelector((state: TReducers) => state.reload.load);
 
@@ -24,9 +31,6 @@ const useGetData = () => {
 
   const page = useSelector((state:TReducers)=>state.changePage.page)
 
-  const notReload = () => {
-    dispatch(reloadProduct.reloadProduct(false));
-  };
 
   const config = {
     withCredentials: true,
@@ -51,7 +55,7 @@ const useGetData = () => {
       });
   };
 
-  const getAllProducts = async (page?: number) => {
+  const getAllProducts = async (page?: number|1) => {
     await request
       .get(`products?page=${page}`, { headers: config })
       .then((res) => {

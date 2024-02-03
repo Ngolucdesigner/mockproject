@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-    load: false
+type loadProps ={
+  load: boolean
+}
+
+const initialState: loadProps = {
+    load : false
 }
 
 const loadProduct = createSlice({

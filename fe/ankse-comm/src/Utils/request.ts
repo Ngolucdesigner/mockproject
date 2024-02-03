@@ -17,6 +17,8 @@ export const get = async (path: string, { headers: {} }) => {
   return response.data;
 };
 
+
+
 export const post = async (path: string, { headers: {} }, data: any) => {
   const response = await request.post(path, data, {});
   return response.data;

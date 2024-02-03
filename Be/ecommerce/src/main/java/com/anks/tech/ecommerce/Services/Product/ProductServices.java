@@ -92,7 +92,7 @@ public class ProductServices implements IProductServices {
     @Override
     public void updateProduct(UpdateProductForm form) {
         try {
-            System.out.println(form.getInformationForm().toString());
+
 
             if(productRepository.existsById(form.getProductId())){
                 Product productUpdate = productRepository.findById(form.getProductId()).get();
@@ -112,7 +112,12 @@ public class ProductServices implements IProductServices {
             }
 
             if(fileProductRespository.existsById(form.getFileProduct().getId())){
+
+
+//                fileProductRespository.deleteDataById(form.getFileProduct().getId());
+
                 FileProduct fileProductUpdate = fileProductRespository.findById(form.getFileProduct().getId()).get();
+
                 fileProductUpdate = modelMapper.map(form.getFileProduct(), FileProduct.class);
 
                 fileProductRespository.save(fileProductUpdate);

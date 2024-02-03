@@ -10,12 +10,14 @@ import { categoryList } from "../model/categoryData";
 import "../styles/AddProduct.scss";
 import { useLocation, useParams } from "react-router-dom";
 import { ProductProps } from "../model/productProps";
+import { useDispatch } from "react-redux";
+import { reloadProduct } from "../redux/slices/loadProduct";
 
 const options = categoryList.slice(1);
 
 const AddProducts = () => {
   const location = useLocation();
-
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   const [title, setTitle] = useState("");
@@ -46,6 +48,7 @@ const AddProducts = () => {
 
 
   const [loading, setLoading] = useState(false);
+  const [reloadDetail, setReloadDetail]= useState(false);
 
   const [productDetail, setProductDetail] = useState<
     ProductProps & { categoryId: string }
@@ -191,7 +194,10 @@ const AddProducts = () => {
     setFunctionP(event.target.value);
   };
 
-
+  
+  const reload = () => {
+    dispatch(reloadProduct.reloadProduct(true));
+  };
 
   const config = {
     // withCredentials: true,
@@ -199,6 +205,8 @@ const AddProducts = () => {
     // Authorization: "Basic " + localStorage.getItem("cookie"),
     // 'Access-Control-Allow-Origin': false ,
   };
+
+
 
   const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -245,7 +253,7 @@ const AddProducts = () => {
       dataInfo.id= productDetail.information?.id;
       formData.append("information", JSON.stringify(dataInfo));
 
-      console.log(productDetail.file?.id)
+     
 
       try {
         request
@@ -273,9 +281,11 @@ const AddProducts = () => {
             // Handle the successful response here
 
             toast.success("Product successfully added");
+            reload();
+            setReloadDetail(true);
             setLoading(false);
           })
-          .catch((error) => {
+          .catch(() => {
             setLoading(false);
             // Handle any errors that occurred during the request
             toast.error("Product fail added!");
@@ -292,6 +302,7 @@ const AddProducts = () => {
         .get(`products/${Number(id)}`, { headers: config })
         .then((res) => {
           setProductDetail(res);
+          setReloadDetail(false);
         })
         .catch((err) => {
           console.log(err);
@@ -305,8 +316,9 @@ const AddProducts = () => {
 
     if (id) {
       getProductById();
+      
     }
-  }, []);
+  }, [reloadDetail]);
 
   useEffect(() => {
     if (productDetail) {
@@ -449,7 +461,7 @@ const AddProducts = () => {
                               width: "100%",
                               height: "100%",
                             }}
-                            src={productDetail?.file?.url}
+                            src={productDetail.file?.url}
                           ></img>
                         </FormGroup>
                       </div>

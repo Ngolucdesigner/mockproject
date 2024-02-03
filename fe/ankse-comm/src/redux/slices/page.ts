@@ -1,8 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { number } from 'yup';
 
-const initialState = {
-    page:number
+
+type propsPage ={
+    page:number;
+}
+
+const initialState:propsPage = {
+    page: 1,
 }
 
 const page = createSlice({

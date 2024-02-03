@@ -207,11 +207,8 @@ public class ProductController {
         fileUpdate.setId(fileId);
         fileUpdate.setFileType(multipartFiles.getContentType());
         fileUpdate.setFileName(fileName);
-
-
-        System.out.println("fileId: "+fileUpdate.getId());
-
         fileUpdate.setData(multipartFiles.getBytes());
+
         form.setFileProduct(fileUpdate);
 
 

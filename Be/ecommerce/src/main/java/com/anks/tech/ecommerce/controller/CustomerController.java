@@ -46,6 +46,12 @@ public class CustomerController {
         return ResponseEntity.ok().body(new PageImpl<>(customerDTOS,pageable,customersPage.getTotalElements()));
     }
 
+    @GetMapping("/get-order/{id}")
+    public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable int id){
+        Customers customers = customerServices.getCustomerById(id);
+        CustomerDTO customerDTO = modelMapper.map(customers, CustomerDTO.class);
+        return ResponseEntity.ok().body(customerDTO);
+    }
     @PostMapping("/new-order")
     public ResponseEntity<String> createOrder(@RequestBody CustomerForm form){
 
@@ -53,6 +59,9 @@ public class CustomerController {
 
         return ResponseEntity.ok().body("create order successfully!");
     }
+
+
+
     @DeleteMapping("/delete/{id}")
     public  ResponseEntity<String> deleteOrder(@PathVariable int id){
         customerServices.deleteOder(id);
