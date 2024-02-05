@@ -209,7 +209,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         String message = ex.getParameterName() + " " + getMessage("MissingServletRequestParameterException.message");
         String detailMessage = ex.getLocalizedMessage();
-        int code = 6;
+        int code = 7;
         String moreInformation = "http://localhost:8080/api/v1/exception/"+code;
 
         ErrorResponse response = new ErrorResponse(message, detailMessage, null, code, moreInformation);
@@ -227,7 +227,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         String message = exception.getName() + " " + getMessage("MethodArgumentTypeMismatchException.message")
                 + exception.getRequiredType().getName();
         String detailMessage = exception.getLocalizedMessage();
-        int code = 7;
+        int code = 8;
         String moreInformation = "http://localhost:8080/api/v1/exception/"+code;
 
         ErrorResponse response = new ErrorResponse(message, detailMessage, null, code, moreInformation);

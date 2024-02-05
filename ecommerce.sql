@@ -47,7 +47,7 @@ CREATE TABLE `account`(
     firstname			VARCHAR(50) NOT NULL,
     avatar				VARCHAR(100) ,
 	phone				VARCHAR(20) NOT NULL,
-    address				VARCHAR(100) NOT NULL,
+    address				TEXT,
     `password`			VARCHAR(100) NOT NULL,
     `role`				ENUM('ADMIN', 'CUSTOMER'),
     CreateDate			DATE DEFAULT(now()), -- '2023-02-18'
@@ -62,7 +62,7 @@ VALUES (1, 'nguyenxuandung707@gmail.com', 'dung8anx', 'Dũng', 'Nguyễn Xuân',
 
 CREATE TABLE `products`(
 	id int UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    productName VARCHAR(50) NOT NULL,
+    productName VARCHAR(100) NOT NULL,
     imgUrl TEXT NOT NULL,
     price FLOAT UNSIGNED NOT NULL,
     priceSale FLOAT UNSIGNED DEFAULT(0),

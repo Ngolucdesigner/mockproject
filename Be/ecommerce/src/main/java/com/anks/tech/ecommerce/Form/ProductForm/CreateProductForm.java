@@ -1,5 +1,6 @@
 package com.anks.tech.ecommerce.Form.ProductForm;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,14 +11,23 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CreateProductForm {
 
+    @NotBlank(message = "product name not null")
     private String productName;
     private String imgUrl;
+    @NotBlank(message = "product name not null")
     private double price;
+
     private double priceSales;
+    @NotBlank(message = "short description name not null")
     private String shortDesc;
+    @NotBlank(message = "description not null")
     private String description;
+    @NotBlank(message = "category not null")
     private Category category;
+
+    @NotBlank(message = "image product name not null")
     private FileProduct fileProduct;
+
     private Origin origin;
     private InformationForm informationForm;
     @Getter
