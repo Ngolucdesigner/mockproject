@@ -44,7 +44,7 @@ public class Account {
     private String fullName;
 
 
-    @Column(name = "address", length = 100)
+    @Column(name = "address", columnDefinition = "TEXT")
     private String address;
 
     @Column(name = "phone", length = 100)

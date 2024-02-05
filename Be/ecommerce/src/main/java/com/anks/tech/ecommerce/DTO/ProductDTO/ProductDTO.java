@@ -23,6 +23,7 @@ public class ProductDTO {
     private double avgRating;
 
     private String category;
+    private String productCode;
     private int categoryId;
     List<Review> reviews;
 

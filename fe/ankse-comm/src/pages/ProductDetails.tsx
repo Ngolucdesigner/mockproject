@@ -18,6 +18,10 @@ import useGetData from "../custom-hooks/useGetData";
 import { ProductProps } from "../model/productProps";
 import * as request from "../Utils/request";
 
+
+
+
+
 const ProductDetails = () => {
   const [tab, setTab] = useState("desc");
   const [rating, setRating] = useState(0);
@@ -25,7 +29,7 @@ const ProductDetails = () => {
 
   const { id } = useParams();
 
-  const [product, setProduct] = useState<ProductProps>({
+  const [product, setProduct] = useState<ProductProps & { productCode?:string } >({
     id: "",
     productName: "",
     imgUrl: "",
@@ -35,6 +39,7 @@ const ProductDetails = () => {
     description: "",
     avgRating: 0,
     shortDesc: "",
+    productCode:"",
     reviews: [
       {
         reviewId: 0,
@@ -115,6 +120,7 @@ const ProductDetails = () => {
     file,
     origin,
     information,
+    productCode
   }: any = product;
 
   const addToCart = () => {
@@ -126,6 +132,7 @@ const ProductDetails = () => {
         price,
         priceSales,
         file,
+    
       })
     );
 
@@ -220,7 +227,7 @@ const ProductDetails = () => {
 
                   <span>Category: {category.toUpperCase()}</span>
                 </div>
-
+                <p className="mt-3">Mã sản phẩm: {productCode}</p>
                 <p className="mt-3">{shortDesc}</p>
                 <motion.button
                   whileTap={{ scale: 1.2 }}

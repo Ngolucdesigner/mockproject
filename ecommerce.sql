@@ -74,7 +74,7 @@ CREATE TABLE `products`(
     uuidUrl VARCHAR(50),
     originId INT UNSIGNED,
     informationId INT UNSIGNED,
-    
+    product_code VARCHAR(50) NOT NULL,
     FOREIGN KEY(catagoryId) REFERENCES `category`(categoryid) ON DELETE CASCADE,
     FOREIGN KEY(uuidUrl) REFERENCES `fileTable`(uuid) ON DELETE CASCADE,
     FOREIGN KEY(originId) REFERENCES `origin`(id) ON DELETE CASCADE,
@@ -101,7 +101,10 @@ CREATE TABLE `customers`(
     address TEXT,
     city VARCHAR(50),
     postalcode INT UNSIGNED,
-    country VARCHAR(50)
+    country VARCHAR(50),
+    
+    customer_code VARCHAR(50) NOT NULL
+    
 );
 
 CREATE TABLE `orders`(

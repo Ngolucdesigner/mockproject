@@ -35,6 +35,9 @@ public class Customers {
     @Column(name = "country")
     private String country;
 
+    @Column(name = "customer_code")
+    private String customerCode;
+
     @OneToMany(mappedBy = "customers", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<Order> orders;
@@ -44,6 +47,9 @@ public class Customers {
     public void prePersist(){
         if(this.country==null){
             this.country ="VIET NAM";
+        }
+        if (this.customerCode == null){
+            this.customerCode = "CUS"+this.customersId;
         }
     }
 

@@ -1,3 +1,149 @@
-2024-02-05 14:56:52 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/]                                  - Initializing Spring DispatcherServlet 'dispatcherServlet' 
-2024-02-05 14:56:52 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet                          - Initializing Servlet 'dispatcherServlet' 
-2024-02-05 14:56:52 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet                          - Completed initialization in 1 ms 
+2024-02-05 16:04:18 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+    insert 
+    into
+        ecommerce.
+        `products` (
+            avgRating, catagoryId, `description`, uuidUrl, imgUrl, informationId, originId, price, priceSale, product_code, productName, shortDesc
+        ) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+2024-02-05 16:04:18 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+    insert 
+    into
+        ecommerce.
+        `category` (
+            catagory
+        ) 
+    values
+        (?) 
+2024-02-05 16:04:18 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+    insert 
+    into
+        ecommerce.
+        `fileTable` (
+            imgdata, imgname, typeImg, uuid
+        ) 
+    values
+        (?, ?, ?, ?) 
+2024-02-05 16:04:18 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+    insert 
+    into
+        ecommerce.
+        `origin` (
+            guarantee, madeIn, manufacturer
+        ) 
+    values
+        (?, ?, ?) 
+2024-02-05 16:04:18 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+    insert 
+    into
+        ecommerce.
+        `infomation` (
+            Weight, accessory, color, level, mode, noise, funtion, size, technology, wattage
+        ) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+2024-02-05 16:04:18 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+    update
+        ecommerce.`products` 
+    set
+        avgRating=?,
+        catagoryId=?,
+        `description`=?,
+        uuidUrl=?,
+        imgUrl=?,
+        informationId=?,
+        originId=?,
+        price=?,
+        priceSale=?,
+        product_code=?,
+        productName=?,
+        shortDesc=? 
+    where
+        id=? 
+2024-02-05 16:04:24 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-05 16:04:24 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-05 16:04:24 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-05 16:04:24 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-05 16:04:24 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-05 16:04:24 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-05 16:04:34 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    insert 
+    into
+        ecommerce.
+        `products` (
+            avgRating, catagoryId, `description`, uuidUrl, imgUrl, informationId, originId, price, priceSale, product_code, productName, shortDesc
+        ) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+2024-02-05 16:04:34 [http-nio-8080-exec-8] WARN  o.h.e.j.s.SqlExceptionHelper                       - SQL Error: 1062, SQLState: 23000 
+2024-02-05 16:04:34 [http-nio-8080-exec-8] ERROR o.h.e.j.s.SqlExceptionHelper                       - Duplicate entry 'PROD_0' for key 'products.product_code' 

@@ -36,10 +36,15 @@ public class Product {
 
     @Column(name = "shortDesc",columnDefinition = "TEXT", nullable = false)
     private String shortDesc;
+
     @Column(name = "`description`", columnDefinition = "TEXT",nullable = false)
     private String description;
+
     @Column(name = "avgRating", nullable = false)
     private double avgRating;
+
+    @Column(name = "product_code",nullable = false)
+    private String productCode;
 
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "catagoryId", referencedColumnName = "categoryid")
@@ -70,6 +75,9 @@ public class Product {
     public void prePersist() {
         if(this.priceSales == 0){
             this.priceSales=0;
+        }
+        if (this.productCode==null){
+            this.productCode = "PROD_"+ getProductId();
         }
     }
 }
