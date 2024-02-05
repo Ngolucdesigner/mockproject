@@ -107,8 +107,9 @@ CREATE TABLE `customers`(
 CREATE TABLE `orders`(
 	orderId 			INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 	customersId 	INT UNSIGNED, 
-    `date` 		DATE DEFAULT(now()),
+    `date` 		DATETIME  DEFAULT(now()),
 	totalPrice 	FLOAT UNSIGNED,
+    payment 	VARCHAR(80),
     `status`	ENUM ('PENDING', 'SHIPPING', 'COMPLETED'),	
 	FOREIGN KEY (customersId) REFERENCES `customers`(customersId) ON DELETE CASCADE
 );
@@ -122,7 +123,7 @@ CREATE TABLE `orderDetails`(
         productQuantity INT UNSIGNED,
         
         price			FLOAT UNSIGNED,
-        price_salse			FLOAT UNSIGNED,
+        price_sales			FLOAT UNSIGNED,
         FOREIGN KEY(orderId) REFERENCES `orders`(orderId) ON DELETE CASCADE,
 		FOREIGN KEY(productId) REFERENCES `products`(id) ON DELETE CASCADE
 );

@@ -1,7 +1,7 @@
 package com.anks.tech.ecommerce.Services.Account;
 
-import com.anks.tech.ecommerce.entity.Account;
-import com.anks.tech.ecommerce.form.AccountForm;
+import com.anks.tech.ecommerce.Entity.Account;
+import com.anks.tech.ecommerce.Form.AccountForm.AccountForm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

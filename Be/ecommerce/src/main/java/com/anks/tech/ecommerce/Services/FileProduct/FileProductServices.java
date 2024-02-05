@@ -1,7 +1,7 @@
 package com.anks.tech.ecommerce.Services.FileProduct;
 
-import com.anks.tech.ecommerce.entity.FileProduct;
-import com.anks.tech.ecommerce.repository.IFileProductRepository;
+import com.anks.tech.ecommerce.Entity.FileProduct;
+import com.anks.tech.ecommerce.Repository.IFileProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

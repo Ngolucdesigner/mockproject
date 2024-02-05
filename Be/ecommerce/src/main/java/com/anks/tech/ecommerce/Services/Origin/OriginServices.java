@@ -1,8 +1,8 @@
 package com.anks.tech.ecommerce.Services.Origin;
 
-import com.anks.tech.ecommerce.entity.Origin;
-import com.anks.tech.ecommerce.form.CreateOriginForm;
-import com.anks.tech.ecommerce.repository.IOriginRepository;
+import com.anks.tech.ecommerce.Entity.Origin;
+import com.anks.tech.ecommerce.Form.ProductForm.CreateOriginForm;
+import com.anks.tech.ecommerce.Repository.IOriginRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;

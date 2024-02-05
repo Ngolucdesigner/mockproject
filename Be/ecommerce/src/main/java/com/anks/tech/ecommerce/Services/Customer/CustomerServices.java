@@ -2,13 +2,13 @@ package com.anks.tech.ecommerce.Services.Customer;
 
 import com.anks.tech.ecommerce.Entity.Customers;
 
-import com.anks.tech.ecommerce.entity.Order;
-import com.anks.tech.ecommerce.entity.OrderDetails;
-import com.anks.tech.ecommerce.form.CustomerForm;
-import com.anks.tech.ecommerce.form.OrderDetailForm;
-import com.anks.tech.ecommerce.repository.ICustomersRepository;
-import com.anks.tech.ecommerce.repository.IOrderDetailRepository;
-import com.anks.tech.ecommerce.repository.IOrderRepository;
+import com.anks.tech.ecommerce.Entity.Order;
+import com.anks.tech.ecommerce.Entity.OrderDetails;
+import com.anks.tech.ecommerce.Form.CustomerForm.CustomerForm;
+import com.anks.tech.ecommerce.Form.CustomerForm.OrderDetailForm;
+import com.anks.tech.ecommerce.Repository.ICustomersRepository;
+import com.anks.tech.ecommerce.Repository.IOrderDetailRepository;
+import com.anks.tech.ecommerce.Repository.IOrderRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
@@ -17,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.anks.tech.ecommerce.Entity.Customers;
 
 import java.util.List;
 import java.util.stream.Collectors;

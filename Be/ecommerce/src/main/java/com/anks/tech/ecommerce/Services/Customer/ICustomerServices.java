@@ -1,6 +1,6 @@
 package com.anks.tech.ecommerce.Services.Customer;
 
-import com.anks.tech.ecommerce.form.CustomerForm;
+import com.anks.tech.ecommerce.Form.CustomerForm.CustomerForm;
 import org.springframework.data.domain.Page;
 import com.anks.tech.ecommerce.Entity.Customers;
 import org.springframework.data.domain.Pageable;

@@ -1,11 +1,11 @@
 package com.anks.tech.ecommerce.Services.Account;
 
-import com.anks.tech.ecommerce.entity.Account;
+import com.anks.tech.ecommerce.Entity.Account;
 
-import com.anks.tech.ecommerce.entity.FileProduct;
-import com.anks.tech.ecommerce.form.AccountForm;
-import com.anks.tech.ecommerce.repository.IAccountRepository;
-import com.anks.tech.ecommerce.repository.IFileProductRepository;
+import com.anks.tech.ecommerce.Entity.FileProduct;
+import com.anks.tech.ecommerce.Form.AccountForm.AccountForm;
+import com.anks.tech.ecommerce.Repository.IAccountRepository;
+import com.anks.tech.ecommerce.Repository.IFileProductRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;

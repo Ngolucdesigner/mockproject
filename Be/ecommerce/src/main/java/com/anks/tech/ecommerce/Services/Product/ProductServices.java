@@ -1,10 +1,10 @@
 package com.anks.tech.ecommerce.Services.Product;
 
 
-import com.anks.tech.ecommerce.entity.*;
-import com.anks.tech.ecommerce.form.CreateProductForm;
-import com.anks.tech.ecommerce.form.UpdateProductForm;
-import com.anks.tech.ecommerce.repository.*;
+import com.anks.tech.ecommerce.Entity.*;
+import com.anks.tech.ecommerce.Form.ProductForm.CreateProductForm;
+import com.anks.tech.ecommerce.Form.ProductForm.UpdateProductForm;
+import com.anks.tech.ecommerce.Repository.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.modelmapper.ModelMapper;

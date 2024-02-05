@@ -21,9 +21,15 @@ import { useDispatch } from "react-redux";
 import { changePage } from "../redux/slices/page";
 import MyPagination from "../components/UI/MyPagination";
 import { reloadProduct } from "../redux/slices/loadProduct";
+import HeroSection from "../components/UI/HeroSection";
 
 const heroImg = require("../assets/images/hero-img.png");
 const counterImg = require("../assets/images/counter-timer-img.png");
+
+
+
+
+
 
 const Home = () => {
   const [page, setPage] = useState(1);
@@ -110,7 +116,7 @@ const Home = () => {
 
   return (
     <Helmet title={"Home"}>
-      <section className="hero__section">
+      {/* <section className="hero__section">
         <Container>
           <Row>
             <Col lg="6" md="6">
@@ -124,7 +130,9 @@ const Home = () => {
                   </Link>
                 </motion.button>
               </div>
+              
             </Col>
+            
             <Col lg="6" md="6">
               <div className="hero__img">
                 <img src={heroImg} alt="hero img" />
@@ -132,7 +140,8 @@ const Home = () => {
             </Col>
           </Row>
         </Container>
-      </section>
+      </section> */}
+      <HeroSection/>
 
       <Services />
       {loading ? (
@@ -168,6 +177,9 @@ const Home = () => {
                 <ProductsList products={BestSalesProduct} />
               </Row>
             </Container>
+            
+            
+
           </section>
 
           <section className="timer-count">

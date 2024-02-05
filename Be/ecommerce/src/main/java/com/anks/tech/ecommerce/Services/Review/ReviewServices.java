@@ -1,9 +1,9 @@
 package com.anks.tech.ecommerce.Services.Review;
 
 
-import com.anks.tech.ecommerce.entity.Review;
-import com.anks.tech.ecommerce.form.ReviewForm;
-import com.anks.tech.ecommerce.repository.IReviewReposiory;
+import com.anks.tech.ecommerce.Entity.Review;
+import com.anks.tech.ecommerce.Form.ProductForm.ReviewForm;
+import com.anks.tech.ecommerce.Repository.IReviewReposiory;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;

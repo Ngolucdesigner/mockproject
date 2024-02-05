@@ -1,8 +1,8 @@
 package com.anks.tech.ecommerce.Services.Product;
 
-import com.anks.tech.ecommerce.entity.Product;
-import com.anks.tech.ecommerce.form.CreateProductForm;
-import com.anks.tech.ecommerce.form.UpdateProductForm;
+import com.anks.tech.ecommerce.Entity.Product;
+import com.anks.tech.ecommerce.Form.ProductForm.CreateProductForm;
+import com.anks.tech.ecommerce.Form.ProductForm.UpdateProductForm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
