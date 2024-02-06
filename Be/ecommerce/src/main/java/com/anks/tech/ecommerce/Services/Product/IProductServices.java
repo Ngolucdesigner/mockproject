@@ -11,6 +11,7 @@ public interface IProductServices {
     Page<Product> getAllProduct(Pageable pageable);
 
     Product getProductById(int id);
+    Product getProductByProductCode(String productCode);
     void createProduct(CreateProductForm form);
     void deleteProduct(int id);
 

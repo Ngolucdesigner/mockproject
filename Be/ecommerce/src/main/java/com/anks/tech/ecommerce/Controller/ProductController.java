@@ -102,6 +102,26 @@ public class ProductController {
         return ResponseEntity.ok().body(productDTO);
     }
 
+    @GetMapping("product-code/{id}")
+    public ResponseEntity<ProductDTO> getProduct(@PathVariable("id")  String productCode) {
+        Product product = productServices.getProductByProductCode(productCode);
+
+        ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
+
+        String fileDowloadUrl = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/products/files/")
+                .path(productDTO.getFile().getId()).toUriString();
+
+        ProductDTO.File file1 = new ProductDTO.File();
+        file1.setUrl(fileDowloadUrl);
+        file1.setId(productDTO.getFile().getId());
+        file1.setFileName(productDTO.getFile().getFileName());
+        file1.setFileType(productDTO.getFile().getFileType());
+        productDTO.setFile(file1);
+
+        return ResponseEntity.ok().body(productDTO);
+    }
+
     @PostMapping("/newProduct")
     public ResponseEntity<String> createProduct(@RequestBody CreateProductForm form) {
 
@@ -121,7 +141,6 @@ public class ProductController {
                                                    @RequestParam String madeIn,
                                                    @RequestParam String guarantee,
                                                    @RequestParam String information
-
 
     ) throws IOException {
 

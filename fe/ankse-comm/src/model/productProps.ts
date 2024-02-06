@@ -9,7 +9,7 @@ export type ProductProps = {
   category: string;
   shortDesc?: string;
   description?: string;
-  
+  productCode?:string;
   reviews?: {
     reviewId:any;
     username:string;

@@ -1,5 +1,6 @@
 package com.anks.tech.ecommerce.Entity;
 
+import com.anks.tech.ecommerce.Utils.GenerateCode;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
@@ -49,7 +50,7 @@ public class Customers {
             this.country ="VIET NAM";
         }
         if (this.customerCode == null){
-            this.customerCode = "CUS"+this.customersId;
+            this.customerCode = "CUST_"+ GenerateCode.generateCode();
         }
     }
 

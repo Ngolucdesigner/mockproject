@@ -312,10 +312,14 @@ const Cart = () => {
 
             navigate("/shop");
             setLoading(false);
+          }).catch((err)=>{
+            console.error(err);
+            setLoading(false);
+            toast.error("Đặt hàng không thành công")
           });
       } catch (error) {
-        console.log(error);
-        setLoading(false);
+        console.error(error);
+        
       }
     } else {
       toast.warning("Không có sản phẩm trong giỏ hàng");

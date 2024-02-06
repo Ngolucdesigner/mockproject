@@ -18,6 +18,7 @@ public class CustomerDTO {
 
     private String address;
     private String city;
+    private String customerCode;
 
     List<OrderDTO> orders;
 

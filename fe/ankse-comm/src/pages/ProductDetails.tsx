@@ -29,7 +29,7 @@ const ProductDetails = () => {
 
   const { id } = useParams();
 
-  const [product, setProduct] = useState<ProductProps & { productCode?:string } >({
+  const [product, setProduct] = useState<ProductProps >({
     id: "",
     productName: "",
     imgUrl: "",
@@ -87,9 +87,10 @@ const ProductDetails = () => {
   const getProductById = async () => {
     try {
       await request
-        .get(`products/${Number(id)}`, { headers: config })
+        .get(`products/product-code/${id}`, { headers: config })
         .then((res) => {
           setProduct(res);
+          
         })
         .catch((err) => {
           console.log(err);
@@ -132,7 +133,7 @@ const ProductDetails = () => {
         price,
         priceSales,
         file,
-    
+        productCode
       })
     );
 
@@ -227,7 +228,7 @@ const ProductDetails = () => {
 
                   <span>Category: {category.toUpperCase()}</span>
                 </div>
-                <p className="mt-3">Mã sản phẩm: {productCode}</p>
+                <p className="mt-3 fz-1">Mã sản phẩm: {productCode}</p>
                 <p className="mt-3">{shortDesc}</p>
                 <motion.button
                   whileTap={{ scale: 1.2 }}

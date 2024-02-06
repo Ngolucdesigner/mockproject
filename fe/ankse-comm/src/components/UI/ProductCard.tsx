@@ -27,6 +27,8 @@ type item = {
   price: number;
   priceSales :number;
   category: string | "Product";
+  productCode?: string;
+
 };
 
 const ProductCard = (props: item) => {
@@ -49,6 +51,8 @@ const ProductCard = (props: item) => {
         price: props.price,
         priceSales: props.priceSales,
         imgUrl: props.imgUrl,
+        productCode: props.productCode
+        
       })
     );
     toast.success("Product added successfully");
@@ -65,6 +69,7 @@ const ProductCard = (props: item) => {
           productName: props.productName,
           price: props.price,
           imgUrl: props.imgUrl,
+          productCode: props.productCode
         })
       );
       toast.success("Product added successfully");
@@ -93,7 +98,7 @@ const ProductCard = (props: item) => {
         <CardBody className="pt-0">
           <CardTitle className=" product__info">
             <h3 className="product__name">
-              <Link to={`/shop/${props.id}`} className="link">
+              <Link to={`/shop/${props.productCode}`} className="link">
                 {props.productName}
               </Link>
             </h3>

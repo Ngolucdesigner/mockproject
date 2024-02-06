@@ -20,6 +20,7 @@ const ProductsList = (props: data) => {
           price={item.price}
           priceSales={item.priceSales}
           category={item.category}
+          productCode ={item.productCode}
         />
       ))}
     </>

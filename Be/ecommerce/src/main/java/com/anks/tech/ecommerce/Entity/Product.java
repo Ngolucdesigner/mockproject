@@ -1,11 +1,13 @@
 package com.anks.tech.ecommerce.Entity;
 
+import com.anks.tech.ecommerce.Utils.GenerateCode;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
+
 
 @Entity
 @Data
@@ -71,13 +73,16 @@ public class Product {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<OrderDetails> orderDetails;
 
+
+
+
     @PrePersist
     public void prePersist() {
         if(this.priceSales == 0){
             this.priceSales=0;
         }
         if (this.productCode==null){
-            this.productCode = "PROD_"+ getProductId();
+            this.productCode = "PROD_"+ GenerateCode.generateCode();
         }
     }
 }

@@ -51,6 +51,12 @@ public class ProductServices implements IProductServices {
     }
 
     @Override
+    public Product getProductByProductCode(String productCode) {
+        return productRepository.findProductByProductCode(productCode);
+    }
+
+
+    @Override
     public void createProduct(CreateProductForm form) {
         TypeMap typeMap = modelMapper.getTypeMap(CreateProductForm.class, Product.class);
         if (typeMap == null) {
