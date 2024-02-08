@@ -69,7 +69,7 @@ const HeroSection = () => {
       <CarouselItem
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
-        key={item.src}
+        key={item.key}
       >
         <section className="hero__section">
           <Container>
