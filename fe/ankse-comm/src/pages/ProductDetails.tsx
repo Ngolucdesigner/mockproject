@@ -109,6 +109,7 @@ const ProductDetails = () => {
   const reviewUser = useRef<HTMLInputElement | null>(null);
 
   const {
+  
     productName,
     imgUrl,
     price,
@@ -148,11 +149,7 @@ const ProductDetails = () => {
     try {
       await request
         .post1<ResponseType>("reviews/new-review", { headers: config }, data)
-        .then((res) => {
-          console.log(res);
-        })
-        .then((response) => {
-          console.log(response);
+        .then(() => {
           setload(true);
         });
     } catch (error) {
@@ -167,11 +164,11 @@ const ProductDetails = () => {
       username: reviewUser.current?.value,
       rating: rating,
       reviewText: reviewMessage.current?.value,
-      productId: Number(id),
+      productId: Number(product.id),
     });
 
     submitReview(reviewObj);
-    console.log(reviewObj);
+ 
     // toast.error("Review submitted fail");
   };
 
@@ -283,7 +280,7 @@ const ProductDetails = () => {
                   <div className="review__wrapper">
                     <ul>
                       {reviews.map((item: any, index: number) => {
-                        console.log(item.rating);
+                       
                         return (
                           <li key={index} className="mb-4">
                             <div className="d-flex flex-start gap-3 align-items-center">
