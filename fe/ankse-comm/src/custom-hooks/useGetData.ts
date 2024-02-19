@@ -1,5 +1,5 @@
 import  { useEffect, useState } from "react";
-import { userPops } from "../model/user";
+
 import * as request from "../Utils/request";
 import { ProductProps } from "../model/productProps";
 
@@ -9,20 +9,16 @@ import { reloadProduct } from "../redux/slices/loadProduct";
 import { getDataFromCookie } from "../Utils/customCookie";
 
 
+
 const useGetData = () => {
-  const [useData, setUseData] = useState<Array<userPops>>([]);
+
 
   const [products, setProducts] = useState<Array<ProductProps>>([]);
   const [totalPagesProduct, setTotalPagesProduct] = useState<string>("");
   const [totalElementsProduct, setTotalElementsProduct] = useState("");
-  const [totalPagesAccount, setTotalPagesAccount] = useState("");
-  const [totalElementsAccount, setTotalElementsAccount] = useState("");
 
-type res={
-  content: any,
-  totalPages:any,
-  totalElements:any
-}
+
+
 
   const notReload = () => {
     dispatch(reloadProduct.reloadProduct(false));
@@ -32,7 +28,6 @@ type res={
   const reload = useSelector((state: TReducers) => state.reload.load);
 
   const dispatch = useDispatch();
-
 
   const page = useSelector((state:TReducers)=>state.changePage.page)
 
@@ -44,26 +39,7 @@ type res={
     // 'Access-Control-Allow-Origin': false ,
   };
 
-  const getAllAccount = async () => {
-    try {
-
-     await request
-      .get1<res>("accounts", {headers: config})
-      .then((res) => {
-        setUseData(res.content);
-        setTotalPagesAccount(res.totalPages);
-        setTotalElementsAccount(res.totalElements);
-        notReload();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
-    } catch (error) {
-      
-    }
-
-  };
+  
 
   const getAllProducts = async (page?: number|1) => {
     await request
@@ -80,7 +56,6 @@ type res={
   };
 
   useEffect(() => {
-    getAllAccount();
     getAllProducts(Number(page));
   }, [reload]);
 
@@ -90,11 +65,11 @@ type res={
   // }, [reload]);
 
   return {
-    useData,
+   
     products,
-    totalElementsAccount,
+    
     totalElementsProduct,
-    totalPagesAccount,
+    
     totalPagesProduct,
   };
 };

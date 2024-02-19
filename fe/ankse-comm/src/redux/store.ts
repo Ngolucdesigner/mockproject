@@ -4,6 +4,7 @@ import cartHeart from "./slices/cartHeart";
 import loadProduct from "./slices/loadProduct";
 import order from "./slices/order";
 import page from "./slices/page";
+import loadAccount from "./slices/loadAccount";
 
 
 const store = configureStore({
@@ -12,7 +13,8 @@ const store = configureStore({
         heart: cartHeart,
         reload: loadProduct,
         quantity: order,
-        changePage:page
+        changePage:page,
+        reloadAccount: loadAccount 
     }
 })
 

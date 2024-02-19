@@ -19,9 +19,6 @@ import { ProductProps } from "../model/productProps";
 import * as request from "../Utils/request";
 
 
-
-
-
 const ProductDetails = () => {
   const [tab, setTab] = useState("desc");
   const [rating, setRating] = useState(0);

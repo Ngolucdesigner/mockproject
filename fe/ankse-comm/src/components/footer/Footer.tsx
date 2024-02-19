@@ -46,7 +46,6 @@ const Footer = () => {
 
               }
               
-
               </ListGroup>
             </div>
           </Col>

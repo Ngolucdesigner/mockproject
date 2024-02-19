@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import * as request from "../Utils/request";
 
-import useGetData from "../custom-hooks/useGetData";
+
 import Spinner from "react-bootstrap/Spinner";
 import UserItem from "./UserItem";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { reloadProduct } from "../redux/slices/loadProduct";
 import { getDataFromCookie } from "../Utils/customCookie";
+import useGetAccount from "../custom-hooks/useGetAccount";
 const User = () => {
   const [loading, setLoading] = useState(false);
 
-  const dataUser = useGetData();
+  const dataUser = useGetAccount();
   const dispatch = useDispatch();
   const config = {
     // withCredentials: true,

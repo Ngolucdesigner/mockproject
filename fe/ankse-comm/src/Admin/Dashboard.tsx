@@ -8,10 +8,11 @@ import useGetData from "../custom-hooks/useGetData";
 import { useSelector } from "react-redux";
 import { TReducers } from "../redux/rootReducer";
 import { priceFormat } from "../model/FormatVND";
+import useGetAccount from "../custom-hooks/useGetAccount";
 
 const Dashboard = () => {
   const totalElementsProduct = useGetData().totalElementsProduct;
-  const totalElementsAccount = useGetData().totalElementsAccount;
+  const totalElementsAccount = useGetAccount().totalElementsAccount;
   const totalOrder: any = useSelector<TReducers>((state)=>
     state.quantity.quantityOder
   )
