@@ -51,7 +51,7 @@ public class Account {
     private String phone;
 
 
-    @Column(name = "`password`", length = 100, nullable = false)
+    @Column(name = "`password`", columnDefinition = "TEXT", nullable = false)
     private String password;
 
     @Column(name = "`role`")

@@ -12,6 +12,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { ProductProps } from "../model/productProps";
 import { useDispatch } from "react-redux";
 import { reloadProduct } from "../redux/slices/loadProduct";
+import { getDataFromCookie } from "../Utils/customCookie";
 
 const options = categoryList.slice(1);
 
@@ -202,6 +203,7 @@ const AddProducts = () => {
   const config = {
     // withCredentials: true,
     "Content-Type": "application/auto",
+    Authorization: "Bearer " + getDataFromCookie("user"),
     // Authorization: "Basic " + localStorage.getItem("cookie"),
     // 'Access-Control-Allow-Origin': false ,
   };
@@ -291,7 +293,7 @@ const AddProducts = () => {
             toast.error("Product fail added!");
           });
       } catch (error) {
-        console.error(error);
+        return Promise.reject(error);
       }
     }
   };
@@ -308,7 +310,7 @@ const AddProducts = () => {
           console.log(err);
         });
     } catch (error) {
-      console.log(error);
+      return Promise.reject(error);
     }
   };
 

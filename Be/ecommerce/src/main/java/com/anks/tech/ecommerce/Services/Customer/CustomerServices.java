@@ -6,15 +6,19 @@ import com.anks.tech.ecommerce.Entity.Order;
 import com.anks.tech.ecommerce.Entity.OrderDetails;
 import com.anks.tech.ecommerce.Form.CustomerForm.CustomerForm;
 import com.anks.tech.ecommerce.Form.CustomerForm.OrderDetailForm;
+import com.anks.tech.ecommerce.Form.CustomerForm.OrderFilterForm;
 import com.anks.tech.ecommerce.Repository.ICustomersRepository;
 import com.anks.tech.ecommerce.Repository.IOrderDetailRepository;
 import com.anks.tech.ecommerce.Repository.IOrderRepository;
+import com.anks.tech.ecommerce.Specification.Order.OrderSpecification;
+import com.anks.tech.ecommerce.Specification.Product.ProductSpecification;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,8 +41,9 @@ public class CustomerServices implements ICustomerServices{
     @Autowired
     private ModelMapper modelMapper;
     @Override
-    public Page<Customers> getAllCustomer(Pageable pageable) {
-        return customersRepository.findAll(pageable);
+    public Page<Customers> getAllCustomer(Pageable pageable, OrderFilterForm form){
+        Specification<Customers> where = OrderSpecification.biuldWhere(form);
+        return customersRepository.findAll(where,pageable);
     }
 
     @Override

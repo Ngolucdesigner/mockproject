@@ -5,6 +5,7 @@ import com.anks.tech.ecommerce.DTO.ProductDTO.ProductDTO;
 import com.anks.tech.ecommerce.Entity.Product;
 import com.anks.tech.ecommerce.Form.ProductForm.CreateProductForm;
 import com.anks.tech.ecommerce.Form.ProductForm.InformationForm;
+import com.anks.tech.ecommerce.Form.ProductForm.ProductFilterForm;
 import com.anks.tech.ecommerce.Form.ProductForm.UpdateProductForm;
 import com.anks.tech.ecommerce.Services.Product.IProductServices;
 import com.anks.tech.ecommerce.Utils.FileDownloadUtil;
@@ -55,10 +56,10 @@ public class ProductController {
 
     @GetMapping
 
-    public ResponseEntity<Page<ProductDTO>> getAllProducts(Pageable pageable) {
+    public ResponseEntity<Page<ProductDTO>> getAllProducts(Pageable pageable, ProductFilterForm form) {
 
 
-        Page<Product> productPage = productServices.getAllProduct(pageable);
+        Page<Product> productPage = productServices.getAllProduct(pageable, form);
         List<Product> products = productPage.getContent();
 
 

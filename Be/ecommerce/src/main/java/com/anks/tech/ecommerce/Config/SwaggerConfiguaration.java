@@ -29,7 +29,7 @@ public class SwaggerConfiguaration  {
                 "This is API description for application",
                 "1.0",
                 "terms of services URL",
-                new Contact("Anks Academy", "https://www.youtube.com/@ankstech4752/about","ngoluc.designer@gmail.com"),
+                new Contact("Anks Tech", "https://www.youtube.com/@ankstech4752/about","ngoluc.designer@gmail.com"),
                 "Apache",
                 "https://www.apache.org/licenses/LICENSE-2.0",
                 Collections.emptyList()

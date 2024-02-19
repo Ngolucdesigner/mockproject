@@ -8,6 +8,7 @@ import UserItem from "./UserItem";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { reloadProduct } from "../redux/slices/loadProduct";
+import { getDataFromCookie } from "../Utils/customCookie";
 const User = () => {
   const [loading, setLoading] = useState(false);
 
@@ -16,7 +17,7 @@ const User = () => {
   const config = {
     // withCredentials: true,
     "Content-Type": "application/auto",
-    // Authorization: "Basic " + localStorage.getItem("cookie"),
+     Authorization: "Bearer " + getDataFromCookie("user"),
     // 'Access-Control-Allow-Origin': false ,
   };
   
@@ -24,6 +25,7 @@ const User = () => {
     dispatch(reloadProduct.reloadProduct(true));
   };
 
+  
 
   const handleDelete = (id: any) => {
     setLoading(true);

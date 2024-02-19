@@ -7,8 +7,10 @@ import com.anks.tech.ecommerce.Entity.FileProduct;
 import com.anks.tech.ecommerce.Services.FileProduct.IFileProductServices;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,13 +68,14 @@ public class FileProductController {
 
     @GetMapping("/{id}")
 
-    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
+    public ResponseEntity<?> getFile(@PathVariable String id) {
         FileProduct fileDB = fileProductServices.getFile(id);
 
 
         return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(fileDB.getFileType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getFileName() + "\"")
-                .body(fileDB.getData());
+                .body(new ByteArrayResource(fileDB.getData()));
     }
 
 }

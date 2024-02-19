@@ -48,7 +48,7 @@ CREATE TABLE `account`(
     avatar				VARCHAR(100) ,
 	phone				VARCHAR(20) NOT NULL,
     address				TEXT,
-    `password`			VARCHAR(100) NOT NULL,
+    `password`			TEXT NOT NULL,
     `role`				ENUM('ADMIN', 'CUSTOMER'),
     CreateDate			DATE DEFAULT(now()), -- '2023-02-18'
     UUIDKey				VARCHAR(50) UNIQUE KEY,
@@ -56,8 +56,8 @@ CREATE TABLE `account`(
 );
 
 INSERT INTO `account` (id, email, username, lastname, firstname, phone, address, `password`, `role` ,UUIDKey)
-VALUES (1, 'nguyenxuandung707@gmail.com', 'dung8anx', 'Dũng', 'Nguyễn Xuân', '0358123444', 'Hà Nội', '$2a$12$sMgQX5HiISo2YuIffw50.Ofmdkg4HaACw98ilQscoFhcY5bDqA.3i', 'CUSTOMER', '112233'),
-	   (2, 'admin@gmail.com', 'admin', 'Admin', 'Nguyễn Xuân', '0358123555', 'Hà Nội', '$2a$12$sMgQX5HiISo2YuIffw50.Ofmdkg4HaACw98ilQscoFhcY5bDqA.3i', 'ADMIN', '221133');
+VALUES (1, 'nguyenxuandung707@gmail.com', 'dung8anx', 'Dũng', 'Nguyễn Xuân', '0358123444', 'Hà Nội', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'CUSTOMER', '112233'),
+	   (2, 'admin@gmail.com', 'admin', 'Admin', 'Nguyễn Xuân', '0358123555', 'Hà Nội', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'ADMIN', '221133');
 
 
 CREATE TABLE `products`(

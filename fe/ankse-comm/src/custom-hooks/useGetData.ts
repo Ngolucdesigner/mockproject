@@ -6,6 +6,7 @@ import { ProductProps } from "../model/productProps";
 import { useDispatch, useSelector } from "react-redux";
 import { TReducers } from "../redux/rootReducer";
 import { reloadProduct } from "../redux/slices/loadProduct";
+import { getDataFromCookie } from "../Utils/customCookie";
 
 
 const useGetData = () => {
@@ -17,7 +18,11 @@ const useGetData = () => {
   const [totalPagesAccount, setTotalPagesAccount] = useState("");
   const [totalElementsAccount, setTotalElementsAccount] = useState("");
 
-
+type res={
+  content: any,
+  totalPages:any,
+  totalElements:any
+}
 
   const notReload = () => {
     dispatch(reloadProduct.reloadProduct(false));
@@ -35,15 +40,15 @@ const useGetData = () => {
   const config = {
     withCredentials: true,
     "Content-Type": "application/json",
-    // Authorization: "Basic " + localStorage.getItem("cookie"),
+    Authorization: "Bearer " + getDataFromCookie("user")
     // 'Access-Control-Allow-Origin': false ,
   };
 
   const getAllAccount = async () => {
-    await request
-      .get("accounts", {
-        headers: config,
-      })
+    try {
+
+     await request
+      .get1<res>("accounts", {headers: config})
       .then((res) => {
         setUseData(res.content);
         setTotalPagesAccount(res.totalPages);
@@ -53,6 +58,11 @@ const useGetData = () => {
       .catch((err) => {
         console.error(err);
       });
+
+    } catch (error) {
+      
+    }
+
   };
 
   const getAllProducts = async (page?: number|1) => {

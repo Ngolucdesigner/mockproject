@@ -1,6 +1,7 @@
 package com.anks.tech.ecommerce.Controller;
 
 import com.anks.tech.ecommerce.DTO.CustomerDTO.CustomerDTO;
+import com.anks.tech.ecommerce.Form.CustomerForm.OrderFilterForm;
 import com.anks.tech.ecommerce.Services.Customer.ICustomerServices;
 import com.anks.tech.ecommerce.Form.CustomerForm.CustomerForm;
 import org.modelmapper.ModelMapper;
@@ -36,8 +37,8 @@ public class CustomerController {
     }
 
     @GetMapping("/all-customer")
-    public ResponseEntity<Page<CustomerDTO>> getAllCustomer(Pageable pageable){
-        Page<Customers> customersPage = customerServices.getAllCustomer(pageable);
+    public ResponseEntity<Page<CustomerDTO>> getAllCustomer(Pageable pageable, OrderFilterForm form){
+        Page<Customers> customersPage = customerServices.getAllCustomer(pageable, form);
         List<Customers> customers = customersPage.getContent();
         List<CustomerDTO> customerDTOS = customers.stream().map(customer -> modelMapper.map(customer, CustomerDTO.class)).collect(Collectors.toList());
 

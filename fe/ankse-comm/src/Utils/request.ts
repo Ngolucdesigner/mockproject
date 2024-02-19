@@ -9,7 +9,7 @@ const request = axios.create({
 });
 
 interface RequestOptions {
-  headers?: Record<string, string>;
+  headers?: Record<string, any>;
 }
 
 export const get = async (path: string, { headers: {} }) => {
@@ -23,6 +23,18 @@ export const post = async (path: string, { headers: {} }, data: any) => {
   const response = await request.post(path, data, {});
   return response.data;
 };
+
+
+export const get1 = async <T>(
+  path: string,
+  options?: RequestOptions,
+): Promise<T> => {
+  const response: AxiosResponse<T> = await request.get(path, {
+    headers: options?.headers || {},
+  });
+  return response.data;
+};
+
 
 export const post1 = async <T>(
   path: string,

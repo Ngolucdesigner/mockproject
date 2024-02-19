@@ -17,7 +17,7 @@ import org.springframework.data.jpa.domain.Specification;
 public class ProductSpecification {
 
     private static final String PRODUCt_NAME = "productName";
-    private static final String PRODUCT_CODE = "product_code";
+    private static final String PRODUCT_CODE = "productCode";
     private static final String MIN_ID = "minId";
     private static final String MAX_ID = "maxId";
     public static Specification<Product> biuldWhere(ProductFilterForm form){
@@ -54,7 +54,7 @@ public class ProductSpecification {
                     return criteriaBuilder.like(root.get("productName"), "%" + value + "%");
                 case PRODUCT_CODE:
                     // product_code LIKE '%value%'
-                    return criteriaBuilder.like(root.get("product_code"), "%" + value + "%");
+                    return criteriaBuilder.like(root.get("productCode"), "%" + value + "%");
 
                 case MIN_ID:
                     // id >= value

@@ -3,8 +3,10 @@ package com.anks.tech.ecommerce.Services.Product;
 
 import com.anks.tech.ecommerce.Entity.*;
 import com.anks.tech.ecommerce.Form.ProductForm.CreateProductForm;
+import com.anks.tech.ecommerce.Form.ProductForm.ProductFilterForm;
 import com.anks.tech.ecommerce.Form.ProductForm.UpdateProductForm;
 import com.anks.tech.ecommerce.Repository.*;
+import com.anks.tech.ecommerce.Specification.Product.ProductSpecification;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.modelmapper.ModelMapper;
@@ -13,6 +15,7 @@ import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,9 +44,11 @@ public class ProductServices implements IProductServices {
     private EntityManager entityManager;
 
     @Override
-    public Page<Product> getAllProduct(Pageable pageable) {
-        return productRepository.findAll(pageable);
+    public Page<Product> getAllProduct(Pageable pageable, ProductFilterForm productFilterForm) {
+        Specification<Product> where= ProductSpecification.biuldWhere(productFilterForm);
+        return productRepository.findAll(where,pageable);
     }
+
 
     @Override
     public Product getProductById(int id) {
