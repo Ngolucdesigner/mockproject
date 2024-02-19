@@ -54,10 +54,11 @@ CREATE TABLE `account`(
     UUIDKey				VARCHAR(50) UNIQUE KEY,
     FOREIGN KEY(avatar) REFERENCES `fileTable`(uuid) ON DELETE CASCADE
 );
+-- gfg123
 
 INSERT INTO `account` (id, email, username, lastname, firstname, phone, address, `password`, `role` ,UUIDKey)
-VALUES (1, 'nguyenxuandung707@gmail.com', 'dung8anx', 'Dũng', 'Nguyễn Xuân', '0358123444', 'Hà Nội', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'CUSTOMER', '112233'),
-	   (2, 'admin@gmail.com', 'admin', 'Admin', 'Nguyễn Xuân', '0358123555', 'Hà Nội', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'ADMIN', '221133');
+VALUES (1, 'nguyenxuandung707@gmail.com', 'dung8anx', 'Dũng', 'Nguyễn Xuân', '0358123444', 'Hà Nội', '$2a$10$F5rzmMmNJcgwqTXmcro1eOeATecEUDsPM8WjKtF8Qx46RFDjlmCSW', 'CUSTOMER', '112233'),
+	   (2, 'admin@gmail.com', 'admin', 'Admin', 'Nguyễn Xuân', '0358123555', 'Hà Nội', '$2a$10$F5rzmMmNJcgwqTXmcro1eOeATecEUDsPM8WjKtF8Qx46RFDjlmCSW', 'ADMIN', '221133');
 
 
 CREATE TABLE `products`(
