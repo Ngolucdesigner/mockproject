@@ -28,14 +28,13 @@ public class ReviewController {
     public ResponseEntity<Page<Review>> getAllReview (Pageable pageable){
         Page<Review> reviewPage = reviewServices.getAllReview(pageable);
         List<Review> reviews = reviewPage.getContent();
-
         return  ResponseEntity.ok().body(new PageImpl<>(reviews, pageable,reviewPage.getTotalElements()));
     }
 
     @PostMapping("/new-review")
     public  ResponseEntity<String> createNewReview(@RequestBody  ReviewForm form){
 
-//        System.out.println(form.getReviewText() +" " + form.getUsername());
+//      System.out.println(form.getReviewText() +" " + form.getUsername());
         reviewServices.createReview(form);
         return ResponseEntity.ok().body("create successfully!");
     }

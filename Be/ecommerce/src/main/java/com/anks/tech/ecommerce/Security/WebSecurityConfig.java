@@ -77,6 +77,9 @@ public class WebSecurityConfig {
                                 .requestMatchers(HttpMethod.POST,"/api/v1/products/**").hasAnyAuthority("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE,"/api/v1/products/**").hasAnyAuthority("ADMIN")
 
+                                .requestMatchers(HttpMethod.POST,"/api/v1/reviews/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/api/v1/reviews/**").permitAll()
+
                                 .requestMatchers(HttpMethod.POST,"/api/v1/customer/new-order").permitAll()
 
                                 .requestMatchers(HttpMethod.GET,"/api/v1/customer/**").hasAnyAuthority("ADMIN")
