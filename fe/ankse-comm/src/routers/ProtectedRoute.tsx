@@ -2,9 +2,9 @@ import React, { ReactNode } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = () => {
-    const currentUser=true;
+    const currentUser=false;
 
-    return currentUser? <Outlet/> : <Navigate to={"/login"}/>;
+    return currentUser? <Outlet/> : <Navigate to={"/dashboard/login"}/>;
 };
 
 export default ProtectedRoute;

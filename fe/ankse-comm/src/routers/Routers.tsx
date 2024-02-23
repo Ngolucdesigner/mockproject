@@ -8,7 +8,7 @@ import Checkout from "../pages/Checkout";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import AllProducts from "../Admin/AllProducts";
 import AddProducts from "../Admin/AddProducts";
@@ -16,11 +16,12 @@ import Dashboard from "../Admin/Dashboard";
 import User from "../Admin/User";
 import Order from "../Admin/Order";
 import OrderDetail from "../Admin/OrderDetail";
+import NotFound from "../components/notfound/NotFound";
 
 const Routers = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="home" />} />
+    <Routes >
+      <Route path="/" element={<Navigate to="home" />}  />
       <Route path="home" element={<Home />} />
       <Route path="shop" element={<Shop />} />
       <Route path="shop/:id" element={<ProductDetails />} />
@@ -29,7 +30,9 @@ const Routers = () => {
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
 
-      <Route path="/*" element={<ProtectedRoute />}>
+      <Route path="*" element={<NotFound />} />
+      <Route path="dashboard/login" element={<Login />} />
+      <Route path="/dashboard/*" element={<ProtectedRoute />}>
         {/* <Route path="checkout" element={<Checkout />} /> */}
 
         <Route path="dashboard/" element={<Dashboard />} />
@@ -40,6 +43,7 @@ const Routers = () => {
         <Route path="dashboard/order" element={<Order/>} />
         <Route path="dashboard/order/order-detail/:id" element={<OrderDetail/>} />
       </Route>
+      
 
       {/* <Route path="checkout" element={
           <ProtectedRoute>

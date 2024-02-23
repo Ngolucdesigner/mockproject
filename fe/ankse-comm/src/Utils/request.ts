@@ -17,17 +17,14 @@ export const get = async (path: string, { headers: {} }) => {
   return response.data;
 };
 
-
-
 export const post = async (path: string, { headers: {} }, data: any) => {
   const response = await request.post(path, data, {});
   return response.data;
 };
 
-
 export const get1 = async <T>(
   path: string,
-  options?: RequestOptions,
+  options?: RequestOptions
 ): Promise<T> => {
   const response: AxiosResponse<T> = await request.get(path, {
     headers: options?.headers || {},
@@ -35,16 +32,24 @@ export const get1 = async <T>(
   return response.data;
 };
 
+export interface PostResponse<T> {
+  data: T;
+  cookie?: any;
+}
 
 export const post1 = async <T>(
   path: string,
   options?: RequestOptions,
   data?: any
-): Promise<T> => {
+): Promise<PostResponse<T>> => {
   const response: AxiosResponse<T> = await request.post(path, data, {
     headers: options?.headers || {},
   });
-  return response.data;
+  return {
+
+   data: response.data,
+   cookie: response.headers["set-cookie"]
+  }
 };
 
 export const delete1 = async <T>(

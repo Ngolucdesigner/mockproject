@@ -1,46 +1,33 @@
-2024-02-19 16:03:52 [background-preinit] INFO  o.h.v.i.u.Version                                  - HV000001: Hibernate Validator 8.0.1.Final 
-2024-02-19 16:03:52 [main] INFO  c.a.t.e.EcommerceApplication                       - Starting EcommerceApplication using Java 20.0.1 with PID 4468 (D:\18_05_2022\java\MOCK\mockproject\Be\ecommerce\target\classes started by admin in D:\18_05_2022\java\MOCK\mockproject\Be\ecommerce) 
-2024-02-19 16:03:52 [main] INFO  c.a.t.e.EcommerceApplication                       - No active profile set, falling back to 1 default profile: "default" 
-2024-02-19 16:03:53 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
-2024-02-19 16:03:53 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 88 ms. Found 10 JPA repository interfaces. 
-2024-02-19 16:03:53 [main] INFO  o.s.b.w.e.t.TomcatWebServer                        - Tomcat initialized with port 8080 (http) 
-2024-02-19 16:03:53 [main] INFO  o.a.c.h.Http11NioProtocol                          - Initializing ProtocolHandler ["http-nio-8080"] 
-2024-02-19 16:03:53 [main] INFO  o.a.c.c.StandardService                            - Starting service [Tomcat] 
-2024-02-19 16:03:53 [main] INFO  o.a.c.c.StandardEngine                             - Starting Servlet engine: [Apache Tomcat/10.1.17] 
-2024-02-19 16:03:54 [main] INFO  o.a.c.c.C.[.[.[/]                                  - Initializing Spring embedded WebApplicationContext 
-2024-02-19 16:03:54 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 1249 ms 
-2024-02-19 16:03:54 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Starting... 
-2024-02-19 16:03:54 [main] INFO  c.z.h.p.HikariPool                                 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ea66c33 
-2024-02-19 16:03:54 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Start completed. 
-2024-02-19 16:03:54 [main] INFO  o.h.j.i.u.LogHelper                                - HHH000204: Processing PersistenceUnitInfo [name: default] 
-2024-02-19 16:03:54 [main] INFO  o.h.Version                                        - HHH000412: Hibernate ORM core version 6.4.1.Final 
-2024-02-19 16:03:54 [main] INFO  o.h.c.i.RegionFactoryInitiator                     - HHH000026: Second-level cache disabled 
-2024-02-19 16:03:54 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer 
-2024-02-19 16:03:55 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration) 
-2024-02-19 16:03:55 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'default' 
-2024-02-19 16:03:56 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactory                   - Hibernate is in classpath; If applicable, HQL parser will be used. 
-2024-02-19 16:03:56 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
-2024-02-19 16:03:56 [main] INFO  o.s.s.w.DefaultSecurityFilterChain                 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@56ed6e17, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@58179860, org.springframework.security.web.context.SecurityContextHolderFilter@12bb3666, org.springframework.security.web.header.HeaderWriterFilter@3253d771, org.springframework.web.filter.CorsFilter@43e55cfb, org.springframework.security.web.authentication.logout.LogoutFilter@5e16e521, com.anks.tech.ecommerce.Security.JWT.AuthTokenFilter@5955568, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1c71d704, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@461e9b31, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@582ea857, org.springframework.security.web.session.SessionManagementFilter@74efc394, org.springframework.security.web.access.ExceptionTranslationFilter@2e50ca51, org.springframework.security.web.access.intercept.AuthorizationFilter@26350832] 
-2024-02-19 16:03:57 [main] INFO  o.a.c.h.Http11NioProtocol                          - Starting ProtocolHandler ["http-nio-8080"] 
-2024-02-19 16:03:57 [main] INFO  o.s.b.w.e.t.TomcatWebServer                        - Tomcat started on port 8080 (http) with context path '' 
-2024-02-19 16:03:57 [main] INFO  c.a.t.e.EcommerceApplication                       - Started EcommerceApplication in 4.59 seconds (process running for 5.359) 
-2024-02-19 16:03:57 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/]                                  - Initializing Spring DispatcherServlet 'dispatcherServlet' 
-2024-02-19 16:03:57 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet                          - Initializing Servlet 'dispatcherServlet' 
-2024-02-19 16:03:57 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet                          - Completed initialization in 1 ms 
-2024-02-19 16:03:57 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
-    insert 
-    into
-        ecommerce.
-        `reviews` (
-            productId, rating, reviewText, username
-        ) 
-    values
-        (?, ?, ?, ?) 
-2024-02-19 16:04:18 [http-nio-8080-exec-4] ERROR c.a.t.e.S.J.JwtUtils                               - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0 
-2024-02-19 16:04:18 [http-nio-8080-exec-4] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
-2024-02-19 16:04:18 [http-nio-8080-exec-7] ERROR c.a.t.e.S.J.JwtUtils                               - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0 
-2024-02-19 16:04:18 [http-nio-8080-exec-7] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
-2024-02-19 16:04:18 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
+2024-02-23 11:12:11 [background-preinit] INFO  o.h.v.i.u.Version                                  - HV000001: Hibernate Validator 8.0.1.Final 
+2024-02-23 11:12:11 [main] INFO  c.a.t.e.EcommerceApplication                       - Starting EcommerceApplication using Java 20.0.1 with PID 12160 (D:\18_05_2022\java\MOCK\mockproject\Be\ecommerce\target\classes started by admin in D:\18_05_2022\java\MOCK\mockproject\Be\ecommerce) 
+2024-02-23 11:12:11 [main] INFO  c.a.t.e.EcommerceApplication                       - No active profile set, falling back to 1 default profile: "default" 
+2024-02-23 11:12:12 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2024-02-23 11:12:12 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 90 ms. Found 10 JPA repository interfaces. 
+2024-02-23 11:12:13 [main] INFO  o.s.b.w.e.t.TomcatWebServer                        - Tomcat initialized with port 8080 (http) 
+2024-02-23 11:12:13 [main] INFO  o.a.c.h.Http11NioProtocol                          - Initializing ProtocolHandler ["http-nio-8080"] 
+2024-02-23 11:12:13 [main] INFO  o.a.c.c.StandardService                            - Starting service [Tomcat] 
+2024-02-23 11:12:13 [main] INFO  o.a.c.c.StandardEngine                             - Starting Servlet engine: [Apache Tomcat/10.1.17] 
+2024-02-23 11:12:13 [main] INFO  o.a.c.c.C.[.[.[/]                                  - Initializing Spring embedded WebApplicationContext 
+2024-02-23 11:12:13 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 2109 ms 
+2024-02-23 11:12:13 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Starting... 
+2024-02-23 11:12:13 [main] INFO  c.z.h.p.HikariPool                                 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@45571cfc 
+2024-02-23 11:12:13 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Start completed. 
+2024-02-23 11:12:13 [main] INFO  o.h.j.i.u.LogHelper                                - HHH000204: Processing PersistenceUnitInfo [name: default] 
+2024-02-23 11:12:13 [main] INFO  o.h.Version                                        - HHH000412: Hibernate ORM core version 6.4.1.Final 
+2024-02-23 11:12:13 [main] INFO  o.h.c.i.RegionFactoryInitiator                     - HHH000026: Second-level cache disabled 
+2024-02-23 11:12:14 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer 
+2024-02-23 11:12:15 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration) 
+2024-02-23 11:12:15 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2024-02-23 11:12:15 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactory                   - Hibernate is in classpath; If applicable, HQL parser will be used. 
+2024-02-23 11:12:16 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2024-02-23 11:12:16 [main] INFO  o.s.s.w.DefaultSecurityFilterChain                 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@36cd58e7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7be3baf2, org.springframework.security.web.context.SecurityContextHolderFilter@518e9141, org.springframework.security.web.header.HeaderWriterFilter@6b5e8b3a, org.springframework.web.filter.CorsFilter@3a296643, org.springframework.security.web.authentication.logout.LogoutFilter@5165783c, com.anks.tech.ecommerce.Security.JWT.AuthTokenFilter@5c8859b4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@42018e32, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@42bd4a4c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3443732a, org.springframework.security.web.session.SessionManagementFilter@9b87a98, org.springframework.security.web.access.ExceptionTranslationFilter@4a6c3720, org.springframework.security.web.access.intercept.AuthorizationFilter@7194f5b] 
+2024-02-23 11:12:16 [main] INFO  o.a.c.h.Http11NioProtocol                          - Starting ProtocolHandler ["http-nio-8080"] 
+2024-02-23 11:12:16 [main] INFO  o.s.b.w.e.t.TomcatWebServer                        - Tomcat started on port 8080 (http) with context path '' 
+2024-02-23 11:12:16 [main] INFO  c.a.t.e.EcommerceApplication                       - Started EcommerceApplication in 6.045 seconds (process running for 7.192) 
+2024-02-23 11:16:29 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/]                                  - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+2024-02-23 11:16:29 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet                          - Initializing Servlet 'dispatcherServlet' 
+2024-02-23 11:16:29 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet                          - Completed initialization in 1 ms 
+2024-02-23 11:16:30 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         p1_0.id,
         p1_0.avgRating,
@@ -59,7 +46,7 @@
         ecommerce.`products` p1_0 
     limit
         ?, ? 
-2024-02-19 16:04:18 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         c1_0.categoryid,
         c1_0.catagory 
@@ -67,7 +54,7 @@
         ecommerce.`category` c1_0 
     where
         c1_0.categoryid=? 
-2024-02-19 16:04:18 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         fp1_0.uuid,
         fp1_0.imgdata,
@@ -77,7 +64,7 @@
         ecommerce.`fileTable` fp1_0 
     where
         fp1_0.uuid=? 
-2024-02-19 16:04:18 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         i1_0.id,
         i1_0.Weight,
@@ -94,7 +81,7 @@
         ecommerce.`infomation` i1_0 
     where
         i1_0.id=? 
-2024-02-19 16:04:18 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         o1_0.id,
         o1_0.guarantee,
@@ -104,7 +91,7 @@
         ecommerce.`origin` o1_0 
     where
         o1_0.id=? 
-2024-02-19 16:04:18 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         r1_0.productId,
         r1_0.reviewid,
@@ -115,7 +102,7 @@
         ecommerce.`reviews` r1_0 
     where
         r1_0.productId=? 
-2024-02-19 16:04:18 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
     select
         p1_0.id,
         p1_0.avgRating,
@@ -134,7 +121,7 @@
         ecommerce.`products` p1_0 
     limit
         ?, ? 
-2024-02-19 16:04:18 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
     select
         c1_0.categoryid,
         c1_0.catagory 
@@ -142,7 +129,7 @@
         ecommerce.`category` c1_0 
     where
         c1_0.categoryid=? 
-2024-02-19 16:04:18 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
     select
         fp1_0.uuid,
         fp1_0.imgdata,
@@ -152,7 +139,7 @@
         ecommerce.`fileTable` fp1_0 
     where
         fp1_0.uuid=? 
-2024-02-19 16:04:18 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
     select
         i1_0.id,
         i1_0.Weight,
@@ -169,7 +156,7 @@
         ecommerce.`infomation` i1_0 
     where
         i1_0.id=? 
-2024-02-19 16:04:18 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
     select
         o1_0.id,
         o1_0.guarantee,
@@ -179,7 +166,7 @@
         ecommerce.`origin` o1_0 
     where
         o1_0.id=? 
-2024-02-19 16:04:18 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
     select
         r1_0.productId,
         r1_0.reviewid,
@@ -190,7 +177,7 @@
         ecommerce.`reviews` r1_0 
     where
         r1_0.productId=? 
-2024-02-19 16:04:18 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
     select
         fp1_0.uuid,
         fp1_0.imgdata,
@@ -200,9 +187,7 @@
         ecommerce.`fileTable` fp1_0 
     where
         fp1_0.uuid=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-8] ERROR c.a.t.e.S.J.JwtUtils                               - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0 
-2024-02-19 16:04:20 [http-nio-8080-exec-8] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
-2024-02-19 16:04:20 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         p1_0.id,
         p1_0.avgRating,
@@ -221,7 +206,7 @@
         ecommerce.`products` p1_0 
     limit
         ?, ? 
-2024-02-19 16:04:20 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         c1_0.categoryid,
         c1_0.catagory 
@@ -229,7 +214,7 @@
         ecommerce.`category` c1_0 
     where
         c1_0.categoryid=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         fp1_0.uuid,
         fp1_0.imgdata,
@@ -239,9 +224,7 @@
         ecommerce.`fileTable` fp1_0 
     where
         fp1_0.uuid=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-10] ERROR c.a.t.e.S.J.JwtUtils                               - Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0 
-2024-02-19 16:04:20 [http-nio-8080-exec-10] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
-2024-02-19 16:04:20 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         i1_0.id,
         i1_0.Weight,
@@ -258,7 +241,7 @@
         ecommerce.`infomation` i1_0 
     where
         i1_0.id=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         o1_0.id,
         o1_0.guarantee,
@@ -268,7 +251,7 @@
         ecommerce.`origin` o1_0 
     where
         o1_0.id=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         r1_0.productId,
         r1_0.reviewid,
@@ -279,44 +262,7 @@
         ecommerce.`reviews` r1_0 
     where
         r1_0.productId=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
-    select
-        p1_0.id,
-        p1_0.avgRating,
-        p1_0.catagoryId,
-        p1_0.`description`,
-        p1_0.uuidUrl,
-        p1_0.imgUrl,
-        p1_0.informationId,
-        p1_0.originId,
-        p1_0.price,
-        p1_0.priceSale,
-        p1_0.product_code,
-        p1_0.productName,
-        p1_0.shortDesc 
-    from
-        ecommerce.`products` p1_0 
-    where
-        p1_0.product_code=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
-    select
-        c1_0.categoryid,
-        c1_0.catagory 
-    from
-        ecommerce.`category` c1_0 
-    where
-        c1_0.categoryid=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
-    select
-        fp1_0.uuid,
-        fp1_0.imgdata,
-        fp1_0.imgname,
-        fp1_0.typeImg 
-    from
-        ecommerce.`fileTable` fp1_0 
-    where
-        fp1_0.uuid=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         p1_0.id,
         p1_0.avgRating,
@@ -335,7 +281,7 @@
         ecommerce.`products` p1_0 
     limit
         ?, ? 
-2024-02-19 16:04:20 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         c1_0.categoryid,
         c1_0.catagory 
@@ -343,7 +289,7 @@
         ecommerce.`category` c1_0 
     where
         c1_0.categoryid=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         fp1_0.uuid,
         fp1_0.imgdata,
@@ -353,7 +299,17 @@
         ecommerce.`fileTable` fp1_0 
     where
         fp1_0.uuid=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         i1_0.id,
         i1_0.Weight,
@@ -370,7 +326,7 @@
         ecommerce.`infomation` i1_0 
     where
         i1_0.id=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         o1_0.id,
         o1_0.guarantee,
@@ -380,34 +336,7 @@
         ecommerce.`origin` o1_0 
     where
         o1_0.id=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
-    select
-        i1_0.id,
-        i1_0.Weight,
-        i1_0.accessory,
-        i1_0.color,
-        i1_0.level,
-        i1_0.mode,
-        i1_0.noise,
-        i1_0.funtion,
-        i1_0.size,
-        i1_0.technology,
-        i1_0.wattage 
-    from
-        ecommerce.`infomation` i1_0 
-    where
-        i1_0.id=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
-    select
-        o1_0.id,
-        o1_0.guarantee,
-        o1_0.madeIn,
-        o1_0.manufacturer 
-    from
-        ecommerce.`origin` o1_0 
-    where
-        o1_0.id=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+2024-02-23 11:16:30 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
     select
         r1_0.productId,
         r1_0.reviewid,
@@ -418,18 +347,17 @@
         ecommerce.`reviews` r1_0 
     where
         r1_0.productId=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+2024-02-23 11:19:07 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
     select
-        r1_0.productId,
-        r1_0.reviewid,
-        r1_0.rating,
-        r1_0.reviewText,
-        r1_0.username 
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
     from
-        ecommerce.`reviews` r1_0 
+        ecommerce.`fileTable` fp1_0 
     where
-        r1_0.productId=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+        fp1_0.uuid=? 
+2024-02-23 11:19:35 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         p1_0.id,
         p1_0.avgRating,
@@ -446,9 +374,9 @@
         p1_0.shortDesc 
     from
         ecommerce.`products` p1_0 
-    where
-        p1_0.product_code=? 
-2024-02-19 16:04:20 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    limit
+        ?, ? 
+2024-02-23 11:19:35 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         c1_0.categoryid,
         c1_0.catagory 
@@ -456,7 +384,7 @@
         ecommerce.`category` c1_0 
     where
         c1_0.categoryid=? 
-2024-02-19 16:04:21 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+2024-02-23 11:19:35 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         fp1_0.uuid,
         fp1_0.imgdata,
@@ -466,17 +394,7 @@
         ecommerce.`fileTable` fp1_0 
     where
         fp1_0.uuid=? 
-2024-02-19 16:04:21 [http-nio-8080-exec-7] DEBUG o.h.SQL                                            - 
-    select
-        fp1_0.uuid,
-        fp1_0.imgdata,
-        fp1_0.imgname,
-        fp1_0.typeImg 
-    from
-        ecommerce.`fileTable` fp1_0 
-    where
-        fp1_0.uuid=? 
-2024-02-19 16:04:21 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+2024-02-23 11:19:35 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         i1_0.id,
         i1_0.Weight,
@@ -493,7 +411,7 @@
         ecommerce.`infomation` i1_0 
     where
         i1_0.id=? 
-2024-02-19 16:04:21 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+2024-02-23 11:19:35 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         o1_0.id,
         o1_0.guarantee,
@@ -503,7 +421,7 @@
         ecommerce.`origin` o1_0 
     where
         o1_0.id=? 
-2024-02-19 16:04:21 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+2024-02-23 11:19:35 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
     select
         r1_0.productId,
         r1_0.reviewid,
@@ -514,12 +432,1270 @@
         ecommerce.`reviews` r1_0 
     where
         r1_0.productId=? 
-2024-02-19 16:04:27 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
-    insert 
-    into
-        ecommerce.
-        `reviews` (
-            productId, rating, reviewText, username
-        ) 
-    values
-        (?, ?, ?, ?) 
+2024-02-23 11:19:35 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:19:35 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:19:35 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:19:35 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:19:35 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:19:35 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:19:35 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:19:46 [http-nio-8080-exec-7] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:19:46 [http-nio-8080-exec-7] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:19:46 [http-nio-8080-exec-7] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:19:46 [http-nio-8080-exec-7] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:19:46 [http-nio-8080-exec-7] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:19:46 [http-nio-8080-exec-7] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:19:46 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:19:46 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:19:46 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:19:46 [http-nio-8080-exec-3] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:19:46 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:19:46 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:19:46 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:20:53 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:20:53 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:20:53 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:20:53 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:20:53 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:20:53 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:20:53 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:20:53 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:20:53 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:20:53 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:20:53 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:20:53 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:20:53 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:21:12 [http-nio-8080-exec-8] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-02-23 11:21:12 [http-nio-8080-exec-1] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-02-23 11:21:34 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+    select
+        a1_0.id,
+        a1_0.UUIDKey,
+        a1_0.address,
+        a1_0.CreateDate,
+        a1_0.email,
+        a1_0.avatar,
+        a1_0.firstname,
+        concat(a1_0.firstname, ' ', a1_0.lastname),
+        a1_0.lastname,
+        a1_0.`password`,
+        a1_0.phone,
+        a1_0.`role`,
+        a1_0.username 
+    from
+        ecommerce.`account` a1_0 
+    where
+        a1_0.username=? 
+2024-02-23 11:21:34 [http-nio-8080-exec-10] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:21:34 [http-nio-8080-exec-10] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:21:34 [http-nio-8080-exec-10] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:21:34 [http-nio-8080-exec-10] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:21:34 [http-nio-8080-exec-10] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:21:34 [http-nio-8080-exec-10] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:21:34 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:21:34 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:21:34 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:21:34 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:21:34 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:21:34 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:21:34 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:21:41 [http-nio-8080-exec-5] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-02-23 11:21:41 [http-nio-8080-exec-7] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-02-23 11:21:41 [http-nio-8080-exec-3] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-02-23 11:21:41 [http-nio-8080-exec-8] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-02-23 11:22:28 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:22:28 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:22:28 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:22:28 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:22:28 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:22:28 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:22:28 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:22:28 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:22:28 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:22:28 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:22:28 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:22:28 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:22:28 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:24:45 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:24:47 [http-nio-8080-exec-7] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:37:48 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:37:48 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:37:48 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:37:48 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:37:48 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:37:48 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:37:48 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:37:48 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:37:48 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:37:48 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:37:48 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:37:48 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:37:48 [http-nio-8080-exec-2] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:37:58 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:37:58 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:37:58 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:37:58 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:37:58 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:37:58 [http-nio-8080-exec-9] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:37:58 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:37:58 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:37:58 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:37:58 [http-nio-8080-exec-10] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:37:58 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:37:58 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:37:58 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:38:38 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:38:39 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:38:39 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:38:39 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:38:39 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:38:39 [http-nio-8080-exec-4] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:38:39 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        p1_0.id,
+        p1_0.avgRating,
+        p1_0.catagoryId,
+        p1_0.`description`,
+        p1_0.uuidUrl,
+        p1_0.imgUrl,
+        p1_0.informationId,
+        p1_0.originId,
+        p1_0.price,
+        p1_0.priceSale,
+        p1_0.product_code,
+        p1_0.productName,
+        p1_0.shortDesc 
+    from
+        ecommerce.`products` p1_0 
+    limit
+        ?, ? 
+2024-02-23 11:38:39 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        c1_0.categoryid,
+        c1_0.catagory 
+    from
+        ecommerce.`category` c1_0 
+    where
+        c1_0.categoryid=? 
+2024-02-23 11:38:39 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:38:39 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        i1_0.id,
+        i1_0.Weight,
+        i1_0.accessory,
+        i1_0.color,
+        i1_0.level,
+        i1_0.mode,
+        i1_0.noise,
+        i1_0.funtion,
+        i1_0.size,
+        i1_0.technology,
+        i1_0.wattage 
+    from
+        ecommerce.`infomation` i1_0 
+    where
+        i1_0.id=? 
+2024-02-23 11:38:39 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        o1_0.id,
+        o1_0.guarantee,
+        o1_0.madeIn,
+        o1_0.manufacturer 
+    from
+        ecommerce.`origin` o1_0 
+    where
+        o1_0.id=? 
+2024-02-23 11:38:39 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        r1_0.productId,
+        r1_0.reviewid,
+        r1_0.rating,
+        r1_0.reviewText,
+        r1_0.username 
+    from
+        ecommerce.`reviews` r1_0 
+    where
+        r1_0.productId=? 
+2024-02-23 11:38:39 [http-nio-8080-exec-7] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 
+2024-02-23 11:40:44 [http-nio-8080-exec-2] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-02-23 11:40:44 [http-nio-8080-exec-10] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-02-23 11:40:44 [http-nio-8080-exec-6] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-02-23 11:40:44 [http-nio-8080-exec-4] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-02-23 11:40:44 [http-nio-8080-exec-5] INFO  o.a.c.h.Http11Processor                            - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level. 
+java.lang.IllegalArgumentException: Invalid character found in the HTTP protocol [RTSP/1.00x0d0x0a0x0d0x0a...]
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:558) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at java.base/java.lang.Thread.run(Thread.java:1623) [?:?]

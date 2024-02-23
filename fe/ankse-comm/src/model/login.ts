@@ -3,5 +3,6 @@ export type loginInfo ={
     username: string
     email: string,
     token: string;
-    roles: []
+    roles: Array<string>;
+    // headers?:any
 }

@@ -19,10 +19,11 @@ import { ProductProps } from "../model/productProps";
 import * as request from "../Utils/request";
 
 
+
 const ProductDetails = () => {
   const [tab, setTab] = useState("desc");
   const [rating, setRating] = useState(0);
-  const [load, setload] = useState(false);
+  const [load, setLoad] = useState(false);
 
   const { id } = useParams();
 
@@ -108,7 +109,7 @@ const ProductDetails = () => {
   const {
   
     productName,
-    imgUrl,
+    // imgUrl,
     price,
     priceSales,
     description,
@@ -147,7 +148,7 @@ const ProductDetails = () => {
       await request
         .post1<ResponseType>("reviews/new-review", { headers: config }, data)
         .then(() => {
-          setload(true);
+          setLoad(true);
         });
     } catch (error) {
       console.error(error);
@@ -175,7 +176,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     getProductById();
-    setload(false);
+    setLoad(false);
   }, [id, load]);
 
   return (

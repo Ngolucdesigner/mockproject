@@ -18,7 +18,8 @@ const User = () => {
   const config = {
     // withCredentials: true,
     "Content-Type": "application/auto",
-     Authorization: "Bearer " + getDataFromCookie("user"),
+    'Cookie': `anks=${getDataFromCookie("user")}`
+    //  Authorization: "Bearer " + getDataFromCookie("user"),
     // 'Access-Control-Allow-Origin': false ,
   };
   

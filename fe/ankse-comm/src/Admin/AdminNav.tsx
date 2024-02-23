@@ -2,8 +2,7 @@ import React from "react";
 import { Container, Row } from "reactstrap";
 
 import "../styles/Admin-Nav.scss";
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useLocation } from "react-router-dom";
 
 const user = require("../assets/images/user-icon.png");
 
@@ -32,6 +31,7 @@ const admin__nav = [
 
 const AdminNav = () => {
 
+  const location = useLocation();
 
   return (
     <>
@@ -62,28 +62,31 @@ const AdminNav = () => {
           </Container>
         </div>
       </header>
-      <section className="admin__menu p-0">
-        <Container>
-          <Row>
-            <div className="admin__navigation">
-              <ul className="admin__menu-list">
-                {admin__nav.map((item, index) => (
-                  <li className="admin__menu-item" key={index}>
-                    <NavLink
-                      to={item.path}
-                      className={(navClass) =>
-                        navClass.isActive ? "active__admin-menu link" : "link"
-                      }
-                    >
-                      {item.display}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Row>
-        </Container>
-      </section>
+
+      {location.pathname.startsWith("/dashboard") ? null : (
+        <section className="admin__menu p-0">
+          <Container>
+            <Row>
+              <div className="admin__navigation">
+                <ul className="admin__menu-list">
+                  {admin__nav.map((item, index) => (
+                    <li className="admin__menu-item" key={index}>
+                      <NavLink
+                        to={item.path}
+                        className={(navClass) =>
+                          navClass.isActive ? "active__admin-menu link" : "link"
+                        }
+                      >
+                        {item.display}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Row>
+          </Container>
+        </section>
+      )}
     </>
   );
 };

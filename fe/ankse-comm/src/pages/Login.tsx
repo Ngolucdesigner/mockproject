@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Helmet from "../components/helmet/Helmet";
 import { Col, Container, Row, Form, FormGroup, Input } from "reactstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import Spinner from "react-bootstrap/Spinner";
 
@@ -12,8 +12,10 @@ import * as request from "../Utils/request";
 import { loginInfo } from "../model/login";
 import { setResponseToCookie } from "../Utils/customCookie";
 
+
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [loginInfo, setLoginInfo] = useState<loginInfo>();
   const [username, setUsername] = useState<string>();
@@ -41,15 +43,18 @@ const Login = () => {
     try {
       request
         .post1<loginInfo>(
-          "auth/signin",
+          "auth/sign-in",
           { headers: config },
           JSON.stringify({ username, password })
         )
         .then((res) => {
-         
-          setLoginInfo(res)
-          setResponseToCookie("user",res.token);
-          // document.cookie = response.token;
+        
+        setLoginInfo(res.data)
+        setResponseToCookie("user",res.data.token);    
+      
+        location.pathname.startsWith("/dashboard") && (res.data.roles[0]=== "ADMIN")  ?  navigate("/dashboard"): navigate("/home")
+      
+              
         })
         .catch(() => {
           setTimeout(() => {
@@ -62,24 +67,7 @@ const Login = () => {
       return Promise.reject(error);
     }
     
-    // const response = await fetch('http://localhost:8080/api/v1/auth/login', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ username, password })
-    // });
 
-    // const data = await response.json();
-
-    // if (response.ok) {
-    //   localStorage.setItem('token', data.token);
-    //   localStorage.setItem('isLoggedIn', 'true');
-    //   // navigate('/home');
-    // } else {
-    //   setTimeout(() => {
-    //     toast.success("Đăng nhập thất bại!", {
-    //       position: toast.POSITION.TOP_CENTER
-    //     });
-    //   }, 500);
-    // }
   };
 
   const loading = false;

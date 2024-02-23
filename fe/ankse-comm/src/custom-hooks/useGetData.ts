@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { TReducers } from "../redux/rootReducer";
 import { reloadProduct } from "../redux/slices/loadProduct";
 import { getDataFromCookie } from "../Utils/customCookie";
+import { res } from "../model/response";
 
 
 
@@ -42,8 +43,10 @@ const useGetData = () => {
   
 
   const getAllProducts = async (page?: number|1) => {
-    await request
-      .get(`products?page=${page}`, { headers: config })
+
+    try {
+      await request
+      .get1<res>(`products?page=${page}`, { headers: config })
       .then((res) => {
         setProducts(res.content);
         setTotalPagesProduct(res.totalPages);
@@ -51,8 +54,12 @@ const useGetData = () => {
         notReload();
       })
       .catch((err) => {
-         console.error(err);
+        console.error(err);
       });
+    } catch (error) {
+      
+    }
+
   };
 
   useEffect(() => {

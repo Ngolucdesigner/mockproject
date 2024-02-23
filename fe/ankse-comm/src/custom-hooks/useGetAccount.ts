@@ -23,15 +23,19 @@ const useGetAccount = () => {
   const config = {
     withCredentials: true,
     "Content-Type": "application/json",
-    Authorization: "Bearer " + getDataFromCookie("user"),
+    'Cookie': `anks=${getDataFromCookie("user")}`
+    // Authorization: "Bearer " + getDataFromCookie("user"),
     // 'Access-Control-Allow-Origin': false ,
   };
+
+ 
 
   const getAllAccount = async () => {
     try {
       await request
         .get1<res>("accounts", { headers: config })
         .then((res) => {
+         
           setUseData(res.content);
           setTotalPagesAccount(res.totalPages);
           setTotalElementsAccount(res.totalElements);

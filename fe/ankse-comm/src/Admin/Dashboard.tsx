@@ -9,16 +9,20 @@ import { useSelector } from "react-redux";
 import { TReducers } from "../redux/rootReducer";
 import { priceFormat } from "../model/FormatVND";
 import useGetAccount from "../custom-hooks/useGetAccount";
+import { useLocation } from "react-router-dom";
 
 const Dashboard = () => {
+  const location = useLocation();
+
   const totalElementsProduct = useGetData().totalElementsProduct;
   const totalElementsAccount = useGetAccount().totalElementsAccount;
-  const totalOrder: any = useSelector<TReducers>((state)=>
-    state.quantity.quantityOder
-  )
-  const totalSales : any = useSelector<TReducers>((state)=>
-  state.quantity.quantitySales
-)
+  const totalOrder: any = useSelector<TReducers>(
+    (state) => state.quantity.quantityOder
+  );
+  const totalSales: any = useSelector<TReducers>(
+    (state) => state.quantity.quantitySales
+  );
+
   return (
     <>
       <section>

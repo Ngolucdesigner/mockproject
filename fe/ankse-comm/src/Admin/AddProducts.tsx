@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { reloadProduct } from "../redux/slices/loadProduct";
 import { getDataFromCookie } from "../Utils/customCookie";
 
+
 const options = categoryList.slice(1);
 
 const AddProducts = () => {
