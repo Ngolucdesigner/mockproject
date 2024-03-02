@@ -2,10 +2,12 @@ package com.anks.tech.ecommerce.Entity;
 
 
 import com.anks.tech.ecommerce.Entity.Enum.Role;
+import com.anks.tech.ecommerce.Utils.LocalDateTimeToDateConverter;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.UUID;
@@ -19,6 +21,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Account {
+
 
 
     @Column(name = "id")
@@ -60,13 +63,18 @@ public class Account {
 
 
     @Column(name = "CreateDate")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 
     @Column(name = "UUIDKey")
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String UUIDKey;
+
+    @Column(name = "`active`")
+    private Boolean active;
+    @Column(name = "`otp`", unique = true, nullable = false)
+    private String otp;
 
     @OneToOne
     @JoinColumn(name = "avatar", referencedColumnName = "uuid")

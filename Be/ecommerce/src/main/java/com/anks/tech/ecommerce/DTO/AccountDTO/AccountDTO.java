@@ -25,7 +25,7 @@ public class AccountDTO {
     private String phone;
     private String address;
     private Role role;
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss a", timezone = "GMT+7")
     private Date createDate;
     private String UUIDKey;
     private File file;

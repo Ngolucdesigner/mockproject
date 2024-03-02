@@ -12,6 +12,7 @@ import com.anks.tech.ecommerce.Repository.IOrderDetailRepository;
 import com.anks.tech.ecommerce.Repository.IOrderRepository;
 import com.anks.tech.ecommerce.Specification.Order.OrderSpecification;
 import com.anks.tech.ecommerce.Specification.Product.ProductSpecification;
+import com.anks.tech.ecommerce.Utils.LocalDateTimeToDateConverter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
@@ -22,6 +23,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +42,10 @@ public class CustomerServices implements ICustomerServices{
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private LocalDateTimeToDateConverter localDateTimeToDateConverter;
+
     @Override
     public Page<Customers> getAllCustomer(Pageable pageable, OrderFilterForm form){
         Specification<Customers> where = OrderSpecification.biuldWhere(form);
@@ -69,6 +75,7 @@ public class CustomerServices implements ICustomerServices{
 
         Order order = modelMapper.map(form.getOrderForm(),Order.class);
         order.setCustomers(customers);
+        order.setOrderDate(localDateTimeToDateConverter.convertToLocalDateTimeToDate(LocalDateTime.now()));
         orderRepository.save(order);
 
 //

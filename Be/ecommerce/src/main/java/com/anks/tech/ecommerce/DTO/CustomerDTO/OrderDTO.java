@@ -15,7 +15,7 @@ import java.util.List;
 public class OrderDTO {
     private int orderId;
     private Status status;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss a", timezone = "GMT+7")
     private Date orderDate;
     private double totalPrice;
     private String paymentMethod;

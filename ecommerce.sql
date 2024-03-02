@@ -50,7 +50,9 @@ CREATE TABLE `account`(
     address				TEXT,
     `password`			TEXT NOT NULL,
     `role`				ENUM('ADMIN', 'CUSTOMER'),
-    CreateDate			DATE DEFAULT(now()), -- '2023-02-18'
+    `active`			BOOLEAN,
+    `otp`				VARCHAR(50) UNIQUE KEY,
+    CreateDate			DATETIME DEFAULT(now()), -- '2023-02-18'
     UUIDKey				VARCHAR(50) UNIQUE KEY,
     FOREIGN KEY(avatar) REFERENCES `fileTable`(uuid) ON DELETE CASCADE
 );

@@ -37,15 +37,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return messageSource.getMessage(key, null, "An error occur", LocaleContextHolder.getLocale());
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleAll(Exception exception) {
-        String message = getMessage("Exception.message");
-        String detailMessage = exception.getLocalizedMessage();
-        int code = 1;
-        String moreInformation = "http://localhost:8080/api/v1/exceptions/" + code;
-        ErrorResponse errorResponse = new ErrorResponse(message, detailMessage, null, code, moreInformation);
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ErrorResponse> handleAll(Exception exception) {
+//        String message = getMessage("Exception.message");
+//        String detailMessage = exception.getLocalizedMessage();
+//        int code = 1;
+//        String moreInformation = "http://localhost:8080/api/v1/exceptions/" + code;
+//        ErrorResponse errorResponse = new ErrorResponse(message, detailMessage, null, code, moreInformation);
+//        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 
 
     @Override

@@ -3,6 +3,7 @@ package com.anks.tech.ecommerce.Controller;
 import com.anks.tech.ecommerce.DTO.AccountDTO.AccountDTO;
 import com.anks.tech.ecommerce.Entity.Account;
 import com.anks.tech.ecommerce.Form.AccountForm.AccountForm;
+import com.anks.tech.ecommerce.Form.AuthForm.SignupRequest;
 import com.anks.tech.ecommerce.Services.Account.IAccountService;
 import com.anks.tech.ecommerce.Validate.Account.AccountIdNotExists;
 import org.modelmapper.ModelMapper;
@@ -13,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +37,7 @@ public class AccountController {
     @Autowired
     private IAccountService accountServices;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -69,6 +71,20 @@ public class AccountController {
         });
 
         return ResponseEntity.ok().body(new PageImpl<>(accountDTOS, pageable, accountPage.getTotalElements()));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody  SignupRequest signupRequest){
+        return ResponseEntity.ok().body(accountServices.register(signupRequest));
+    }
+    @GetMapping("/verify-account")
+    public ResponseEntity<String> verifyAccount(@RequestParam String email,
+                                                @RequestParam String otp) {
+        return new ResponseEntity<>(accountServices.verifyAccount(email, otp), HttpStatus.OK);
+    }
+    @PutMapping("/regenerate-otp")
+    public ResponseEntity<String> regenerateOtp(@RequestParam String email) {
+        return new ResponseEntity<>(accountServices.regenerateOtp(email), HttpStatus.OK);
     }
 
     @PostMapping("/signup")
