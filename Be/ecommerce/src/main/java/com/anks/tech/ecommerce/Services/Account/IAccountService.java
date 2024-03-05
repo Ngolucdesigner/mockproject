@@ -1,6 +1,7 @@
 package com.anks.tech.ecommerce.Services.Account;
 
 import com.anks.tech.ecommerce.Entity.Account;
+import com.anks.tech.ecommerce.Form.AccountForm.AccountFilterForm;
 import com.anks.tech.ecommerce.Form.AccountForm.AccountForm;
 
 import com.anks.tech.ecommerce.Form.AuthForm.LoginRequest;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 public interface IAccountService {
 
-    Page<Account> getAllAccounts(Pageable pageable);
+    Page<Account> getAllAccounts(Pageable pageable, AccountFilterForm form);
     void createNewAccount (AccountForm form);
     Optional<Account> getAccountById(Integer id);
 

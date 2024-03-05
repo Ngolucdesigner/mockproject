@@ -58,9 +58,9 @@ CREATE TABLE `account`(
 );
 -- gfg123
 
-INSERT INTO `account` (id, email, username, lastname, firstname, phone, address, `password`, `role` ,UUIDKey)
-VALUES (1, 'nguyenxuandung707@gmail.com', 'dung8anx', 'Dũng', 'Nguyễn Xuân', '0358123444', 'Hà Nội', '$2a$10$F5rzmMmNJcgwqTXmcro1eOeATecEUDsPM8WjKtF8Qx46RFDjlmCSW', 'CUSTOMER', '112233'),
-	   (2, 'admin@gmail.com', 'admin', 'Admin', 'Nguyễn Xuân', '0358123555', 'Hà Nội', '$2a$10$F5rzmMmNJcgwqTXmcro1eOeATecEUDsPM8WjKtF8Qx46RFDjlmCSW', 'ADMIN', '221133');
+INSERT INTO `account` (id, email, username, lastname, firstname, phone, address, `password`, `role` ,UUIDKey, `active`)
+VALUES (1, 'nguyenxuandung707@gmail.com', 'dung8anx', 'Dũng', 'Nguyễn Xuân', '0358123444', 'Hà Nội', '$2a$10$F5rzmMmNJcgwqTXmcro1eOeATecEUDsPM8WjKtF8Qx46RFDjlmCSW', 'CUSTOMER', '112233', 1),
+	   (2, 'admin@gmail.com', 'admin', 'Admin', 'Nguyễn Xuân', '0358123555', 'Hà Nội', '$2a$10$F5rzmMmNJcgwqTXmcro1eOeATecEUDsPM8WjKtF8Qx46RFDjlmCSW', 'ADMIN', '221133' , 1);
 
 
 CREATE TABLE `products`(

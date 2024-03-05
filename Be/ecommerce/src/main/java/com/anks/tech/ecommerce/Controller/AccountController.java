@@ -2,6 +2,7 @@ package com.anks.tech.ecommerce.Controller;
 
 import com.anks.tech.ecommerce.DTO.AccountDTO.AccountDTO;
 import com.anks.tech.ecommerce.Entity.Account;
+import com.anks.tech.ecommerce.Form.AccountForm.AccountFilterForm;
 import com.anks.tech.ecommerce.Form.AccountForm.AccountForm;
 import com.anks.tech.ecommerce.Form.AuthForm.SignupRequest;
 import com.anks.tech.ecommerce.Services.Account.IAccountService;
@@ -48,8 +49,8 @@ public class AccountController {
     }
 
     @GetMapping("/accounts")
-    public ResponseEntity<Page<AccountDTO>> getAllAccounts(Pageable pageable) {
-        Page<Account> accountPage = accountServices.getAllAccounts(pageable);
+    public ResponseEntity<Page<AccountDTO>> getAllAccounts(Pageable pageable, AccountFilterForm form) {
+        Page<Account> accountPage = accountServices.getAllAccounts(pageable, form);
         List<Account> accounts = accountPage.getContent();
 
         List<AccountDTO> accountDTOS = accounts.stream().map(account -> modelMapper.map(account, AccountDTO.class)).collect(Collectors.toList());

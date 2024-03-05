@@ -3,11 +3,13 @@ package com.anks.tech.ecommerce.Services.Account;
 import com.anks.tech.ecommerce.Entity.Account;
 
 import com.anks.tech.ecommerce.Entity.FileProduct;
+import com.anks.tech.ecommerce.Form.AccountForm.AccountFilterForm;
 import com.anks.tech.ecommerce.Form.AccountForm.AccountForm;
 import com.anks.tech.ecommerce.Form.AuthForm.LoginRequest;
 import com.anks.tech.ecommerce.Form.AuthForm.SignupRequest;
 import com.anks.tech.ecommerce.Repository.IAccountRepository;
 import com.anks.tech.ecommerce.Repository.IFileProductRepository;
+import com.anks.tech.ecommerce.Specification.Account.AccountSpecification;
 import com.anks.tech.ecommerce.Utils.EmailUtil;
 import com.anks.tech.ecommerce.Utils.LocalDateTimeToDateConverter;
 import com.anks.tech.ecommerce.Utils.OtpUtil;
@@ -19,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,8 +54,9 @@ public class AccountService implements IAccountService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Page<Account> getAllAccounts(Pageable pageable) {
-        return accountRepository.findAll(pageable);
+    public Page<Account> getAllAccounts(Pageable pageable, AccountFilterForm form) {
+        Specification<Account> where = AccountSpecification.biuldWhere(form);
+        return accountRepository.findAll(where, pageable);
     }
 
     @Override
@@ -99,11 +103,11 @@ public class AccountService implements IAccountService {
         } catch (MessagingException e) {
 
 
-            System.err.println("Unable to send otp please try again");
+
             throw new RuntimeException("Unable to send otp please try again");
         }
         catch ( UnsupportedEncodingException e) {
-            System.err.println("Unable to send otp please try again");
+
             throw new RuntimeException("Unable to send otp please try again");
         }
 
@@ -118,8 +122,7 @@ public class AccountService implements IAccountService {
         user.setActive(false);
         user.setCreateDate(localDateTimeToDateConverter.
                 convertToLocalDateTimeToDate(LocalDateTime.now()));
-        System.err.println(localDateTimeToDateConverter.
-                convertToLocalDateTimeToDate(LocalDateTime.now()).toString());
+
         accountRepository.save(user);
         return "User registration successful";
     }
@@ -145,12 +148,11 @@ public class AccountService implements IAccountService {
         try {
             emailUtil.sendOtpEmail(user.getFullName(), email, otp);
         } catch (MessagingException e) {
-            System.err.println("Unable to send otp please try again");
-            throw new RuntimeException("Unable to send otp please try again");
 
+            throw new RuntimeException("Unable to send otp please try again");
         }
         catch (UnsupportedEncodingException e) {
-            System.err.println("Unable to send otp please try again");
+
            throw new RuntimeException("Unable to send otp please try again");
 
         }

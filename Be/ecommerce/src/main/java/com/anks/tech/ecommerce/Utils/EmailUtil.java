@@ -18,7 +18,7 @@ public class EmailUtil {
     @Async
     public void sendOtpEmail(String name, String email, String otp) throws MessagingException, UnsupportedEncodingException {
 
-        String fromAddress = "ankstech.designer@gmail.com";
+        String fromAddress = "anksngo@gmail.com";
         String senderName = "Anks Tech";
         String subject = "Please verify your registration";
         String content = "Dear ${name},<br>"
