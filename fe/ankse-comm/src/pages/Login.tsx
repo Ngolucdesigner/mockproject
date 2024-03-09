@@ -11,16 +11,23 @@ import { toast } from "react-toastify";
 import * as request from "../Utils/request";
 import { loginInfo } from "../model/login";
 import { setResponseToCookie } from "../Utils/customCookie";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/slices/isLogin";
 
-
+type loginInformation = loginInfo & {
+  fullName: string;
+};
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [loginInfo, setLoginInfo] = useState<loginInfo>();
+
   const [username, setUsername] = useState<string>();
 
   const [password, setPassword] = useState<string>();
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -39,22 +46,25 @@ const Login = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    setLoading(true);
     try {
       request
-        .post1<loginInfo>(
+        .post1<loginInformation>(
           "auth/sign-in",
           { headers: config },
           JSON.stringify({ username, password })
         )
         .then((res) => {
-        
-        setLoginInfo(res.data)
-        setResponseToCookie("user",res.data.token);    
-      
-        location.pathname.startsWith("/dashboard") && (res.data.roles[0]=== "ADMIN")  ?  navigate("/dashboard"): navigate("/home")
-      
-              
+          
+          setResponseToCookie("user", res.data.token);
+
+          dispatch(login.setLogin(res.data));
+          dispatch(login.isLogin(true));
+          location.pathname.startsWith("/dashboard") &&
+          res.data.roles[0] === "ADMIN"
+            ? navigate("/dashboard/dashboard")
+            : navigate("/home");
+            setLoading(false);
         })
         .catch(() => {
           setTimeout(() => {
@@ -62,16 +72,14 @@ const Login = () => {
               position: toast.POSITION.TOP_CENTER,
             });
           }, 500);
+          setLoading(false);
         });
     } catch (error) {
       return Promise.reject(error);
     }
-    
-
   };
 
-  const loading = false;
-
+  
   return (
     <Helmet title="Login">
       <section>
@@ -94,6 +102,7 @@ const Login = () => {
                       placeholder="enter your username"
                       value={username}
                       onChange={handleChangeUsername}
+                      required
                     />
                   </FormGroup>
 
@@ -103,6 +112,7 @@ const Login = () => {
                       placeholder="enter your password"
                       value={password}
                       onChange={handleChangePassword}
+                      required
                     />
                   </FormGroup>
 

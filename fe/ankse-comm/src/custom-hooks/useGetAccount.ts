@@ -16,14 +16,15 @@ const useGetAccount = () => {
   const notReload = () => {
     dispatch(reloadAccount.reloadAccount(false));
   };
-  const reload = useSelector((state: TReducers) => state.reload.load);
+  const reload = useSelector((state: TReducers) => state.reloadAccount.load);
 
   const page = useSelector((state: TReducers) => state.changePage.page);
 
+  // const auth = getDataFromCookie("user")
   const config = {
     withCredentials: true,
     "Content-Type": "application/json",
-    'Cookie': `anks=${getDataFromCookie("user")}`
+    Authorization: `Bearer ${getDataFromCookie("user")}`,
     // Authorization: "Bearer " + getDataFromCookie("user"),
     // 'Access-Control-Allow-Origin': false ,
   };

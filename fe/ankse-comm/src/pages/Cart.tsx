@@ -364,7 +364,7 @@ const Cart = () => {
                           productName={item.productName}
                           quantity={item.quantity}
                           file={item.file}
-                          detail={() => productDetail(item.id)}
+                          detail={() => productDetail(item.productCode)}
                           delete={() => handleDelete(item.id)}
                         />
                       );

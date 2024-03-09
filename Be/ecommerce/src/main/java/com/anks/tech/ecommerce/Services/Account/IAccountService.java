@@ -15,7 +15,7 @@ public interface IAccountService {
 
     Page<Account> getAllAccounts(Pageable pageable, AccountFilterForm form);
     void createNewAccount (AccountForm form);
-    Optional<Account> getAccountById(Integer id);
+   Account getAccountById(Integer id);
 
     void deleteAccountByid(int id);
 

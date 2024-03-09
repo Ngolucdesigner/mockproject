@@ -19,6 +19,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class ProductServices implements IProductServices {
@@ -108,7 +110,10 @@ public class ProductServices implements IProductServices {
             if(productRepository.existsById(form.getProductId())){
                 Product productUpdate = productRepository.findById(form.getProductId()).get();
                 productUpdate.setOrderDetails(null);
+                String code = productUpdate.getProductCode();
+
                 productUpdate = modelMapper.map(form,Product.class);
+                productUpdate.setProductCode(code);
                 productRepository.save(productUpdate);
             }
             if(categoryRepository.existsById(form.getCategory().getCategoryId())){

@@ -8,6 +8,8 @@ import Spinner from "react-bootstrap/Spinner";
 import { useDispatch } from "react-redux";
 import { quantity } from "../redux/slices/order";
 import { useNavigate } from "react-router-dom";
+import { getDataFromCookie } from "../Utils/customCookie";
+import { res } from "../model/response";
 
 type productDetail = {
   id: any;
@@ -52,7 +54,7 @@ const Order = () => {
   const config = {
     // withCredentials: true,
     "Content-Type": "application/json",
-    // Authorization: "Basic " + localStorage.getItem("cookie"),
+    Authorization: `Bearer ${getDataFromCookie("user")}`,
     // 'Access-Control-Allow-Origin': false ,
   };
 
@@ -60,7 +62,7 @@ const Order = () => {
     try {
       setLoading(true);
       await request
-        .get("customer/all-customer", { headers: config })
+        .get1<res>("customer/all-customer", { headers: config })
         .then((res) => {
           setGetOrder(res.content);
           setQuantityOrder(res.totalElements);

@@ -10,14 +10,18 @@ import { IoBagHandleOutline } from "react-icons/io5";
 import { IoMdMenu } from "react-icons/io";
 
 import { CiHeart } from "react-icons/ci";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { TReducers } from "../../redux/rootReducer";
+import { login } from "../../redux/slices/isLogin";
+
+import * as request from "../../Utils/request";
+
+import { toast } from "react-toastify";
+import { loginInfo } from "../../model/login";
 
 const logo = require("../../assets/images/eco-logo.png");
 const user = require("../../assets/images/user-icon.png");
-
-
 
 const nav__Links = [
   {
@@ -34,10 +38,19 @@ const nav__Links = [
   },
 ];
 
+
+
+
 const Header = () => {
+  const dispatch = useDispatch();
 
   // Kiểm tra trạng thái đăng nhập từ localStorage
-  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const isLoggedIn = useSelector<TReducers>((state) => state.login.isLogin);
+
+  const avatar :loginInfo | any = useSelector<TReducers>((state) => state.login.loginState);
+
+
+
 
   const totalQuantity = useSelector(
     (state: TReducers) => state.cart.totalQuantity
@@ -45,8 +58,7 @@ const Header = () => {
 
   const totalHeart = useSelector(
     (state: TReducers) => state.heart.totalQuantity
-  )
-
+  );
 
   const headerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -86,14 +98,33 @@ const Header = () => {
     navigate("/cart");
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('isLoggedIn');
-    navigate('/login');
+  const config = {
+    // withCredentials: true,
+    "Content-Type": "application/json",
+    // Authorization: "Bearer " + getDataFromCookie("user"),
+    // Authorization: "Basic " + localStorage.getItem("cookie"),
+    // 'Access-Control-Allow-Origin': false ,
   };
 
-  const currentUser = false;
-  const userImage = localStorage.getItem('userImage') || user; // 'user' là ảnh mặc định
+  const handleLogout = async () => {
+    try {
+      await request
+        .post1("auth/sign-out", { headers: config })
+        .then(() => {
+          
+          dispatch(login.clearInfo());
+          toast.success("You've been signed out!", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        });
+    } catch (err) {
+        console.log(err)
+    }
+
+    
+  };
+
+
   return (
     <header className="header" ref={headerRef}>
       <Container>
@@ -116,10 +147,9 @@ const Header = () => {
                   <li className="nav__item" key={index}>
                     <NavLink
                       to={item.path}
-                      className={
-                        navClass => navClass.isActive ? "nav__active link" : "link"
+                      className={(navClass) =>
+                        navClass.isActive ? "nav__active link" : "link"
                       }
-
                     >
                       {item.display}
                     </NavLink>
@@ -143,9 +173,8 @@ const Header = () => {
                 <span onClick={toggleProfileActions}>
                   <motion.img
                     whileTap={{ scale: 1.2 }}
-                    src={userImage}
+                    src={isLoggedIn ? avatar.avatar.url :user}
                     alt="User Avatar"
-
                   />
                 </span>
 
@@ -155,11 +184,19 @@ const Header = () => {
                   onClick={toggleProfileActions}
                 >
                   {isLoggedIn ? (
-                    <span onClick={handleLogout}>Logout</span>
+                    <div className="d-flex align-items-center justify-content-center flex-column gap-1">
+                        <span>Hi! {avatar.username}</span>
+                       <span onClick={handleLogout}>Logout</span>
+                       
+                    </div>
                   ) : (
                     <div className="d-flex align-items-center justify-content-center flex-column">
-                      <Link to={"/signup"} className="link">Sign up</Link>
-                      <Link to={"/login"} className="link">Login</Link>
+                      <Link to={"/signup"} className="link">
+                        Sign up
+                      </Link>
+                      <Link to={"/login"} className="link">
+                        Login
+                      </Link>
                     </div>
                   )}
                 </div>

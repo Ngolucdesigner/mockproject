@@ -19,4 +19,15 @@ public class UserInfoResponse {
     private String email;
     private String token;
     private List<String> roles;
+    private File avatar;
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    public  static  class File{
+        private String id;
+        private String fileName;
+        private String fileType;
+        private String url;
+//        private byte[] data;
+    }
 }

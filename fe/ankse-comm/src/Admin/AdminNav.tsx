@@ -3,36 +3,38 @@ import { Container, Row } from "reactstrap";
 
 import "../styles/Admin-Nav.scss";
 import { NavLink, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { TReducers } from "../redux/rootReducer";
 
 const user = require("../assets/images/user-icon.png");
 
 const admin__nav = [
   {
     display: "Dashboard",
-    path: "/dashboard/",
+    path: "/dashboard/dashboard/",
   },
   {
     display: "All-products",
-    path: "/dashboard/all-products",
+    path: "/dashboard/dashboard/all-products",
   },
   {
     display: "Add-products",
-    path: "/dashboard/add-product",
+    path: "/dashboard/dashboard/add-product",
   },
   {
     display: "Orders",
-    path: "/dashboard/order",
+    path: "/dashboard/dashboard/order",
   },
   {
     display: "Users",
-    path: "/dashboard/users",
+    path: "/dashboard/dashboard/users",
   },
 ];
 
 const AdminNav = () => {
 
   const location = useLocation();
-
+  const currentUser= useSelector<TReducers>((state)=> state.login.isLogin);
   return (
     <>
       <header className="admin__header">
@@ -63,7 +65,7 @@ const AdminNav = () => {
         </div>
       </header>
 
-      {location.pathname.startsWith("/dashboard") ? null : (
+      {currentUser ?  (
         <section className="admin__menu p-0">
           <Container>
             <Row>
@@ -86,7 +88,7 @@ const AdminNav = () => {
             </Row>
           </Container>
         </section>
-      )}
+      ): null}
     </>
   );
 };

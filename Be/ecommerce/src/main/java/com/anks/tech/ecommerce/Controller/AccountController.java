@@ -4,9 +4,11 @@ import com.anks.tech.ecommerce.DTO.AccountDTO.AccountDTO;
 import com.anks.tech.ecommerce.Entity.Account;
 import com.anks.tech.ecommerce.Form.AccountForm.AccountFilterForm;
 import com.anks.tech.ecommerce.Form.AccountForm.AccountForm;
+import com.anks.tech.ecommerce.Form.AuthForm.FileAccount;
 import com.anks.tech.ecommerce.Form.AuthForm.SignupRequest;
 import com.anks.tech.ecommerce.Services.Account.IAccountService;
-import com.anks.tech.ecommerce.Validate.Account.AccountIdNotExists;
+import com.anks.tech.ecommerce.Validate.Account.*;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,7 +40,8 @@ public class AccountController {
     @Autowired
     private IAccountService accountServices;
 
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -59,7 +62,7 @@ public class AccountController {
         accountDTOS.forEach(accountDTO -> {
             if(accountDTO.getFile()!=null) {
                 String fileDowloadUrl = ServletUriComponentsBuilder
-                        .fromCurrentContextPath().path("/api/v1/products/files/")
+                        .fromCurrentContextPath().path("/products/files/")
                         .path(accountDTO.getFile().getId()).toUriString();
 
                 AccountDTO.File avatar = new AccountDTO.File();
@@ -74,11 +77,38 @@ public class AccountController {
         return ResponseEntity.ok().body(new PageImpl<>(accountDTOS, pageable, accountPage.getTotalElements()));
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody  SignupRequest signupRequest){
+    @PostMapping(value = "/register")
+
+    public ResponseEntity<?> register(
+                                      @RequestParam("avatar") MultipartFile multipartFile,
+                                      @RequestParam  @AccountUserNameNotExist String username,
+                                      @RequestParam  @AccountEmailNotExists String email,
+                                      @RequestParam String password,
+                                      @RequestParam(required = false) String firstName,
+                                      @RequestParam(required = false) String lastName
+    )throws IOException {
+        SignupRequest signupRequest = new SignupRequest();
+
+        signupRequest.setUsername(username);
+        signupRequest.setEmail(email);
+        signupRequest.setPassword(password);
+        signupRequest.setLastName(lastName);
+        signupRequest.setFirstName(firstName);
+
+        FileAccount fileAccount = new FileAccount();
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        fileAccount.setFileName(fileName);
+        fileAccount.setFileType(multipartFile.getContentType());
+        fileAccount.setData(multipartFile.getBytes());
+        signupRequest.setFileAccount(fileAccount);
+
+
+
         return ResponseEntity.ok().body(accountServices.register(signupRequest));
+
     }
     @GetMapping("/verify-account")
+
     public ResponseEntity<String> verifyAccount(@RequestParam String email,
                                                 @RequestParam String otp) {
         return new ResponseEntity<>(accountServices.verifyAccount(email, otp), HttpStatus.OK);
@@ -88,11 +118,11 @@ public class AccountController {
         return new ResponseEntity<>(accountServices.regenerateOtp(email), HttpStatus.OK);
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/create-account")
     public ResponseEntity<?> createNewAccount(
             @RequestParam("avatar") MultipartFile multipartFile,
-            @RequestParam String username,
-            @RequestParam String email,
+            @RequestParam @AccountEmailNotExists String username,
+            @RequestParam @AccountEmailNotExists String email,
             @RequestParam String password,
             @RequestParam(required = false) String firstName,
             @RequestParam(required = false) String lastName,
@@ -101,9 +131,9 @@ public class AccountController {
             @RequestParam(required = false) String role
     ) throws IOException {
 
-        String encodedPassword = password;
 
-        AccountForm form = new AccountForm(username,email,firstName,lastName,address,phone,encodedPassword,role);
+
+        AccountForm form = new AccountForm(username,email,firstName,lastName,address,phone,passwordEncoder.encode(password),role);
 
         AccountForm.FileProduct fileAvatar= new AccountForm.FileProduct();
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -118,12 +148,16 @@ public class AccountController {
             return new ResponseEntity<>("Cannot create null user!", HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(form, HttpStatus.CREATED);
+        return  ResponseEntity.ok().body("Create successfully!");
     }
 
     @GetMapping("accounts/{id}")
-    public Optional<Account> getAccountById (@PathVariable @AccountIdNotExists Integer id) {
-        return accountServices.getAccountById(id);
+    public ResponseEntity<?> getAccountById (@PathVariable @AccountIdNotExists Integer id) {
+
+        Account account = accountServices.getAccountById(id);
+
+        AccountDTO accountDTO = modelMapper.map(account,AccountDTO.class);
+        return ResponseEntity.ok().body(accountDTO);
     }
 
     @DeleteMapping("accounts/delete/{id}")

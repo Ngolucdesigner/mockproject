@@ -3,15 +3,22 @@ import React, { useState } from "react";
 import Helmet from "../components/helmet/Helmet";
 import { Col, Container, Form, FormGroup, Input, Row } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
+import Spinner from "react-bootstrap/Spinner";
+import * as request from "../Utils/request";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState<string>();
+  const [email, setEmail] = useState<string>("");
 
-  const [password, setPassword] = useState<string>();
+  const [password, setPassword] = useState<string>("");
 
-  const [username, setUsername] = useState<string>();
+  const [username, setUsername] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+
+  const [loading, setLoading] = useState(false);
 
   const [img, setImg] = useState<any>();
 
@@ -27,110 +34,155 @@ const Signup = () => {
     setUsername(event.target.value);
   };
 
-  const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        // Sử dụng type assertion để khẳng định e.target không phải là null
-        const target = e.target as FileReader;
-        setImg(target.result);
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
+  const handleChangeFirstName = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFirstName(event.target.value);
   };
-  
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleChangeLastName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLastName(event.target.value);
+  };
+
+  const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // if (event.target.files && event.target.files[0]) {
+    //   const reader = new FileReader();
+    //   reader.onload = (e) => {
+    //     // Sử dụng type assertion để khẳng định e.target không phải là null
+    //     const target = e.target as FileReader;
+    //     setImg(target.result);
+    //   };
+    //   reader.readAsDataURL(event.target.files[0]);
+    // }
+    setImg(event.target.files?.[0]);
+  };
+
+  const config = {
+    // withCredentials: true,
+    "Content-Type": "application/auto",
+    // Authorization: "Bearer " + getDataFromCookie("user"),
+    // Authorization: "Basic " + localStorage.getItem("cookie"),
+    // 'Access-Control-Allow-Origin': false ,
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    setLoading(true);
     const formData = new FormData();
-    if (username) formData.append('username', username);
-    if (email) formData.append('email', email);
-    if (password) formData.append('password', password);
-    if (img && img[0]) formData.append('avatar', img[0]);
-
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("avatar", img as File);
 
     try {
-      const response = await fetch('http://localhost:8080/api/v1/signup', {
-        method: 'POST',
-        body: formData
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        const imageUrl = img && img[0] ? URL.createObjectURL(img[0]) : '';
-        const formDataObject = {
-          username: username,
-          email: email,
-          // Không lưu mật khẩu trong localStorage vì lý do bảo mật
-          avatar: img && img[0] ? URL.createObjectURL(img[0]) : ''
-        };
-  
-        localStorage.setItem('formData', JSON.stringify(formDataObject));
-        localStorage.setItem('isLoggedIn', 'true');
-        navigate("/home");
-      } else {
-        console.error('Đăng ký không thành công');
-      }
+      request
+        .post1("register", { headers: config }, formData)
+        .then(() => {
+          toast.success("create account successfully");
+          setLoading(false);
+          navigate("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
     } catch (error) {
-      console.error('Lỗi khi gửi yêu cầu đăng ký:', error);
+      console.error("Lỗi khi gửi yêu cầu đăng ký:");
+      setLoading(false);
     }
   };
 
   return (
-    <Helmet title="Login">
-      <section>
-        <Container>
-          <Row>
-            <Col lg="6" className="m-auto text-center">
-              <h3 className="fw-bold mb-4">Sign Up</h3>
-              <Form className="auth__form" onSubmit={handleSubmit}>
-                <FormGroup className="form__group">
-                  <Input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={handleChangeUser}
-                  />
-                </FormGroup>
+    <Helmet title="sign-up">
+      {loading ? (
+        <div className="w-100 h-100">
+          <h5 className=" d-flex align-items-center justify-content-center  gap-2">
+            <Spinner animation="border" variant="info" />
+            <span>Loading...</span>
+          </h5>
+        </div>
+      ) : (
+        <section>
+          <Container>
+            <Row>
+              <Col lg="6" className="m-auto text-center">
+                <h3 className="fw-bold mb-4">Sign Up</h3>
+                <Form className="auth__form" onSubmit={handleSubmit}>
+                  <FormGroup className="form__group">
+                    <Input
+                      
+                      type="text"
+                      placeholder="Username"
+                      value={username}
+                      onChange={handleChangeUser}
+                      required
+                    />
 
-                <FormGroup className="form__group">
-                  <Input
-                    type="email"
-                    placeholder="enter your email"
-                    value={email}
-                    onChange={handleChangeEmail}
-                  />
-                </FormGroup>
+                  </FormGroup>
+                  <div className="d-flex align-items-center justify-content-between gap-2">
+                    <FormGroup className="form__group w-50">
+                      <Input
+                        type="text"
+                        placeholder="First Name"
+                        value={firstName}
+                        onChange={handleChangeFirstName}
+                        required
+                      />
+                    </FormGroup>
 
-                <FormGroup className="form__group">
-                  <Input
-                    type="password"
-                    placeholder="enter your password"
-                    value={password}
-                    onChange={handleChangePass}
-                  />
-                </FormGroup>
+                    <FormGroup className="form__group w-50">
+                      <Input
+                        type="text"
+                        placeholder="Last Name"
+                        value={lastName}
+                        onChange={handleChangeLastName}
+                        required
+                      />
+                    </FormGroup>
+                  </div>
 
-                <FormGroup className="form__group">
-                  <Input type="file" onChange={handleChangeFile} />
-                </FormGroup>
+                  <FormGroup className="form__group">
+                    <Input
+                      type="email"
+                      placeholder="enter your email"
+                      value={email}
+                      onChange={handleChangeEmail}
+                      required
+                    />
+                  </FormGroup>
 
-                <button type="submit" className="buy__btn auth__btn">
-                  Create an account
-                </button>
-                <p>
-                  Already have an account?{" "}
-                  <Link to={"/login"} className="link">
-                    Login
-                  </Link>
-                </p>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+                  <FormGroup className="form__group">
+                    <Input
+                      type="password"
+                      placeholder="enter your password"
+                      value={password}
+                      onChange={handleChangePass}
+                      required
+                    />
+                  </FormGroup>
+
+                  <FormGroup className="form__group">
+                    <Input type="file" onChange={handleChangeFile} required />
+                  </FormGroup>
+
+                  <button type="submit" className="buy__btn auth__btn">
+                    Create an account
+                  </button>
+                  <p>
+                    Already have an account?{" "}
+                    <Link to={"/login"} className="link">
+                      Login
+                    </Link>
+                  </p>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      )}
     </Helmet>
   );
 };

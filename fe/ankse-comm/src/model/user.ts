@@ -4,6 +4,8 @@ export type userPops = {
     username:string,
     email: string,
     fullName: string,
+    firstName:string,
+    lastName:string,
     avatar?: any,
     phone: string,
     address: string,

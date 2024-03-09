@@ -17,6 +17,7 @@ import User from "../Admin/User";
 import Order from "../Admin/Order";
 import OrderDetail from "../Admin/OrderDetail";
 import NotFound from "../components/notfound/NotFound";
+import UserDetail from "../Admin/UserDetail";
 
 const Routers = () => {
   return (
@@ -35,13 +36,15 @@ const Routers = () => {
       <Route path="/dashboard/*" element={<ProtectedRoute />}>
         {/* <Route path="checkout" element={<Checkout />} /> */}
 
-        <Route path="dashboard/" element={<Dashboard />} />
+        <Route path="dashboard" element={<Dashboard />} />
         <Route path="dashboard/all-products" element={<AllProducts />} />
         <Route path="dashboard/edit-product/:id" element={<AddProducts />} />
         <Route path="dashboard/add-product" element={<AddProducts />} />
         <Route path="dashboard/users" element={<User/>} />
         <Route path="dashboard/order" element={<Order/>} />
         <Route path="dashboard/order/order-detail/:id" element={<OrderDetail/>} />
+        <Route path="dashboard/users/create" element = {<UserDetail/>}/>
+        <Route path="dashboard/users/edit/:id" element = {<UserDetail/>}/>
       </Route>
       
 

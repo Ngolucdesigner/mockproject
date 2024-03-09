@@ -1,6 +1,7 @@
 package com.anks.tech.ecommerce.Security.Services;
 
 import com.anks.tech.ecommerce.Entity.Account;
+import com.anks.tech.ecommerce.Entity.FileProduct;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,9 +31,11 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
     private Boolean isActive;
 
+    private FileProduct avatar;
+
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(int id, String username, String email, String password, Boolean isActive,
+    public UserDetailsImpl(int id, String username, String email, String password, Boolean isActive, FileProduct avatar,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
@@ -40,6 +43,7 @@ public class UserDetailsImpl implements UserDetails {
         this.password = password;
         this.authorities = authorities;
         this.isActive = isActive;
+        this.avatar = avatar;
     }
 
     public static UserDetailsImpl build(Account user) {
@@ -47,15 +51,28 @@ public class UserDetailsImpl implements UserDetails {
 
         authorities.add( new SimpleGrantedAuthority(user.getRole().name()));
 
+        if(user.getFileProduct()==null){
+            return new UserDetailsImpl(
+                    user.getAccountId(),
+                    user.getUsername(),
+                    user.getEmail(),
+                    user.getPassword(),
+                    user.getActive(),
+                    null,
+                    authorities);
+        }
+        else {
+            return new UserDetailsImpl(
+                    user.getAccountId(),
+                    user.getUsername(),
+                    user.getEmail(),
+                    user.getPassword(),
+                    user.getActive(),
+                    user.getFileProduct(),
+                    authorities);
+        }
 
 
-        return new UserDetailsImpl(
-                user.getAccountId(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getActive(),
-                authorities);
     }
 
     @Override

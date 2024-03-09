@@ -15,6 +15,7 @@ import MyPagination from "../components/UI/MyPagination";
 
 import { useNavigate } from "react-router-dom";
 import { changePage } from "../redux/slices/page";
+import { getDataFromCookie } from "../Utils/customCookie";
 const AllProducts = () => {
 
     const navigate = useNavigate();
@@ -30,7 +31,8 @@ const AllProducts = () => {
   const config = {
     // withCredentials: true,
     "Content-Type": "application/auto",
-    // Authorization: "Basic " + localStorage.getItem("cookie"),
+    Authorization: `Bearer ${getDataFromCookie("user")}`
+   
     // 'Access-Control-Allow-Origin': false ,
   };
 
@@ -59,7 +61,7 @@ const AllProducts = () => {
     }
   };
   const handleEdit = (id: any) => {
-    navigate(`/dashboard/edit-product/${id}`)
+    navigate(`/dashboard/dashboard/edit-product/${id}`)
   };
 
   const handlePageChange = (pageNumber: number) => {

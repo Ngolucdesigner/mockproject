@@ -5,6 +5,7 @@ import loadProduct from './slices/loadProduct'
 import order from './slices/order'
 import page from './slices/page'
 import loadAccount from './slices/loadAccount'
+import isLogin from './slices/isLogin'
 
 export const rootReducer = combineReducers({
    cart: cartSlice,
@@ -12,7 +13,8 @@ export const rootReducer = combineReducers({
    reload: loadProduct,
    quantity: order,
    changePage: page,
-   reloadAccount: loadAccount
+   reloadAccount: loadAccount,
+   login: isLogin
     // trong trường hợp có nhiều reducer thì bạn cho vào đây
   })
   export type TReducers = ReturnType<typeof rootReducer>

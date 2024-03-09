@@ -52,7 +52,6 @@ public class AccountService implements IAccountService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Override
     public Page<Account> getAllAccounts(Pageable pageable, AccountFilterForm form) {
         Specification<Account> where = AccountSpecification.biuldWhere(form);
@@ -63,30 +62,44 @@ public class AccountService implements IAccountService {
     public void createNewAccount(AccountForm form) {
         TypeMap typeMap = modelMapper.getTypeMap(AccountForm.class, Account.class);
 
+        String otp = otpUtil.generateOtp();
+
         if (typeMap == null) {
             modelMapper.addMappings(new PropertyMap<AccountForm, Account>() {
                 @Override
                 protected void configure() {
-                    skip(destination.getPassword()); //bỏ qua mapping password
+                    skip(destination.getAccountId()); //bỏ qua mapping password
                 }
             });
         }
-
         Account account = modelMapper.map(form, Account.class);
-
         // Mã hóa mật khẩu và set nó sau khi mapping
-        String encodedPassword = form.getPassword();
-        account.setPassword(encodedPassword);
+
+        account.setOtp(otp);
+        account.setActive(false);
+        account.setCreateDate(localDateTimeToDateConverter.
+                convertToLocalDateTimeToDate(LocalDateTime.now()));
         accountRepository.save(account);
 
         FileProduct fileAvatar = account.getFileProduct();
         fileProductRespository.save(fileAvatar);
+
+        try {
+            emailUtil.sendOtpEmail(account.getLastName() ,account.getEmail(), otp);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException("Unable to send otp please try again");
+        }
+        catch ( UnsupportedEncodingException e) {
+
+            throw new RuntimeException("Unable to send otp please try again");
+        }
     }
 
     @Override
-    public Optional<Account> getAccountById(Integer id) {
-        Optional<Account> account = accountRepository.findById(id);
-        return account;
+    public Account getAccountById(Integer id) {
+
+        return accountRepository.findById(id).get();
     }
 
     @Override
@@ -97,25 +110,21 @@ public class AccountService implements IAccountService {
     @Override
     public String register(SignupRequest registerDto)  {
         String otp = otpUtil.generateOtp();
-        try {
-            emailUtil.sendOtpEmail(registerDto.getLastName() ,registerDto.getEmail(), otp);
-
-        } catch (MessagingException e) {
 
 
+        TypeMap typeMap = modelMapper.getTypeMap(SignupRequest.class, Account.class);
 
-            throw new RuntimeException("Unable to send otp please try again");
+        if(typeMap == null){
+            modelMapper.addMappings(new PropertyMap<SignupRequest, Account>() {
+
+                @Override
+                protected void configure() {
+                    skip(destination.getAccountId());
+                }
+            });
         }
-        catch ( UnsupportedEncodingException e) {
+        Account user = modelMapper.map(registerDto, Account.class);
 
-            throw new RuntimeException("Unable to send otp please try again");
-        }
-
-        Account user = new Account();
-        user.setUsername(registerDto.getUsername());
-        user.setLastName(registerDto.getLastName());
-        user.setFirstName(registerDto.getFirstName());
-        user.setEmail(registerDto.getEmail());
         user.setPhone("0");
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         user.setOtp(otp);
@@ -123,7 +132,22 @@ public class AccountService implements IAccountService {
         user.setCreateDate(localDateTimeToDateConverter.
                 convertToLocalDateTimeToDate(LocalDateTime.now()));
 
+        FileProduct fileAccount = modelMapper.map(registerDto.getFileAccount(), FileProduct.class);
+        user.setFileProduct(fileAccount);
+        fileProductRespository.save(fileAccount);
         accountRepository.save(user);
+
+        try {
+            emailUtil.sendOtpEmail(registerDto.getLastName() ,registerDto.getEmail(), otp);
+
+        } catch (MessagingException e) {
+
+            throw new RuntimeException("Unable to send otp please try again");
+        }
+        catch ( UnsupportedEncodingException e) {
+
+            throw new RuntimeException("Unable to send otp please try again");
+        }
         return "User registration successful";
     }
 
@@ -132,7 +156,7 @@ public class AccountService implements IAccountService {
         Account user = accountRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found with this email: " + email));
         if (user.getOtp().equals(otp) && Duration.between(localDateTimeToDateConverter.convertToDateToLocalDateTime(user.getCreateDate()),
-                LocalDateTime.now()).getSeconds() < (1 * 60)) {
+                LocalDateTime.now()).getSeconds() < (2 * 60)) {
             user.setActive(true);
             accountRepository.save(user);
             return "OTP verified you can login";

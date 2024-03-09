@@ -53,6 +53,7 @@ const cartSlice = createSlice({
           quantity: 1,
           totalPrice: newItem.price,
           totalSale: newItem.priceSales,
+          productCode:newItem.productCode
         });
       } else {
         existingItem.quantity++;

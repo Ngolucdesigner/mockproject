@@ -204,7 +204,8 @@ const AddProducts = () => {
   const config = {
     // withCredentials: true,
     "Content-Type": "application/auto",
-    Authorization: "Bearer " + getDataFromCookie("user"),
+    Authorization: `Bearer ${getDataFromCookie("user")}`,
+    // 'Cookie': "anks="+getDataFromCookie("user").toString()
     // Authorization: "Basic " + localStorage.getItem("cookie"),
     // 'Access-Control-Allow-Origin': false ,
   };
@@ -243,7 +244,6 @@ const AddProducts = () => {
     formData.append("information", JSON.stringify(dataInfo));
 
 
-
     setLoading(true);
 
     if (id) {
@@ -280,7 +280,7 @@ const AddProducts = () => {
             { headers: config },
             formData
           )
-          .then((response) => {
+          .then(() => {
             // Handle the successful response here
 
             toast.success("Product successfully added");
@@ -363,7 +363,7 @@ const AddProducts = () => {
             ) : (
               <>
                 <h4 className="mb-5">
-                  {location.pathname.startsWith("/dashboard/edit-product")
+                  {location.pathname.startsWith("/dashboard/dashboard/edit-product")
                     ? "Edit products"
                     : "Add products"}
                 </h4>
@@ -440,7 +440,7 @@ const AddProducts = () => {
                           type="select"
                           value={category}
                           onChange={handleChangeCategory}
-                          required
+                      
                         >
                           {options.map((item, index) => (
                             <option key={index} value={item.value}>

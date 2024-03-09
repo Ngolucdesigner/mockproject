@@ -5,6 +5,7 @@ import loadProduct from "./slices/loadProduct";
 import order from "./slices/order";
 import page from "./slices/page";
 import loadAccount from "./slices/loadAccount";
+import isLogin from "./slices/isLogin";
 
 
 const store = configureStore({
@@ -14,7 +15,8 @@ const store = configureStore({
         reload: loadProduct,
         quantity: order,
         changePage:page,
-        reloadAccount: loadAccount 
+        reloadAccount: loadAccount ,
+        login: isLogin
     }
 })
 

@@ -2,6 +2,7 @@ package com.anks.tech.ecommerce.Controller.Auth;
 
 import com.anks.tech.ecommerce.Entity.Account;
 import com.anks.tech.ecommerce.Entity.Enum.Role;
+import com.anks.tech.ecommerce.Form.AuthForm.FileAccount;
 import com.anks.tech.ecommerce.Form.AuthForm.LoginRequest;
 import com.anks.tech.ecommerce.Form.AuthForm.SignupRequest;
 import com.anks.tech.ecommerce.Form.AuthForm.UserInfoResponse;
@@ -12,6 +13,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -23,6 +26,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,16 +38,19 @@ import java.util.stream.Collectors;
 public class AuthController {
 
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    IAccountRepository accountRepository;
+    private IAccountRepository accountRepository;
 
     @Autowired
-    PasswordEncoder encoder;
+    private PasswordEncoder encoder;
 
     @Autowired
-    JwtUtils jwtUtils;
+    private JwtUtils jwtUtils;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @PostMapping("/sign-in")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -62,17 +69,29 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
+        UserInfoResponse.File avatar = new UserInfoResponse.File();
+
+        if(userDetails.getAvatar()!=null) {
+             avatar = modelMapper.map(userDetails.getAvatar(), UserInfoResponse.File.class);
+
+            String avatarUrl = ServletUriComponentsBuilder
+                    .fromCurrentContextPath().path("/products/files/")
+                    .path(userDetails.getAvatar().getId()).toUriString();
+            avatar.setUrl(avatarUrl);
+        }
 
 
+
+        UserInfoResponse userInfoResponse =new UserInfoResponse(userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                jwtCookie.getValue(),
+                roles, avatar
+
+        );
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
 
-                .body(new UserInfoResponse(userDetails.getId(),
-                        userDetails.getUsername(),
-                        userDetails.getEmail(),
-                        jwtCookie.getValue(),
-                        roles
-                        )
-                );
+                .body(userInfoResponse);
     }
 
 

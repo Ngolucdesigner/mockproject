@@ -23,3 +23,4 @@ export const getDataFromCookie = (key: string): any => {
     // Trả về null nếu không tìm thấy cookie có key tương ứng
     return null;
   };
+

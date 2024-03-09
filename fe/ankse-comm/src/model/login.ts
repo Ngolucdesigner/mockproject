@@ -4,5 +4,11 @@ export type loginInfo ={
     email: string,
     token: string;
     roles: Array<string>;
+    avatar:{
+        id: any,
+        fileName: string,
+        fileType: string,
+        url: string
+    }
     // headers?:any
 }

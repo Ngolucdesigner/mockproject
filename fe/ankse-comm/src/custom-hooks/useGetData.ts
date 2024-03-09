@@ -6,7 +6,7 @@ import { ProductProps } from "../model/productProps";
 import { useDispatch, useSelector } from "react-redux";
 import { TReducers } from "../redux/rootReducer";
 import { reloadProduct } from "../redux/slices/loadProduct";
-import { getDataFromCookie } from "../Utils/customCookie";
+
 import { res } from "../model/response";
 
 
@@ -31,12 +31,20 @@ const useGetData = () => {
   const dispatch = useDispatch();
 
   const page = useSelector((state:TReducers)=>state.changePage.page)
+  
+  // const cookies = {
+  //   anks: getDataFromCookie("user"),
+    
+  // };
+  
 
 
   const config = {
+   
     withCredentials: true,
     "Content-Type": "application/json",
-    Authorization: "Bearer " + getDataFromCookie("user")
+    
+    // Cookie: Object.entries(cookies).map(([key, value]) => `${key}=${value}`).join('; ')
     // 'Access-Control-Allow-Origin': false ,
   };
 
