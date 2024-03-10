@@ -1,33 +1,46 @@
-2024-03-09 13:51:04 [background-preinit] INFO  o.h.v.i.u.Version                                  - HV000001: Hibernate Validator 8.0.1.Final 
-2024-03-09 13:51:04 [main] INFO  c.a.t.e.EcommerceApplication                       - Starting EcommerceApplication using Java 20.0.1 with PID 7868 (D:\18_05_2022\java\MOCK\mockproject\Be\ecommerce\target\classes started by admin in D:\18_05_2022\java\MOCK\mockproject\Be\ecommerce) 
-2024-03-09 13:51:04 [main] INFO  c.a.t.e.EcommerceApplication                       - No active profile set, falling back to 1 default profile: "default" 
-2024-03-09 13:51:05 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
-2024-03-09 13:51:05 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 83 ms. Found 10 JPA repository interfaces. 
-2024-03-09 13:51:05 [main] INFO  o.s.b.w.e.t.TomcatWebServer                        - Tomcat initialized with port 8080 (http) 
-2024-03-09 13:51:05 [main] INFO  o.a.c.h.Http11NioProtocol                          - Initializing ProtocolHandler ["http-nio-8080"] 
-2024-03-09 13:51:05 [main] INFO  o.a.c.c.StandardService                            - Starting service [Tomcat] 
-2024-03-09 13:51:05 [main] INFO  o.a.c.c.StandardEngine                             - Starting Servlet engine: [Apache Tomcat/10.1.17] 
-2024-03-09 13:51:05 [main] INFO  o.a.c.c.C.[.[.[/]                                  - Initializing Spring embedded WebApplicationContext 
-2024-03-09 13:51:05 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 1287 ms 
-2024-03-09 13:51:05 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Starting... 
-2024-03-09 13:51:06 [main] INFO  c.z.h.p.HikariPool                                 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@191f4d65 
-2024-03-09 13:51:06 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Start completed. 
-2024-03-09 13:51:06 [main] INFO  o.h.j.i.u.LogHelper                                - HHH000204: Processing PersistenceUnitInfo [name: default] 
-2024-03-09 13:51:06 [main] INFO  o.h.Version                                        - HHH000412: Hibernate ORM core version 6.4.1.Final 
-2024-03-09 13:51:06 [main] INFO  o.h.c.i.RegionFactoryInitiator                     - HHH000026: Second-level cache disabled 
-2024-03-09 13:51:06 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer 
-2024-03-09 13:51:07 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration) 
-2024-03-09 13:51:07 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'default' 
-2024-03-09 13:51:07 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactory                   - Hibernate is in classpath; If applicable, HQL parser will be used. 
-2024-03-09 13:51:08 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
-2024-03-09 13:51:08 [main] INFO  o.s.s.w.DefaultSecurityFilterChain                 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@682bff78, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7528ece2, org.springframework.security.web.context.SecurityContextHolderFilter@75c8ba94, org.springframework.security.web.header.HeaderWriterFilter@27f7db5a, org.springframework.web.filter.CorsFilter@4e22fdc0, org.springframework.security.web.authentication.logout.LogoutFilter@12e4822b, com.anks.tech.ecommerce.Security.JWT.AuthTokenFilter@5ce7ab6f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@510c6b9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4c666872, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@74de1e9d, org.springframework.security.web.session.SessionManagementFilter@598b15ba, org.springframework.security.web.access.ExceptionTranslationFilter@78181f7f, org.springframework.security.web.access.intercept.AuthorizationFilter@6adee80f] 
-2024-03-09 13:51:09 [main] INFO  o.a.c.h.Http11NioProtocol                          - Starting ProtocolHandler ["http-nio-8080"] 
-2024-03-09 13:51:09 [main] INFO  o.s.b.w.e.t.TomcatWebServer                        - Tomcat started on port 8080 (http) with context path '' 
-2024-03-09 13:51:09 [main] INFO  c.a.t.e.EcommerceApplication                       - Started EcommerceApplication in 4.738 seconds (process running for 5.528) 
-2024-03-09 13:51:15 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/]                                  - Initializing Spring DispatcherServlet 'dispatcherServlet' 
-2024-03-09 13:51:15 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet                          - Initializing Servlet 'dispatcherServlet' 
-2024-03-09 13:51:15 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet                          - Completed initialization in 1 ms 
-2024-03-09 13:51:15 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
+2024-03-10 15:40:20 [background-preinit] INFO  o.h.v.i.u.Version                                  - HV000001: Hibernate Validator 8.0.1.Final 
+2024-03-10 15:40:20 [main] INFO  c.a.t.e.EcommerceApplication                       - Starting EcommerceApplication using Java 20.0.1 with PID 1452 (D:\18_05_2022\java\MOCK\mockproject\Be\ecommerce\target\classes started by admin in D:\18_05_2022\java\MOCK\mockproject\Be\ecommerce) 
+2024-03-10 15:40:20 [main] INFO  c.a.t.e.EcommerceApplication                       - No active profile set, falling back to 1 default profile: "default" 
+2024-03-10 15:40:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2024-03-10 15:40:21 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 88 ms. Found 10 JPA repository interfaces. 
+2024-03-10 15:40:21 [main] INFO  o.s.b.w.e.t.TomcatWebServer                        - Tomcat initialized with port 8080 (http) 
+2024-03-10 15:40:21 [main] INFO  o.a.c.h.Http11NioProtocol                          - Initializing ProtocolHandler ["http-nio-8080"] 
+2024-03-10 15:40:21 [main] INFO  o.a.c.c.StandardService                            - Starting service [Tomcat] 
+2024-03-10 15:40:21 [main] INFO  o.a.c.c.StandardEngine                             - Starting Servlet engine: [Apache Tomcat/10.1.17] 
+2024-03-10 15:40:21 [main] INFO  o.a.c.c.C.[.[.[/]                                  - Initializing Spring embedded WebApplicationContext 
+2024-03-10 15:40:21 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 1294 ms 
+2024-03-10 15:40:21 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Starting... 
+2024-03-10 15:40:22 [main] INFO  c.z.h.p.HikariPool                                 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@29147c12 
+2024-03-10 15:40:22 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Start completed. 
+2024-03-10 15:40:22 [main] INFO  o.h.j.i.u.LogHelper                                - HHH000204: Processing PersistenceUnitInfo [name: default] 
+2024-03-10 15:40:22 [main] INFO  o.h.Version                                        - HHH000412: Hibernate ORM core version 6.4.1.Final 
+2024-03-10 15:40:22 [main] INFO  o.h.c.i.RegionFactoryInitiator                     - HHH000026: Second-level cache disabled 
+2024-03-10 15:40:22 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer 
+2024-03-10 15:40:23 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration) 
+2024-03-10 15:40:23 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2024-03-10 15:40:23 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactory                   - Hibernate is in classpath; If applicable, HQL parser will be used. 
+2024-03-10 15:40:24 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2024-03-10 15:40:24 [main] INFO  o.s.s.w.DefaultSecurityFilterChain                 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4bb747c1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@18b12df9, org.springframework.security.web.context.SecurityContextHolderFilter@51413d02, org.springframework.security.web.header.HeaderWriterFilter@648e25f2, org.springframework.web.filter.CorsFilter@3ef8de39, org.springframework.security.web.authentication.logout.LogoutFilter@6990f6af, com.anks.tech.ecommerce.Security.JWT.AuthTokenFilter@752573df, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ad113d6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@23fed844, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@370e5bb9, org.springframework.security.web.session.SessionManagementFilter@7dcd8e74, org.springframework.security.web.access.ExceptionTranslationFilter@635900ef, org.springframework.security.web.access.intercept.AuthorizationFilter@64e6f678] 
+2024-03-10 15:40:24 [main] INFO  o.a.c.h.Http11NioProtocol                          - Starting ProtocolHandler ["http-nio-8080"] 
+2024-03-10 15:40:24 [main] INFO  o.s.b.w.e.t.TomcatWebServer                        - Tomcat started on port 8080 (http) with context path '' 
+2024-03-10 15:40:24 [main] INFO  c.a.t.e.EcommerceApplication                       - Started EcommerceApplication in 4.774 seconds (process running for 5.56) 
+2024-03-10 15:40:31 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/]                                  - Initializing Spring DispatcherServlet 'dispatcherServlet' 
+2024-03-10 15:40:31 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet                          - Initializing Servlet 'dispatcherServlet' 
+2024-03-10 15:40:31 [http-nio-8080-exec-1] INFO  o.s.w.s.DispatcherServlet                          - Completed initialization in 1 ms 
+2024-03-10 15:40:31 [http-nio-8080-exec-1] ERROR c.a.t.e.S.J.JwtUtils                               - JWT token is expired: JWT expired at 2024-03-09T08:12:27Z. Current time: 2024-03-10T08:40:31Z, a difference of 88084396 milliseconds.  Allowed clock skew: 0 milliseconds. 
+2024-03-10 15:40:31 [http-nio-8080-exec-1] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-03-10 15:40:33 [http-nio-8080-exec-6] ERROR c.a.t.e.S.J.JwtUtils                               - JWT token is expired: JWT expired at 2024-03-09T08:12:27Z. Current time: 2024-03-10T08:40:33Z, a difference of 88086568 milliseconds.  Allowed clock skew: 0 milliseconds. 
+2024-03-10 15:40:33 [http-nio-8080-exec-6] ERROR c.a.t.e.S.J.AuthEntryPointJwt                      - Unauthorized error: Full authentication is required to access this resource 
+2024-03-10 15:40:38 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
+    select
+        a1_0.id 
+    from
+        ecommerce.`account` a1_0 
+    where
+        a1_0.username=? 
+    limit
+        ? 
+2024-03-10 15:40:38 [http-nio-8080-exec-8] DEBUG o.h.SQL                                            - 
     select
         a1_0.id,
         a1_0.UUIDKey,
@@ -48,41 +61,7 @@
         ecommerce.`account` a1_0 
     where
         a1_0.username=? 
-2024-03-09 13:51:15 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
-    select
-        count(*) 
-    from
-        ecommerce.`account` a1_0 
-    where
-        a1_0.id=? 
-2024-03-09 13:51:15 [http-nio-8080-exec-1] DEBUG o.h.SQL                                            - 
-    select
-        a1_0.id,
-        a1_0.UUIDKey,
-        a1_0.`active`,
-        a1_0.address,
-        a1_0.CreateDate,
-        a1_0.email,
-        fp1_0.uuid,
-        fp1_0.imgdata,
-        fp1_0.imgname,
-        fp1_0.typeImg,
-        a1_0.firstname,
-        concat(a1_0.firstname, ' ', a1_0.lastname),
-        a1_0.lastname,
-        a1_0.`otp`,
-        a1_0.`password`,
-        a1_0.phone,
-        a1_0.`role`,
-        a1_0.username 
-    from
-        ecommerce.`account` a1_0 
-    left join
-        ecommerce.`fileTable` fp1_0 
-            on fp1_0.uuid=a1_0.avatar 
-    where
-        a1_0.id=? 
-2024-03-09 13:51:33 [http-nio-8080-exec-10] DEBUG o.h.SQL                                            - 
+2024-03-10 15:40:51 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
     select
         a1_0.id,
         a1_0.UUIDKey,
@@ -103,41 +82,7 @@
         ecommerce.`account` a1_0 
     where
         a1_0.username=? 
-2024-03-09 13:51:33 [http-nio-8080-exec-10] DEBUG o.h.SQL                                            - 
-    select
-        count(*) 
-    from
-        ecommerce.`account` a1_0 
-    where
-        a1_0.id=? 
-2024-03-09 13:51:33 [http-nio-8080-exec-10] DEBUG o.h.SQL                                            - 
-    select
-        a1_0.id,
-        a1_0.UUIDKey,
-        a1_0.`active`,
-        a1_0.address,
-        a1_0.CreateDate,
-        a1_0.email,
-        fp1_0.uuid,
-        fp1_0.imgdata,
-        fp1_0.imgname,
-        fp1_0.typeImg,
-        a1_0.firstname,
-        concat(a1_0.firstname, ' ', a1_0.lastname),
-        a1_0.lastname,
-        a1_0.`otp`,
-        a1_0.`password`,
-        a1_0.phone,
-        a1_0.`role`,
-        a1_0.username 
-    from
-        ecommerce.`account` a1_0 
-    left join
-        ecommerce.`fileTable` fp1_0 
-            on fp1_0.uuid=a1_0.avatar 
-    where
-        a1_0.id=? 
-2024-03-09 13:51:33 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+2024-03-10 15:40:51 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
     select
         a1_0.id,
         a1_0.UUIDKey,
@@ -156,39 +101,25 @@
         a1_0.username 
     from
         ecommerce.`account` a1_0 
-    where
-        a1_0.username=? 
-2024-03-09 13:51:33 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
+    limit
+        ?, ? 
+2024-03-10 15:40:51 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
     select
-        count(*) 
-    from
-        ecommerce.`account` a1_0 
-    where
-        a1_0.id=? 
-2024-03-09 13:51:33 [http-nio-8080-exec-6] DEBUG o.h.SQL                                            - 
-    select
-        a1_0.id,
-        a1_0.UUIDKey,
-        a1_0.`active`,
-        a1_0.address,
-        a1_0.CreateDate,
-        a1_0.email,
         fp1_0.uuid,
         fp1_0.imgdata,
         fp1_0.imgname,
-        fp1_0.typeImg,
-        a1_0.firstname,
-        concat(a1_0.firstname, ' ', a1_0.lastname),
-        a1_0.lastname,
-        a1_0.`otp`,
-        a1_0.`password`,
-        a1_0.phone,
-        a1_0.`role`,
-        a1_0.username 
+        fp1_0.typeImg 
     from
-        ecommerce.`account` a1_0 
-    left join
         ecommerce.`fileTable` fp1_0 
-            on fp1_0.uuid=a1_0.avatar 
     where
-        a1_0.id=? 
+        fp1_0.uuid=? 
+2024-03-10 15:40:51 [http-nio-8080-exec-5] DEBUG o.h.SQL                                            - 
+    select
+        fp1_0.uuid,
+        fp1_0.imgdata,
+        fp1_0.imgname,
+        fp1_0.typeImg 
+    from
+        ecommerce.`fileTable` fp1_0 
+    where
+        fp1_0.uuid=? 

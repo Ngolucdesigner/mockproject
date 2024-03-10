@@ -17,6 +17,7 @@ public interface IAccountService {
     void createNewAccount (AccountForm form);
    Account getAccountById(Integer id);
 
+   void updateAccount(AccountForm form);
     void deleteAccountByid(int id);
 
     String register(SignupRequest registerDto);

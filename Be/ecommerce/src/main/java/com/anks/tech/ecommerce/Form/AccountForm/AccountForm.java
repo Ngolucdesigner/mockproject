@@ -14,6 +14,7 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 public class AccountForm {
 
+    private int accountId;
     @Length(max = 50, message = "max length 50")
     @NotBlank(message = "username not null")
     @AccountUserNameNotExist

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import {
+  Badge,
   Button,
   Col,
   Container,
@@ -43,8 +44,6 @@ const UserDetail = () => {
   const [user, setUser] = useState<userPops>();
 
   const [loading, setLoading] = useState<boolean>(false);
-
-  const [reloadDetail, setReloadDetail] = useState(false);
 
   const handleChangeUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -105,6 +104,25 @@ const UserDetail = () => {
     formData.append("avatar", avatar as File);
     setLoading(true);
     if (id) {
+      try {
+        request
+          .put1<ResponseType>(
+            `accounts/update-account/${id}`,
+            { headers: config },
+            formData
+          )
+          .then(() => {
+            toast.success("Account update successfully");
+            setLoading(false);
+          })
+          .catch((err) => {
+            setLoading(false);
+            toast.error("Account update fail");
+            console.error(err);
+          });
+      } catch (err) {
+        console.error(err);
+      }
     } else {
       try {
         request
@@ -126,6 +144,7 @@ const UserDetail = () => {
       await request
         .get1<userPops>(`accounts/${id}`, { headers: config })
         .then((res) => {
+          
           setUser(res);
         });
     } catch (error) {}
@@ -149,6 +168,24 @@ const UserDetail = () => {
     }
   }, [user]);
 
+  const handleReloadActive = (email?: string) => {
+    const data = new FormData();
+    if (email) data.append("email", email);
+
+    if (!user?.active) {
+      try {
+        request
+          .put1<ResponseType>("regenerate-otp", { headers: config }, data)
+          .then(() => {
+            toast.success("Regenerate OTP OK");
+          })
+          .catch(() => {
+            toast.error("Error");
+          });
+      } catch (error) {}
+    }
+  };
+
   return (
     <section>
       <Container>
@@ -165,16 +202,25 @@ const UserDetail = () => {
                 {location.pathname.startsWith(
                   "/dashboard/dashboard/users/edit"
                 ) ? (
-                  <Button>
-                    <i className="ri-refresh-line"></i>
-                  </Button>
+                  <div className="">
+                    <Button
+                      color={user?.active ? "success" : "danger"}
+                      onClick={() => handleReloadActive(user?.email)}
+                    >
+                      {user?.active ? (
+                        <i className="ri-check-line"></i>
+                      ) : (
+                        <i className="ri-refresh-line"></i>
+                      )}
+                    </Button>
+                  </div>
                 ) : null}
               </div>
               <Form onSubmit={handleSubmit}>
                 <Row>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="exampleEmail">Username</Label>
+                      <Label for="exampleUserName">Username</Label>
                       <Input
                         name="username"
                         placeholder="Enter your username!"
@@ -187,7 +233,7 @@ const UserDetail = () => {
                   </Col>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="examplePassword">Email</Label>
+                      <Label for="exampleEmail">Email</Label>
                       <Input
                         name="email"
                         placeholder="Enter your email!"
@@ -203,7 +249,7 @@ const UserDetail = () => {
                 <Row>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="exampleEmail">First name</Label>
+                      <Label for="exampleFirtName">First name</Label>
                       <Input
                         name="firstName"
                         placeholder="Enter your first name!"
@@ -216,7 +262,7 @@ const UserDetail = () => {
                   </Col>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="examplePassword">Last name</Label>
+                      <Label for="exampleLastName">Last name</Label>
                       <Input
                         name="lastName"
                         placeholder="Enter your last name!"
@@ -232,7 +278,7 @@ const UserDetail = () => {
                 <Row>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="exampleEmail">Address</Label>
+                      <Label for="exampleAddress">Address</Label>
                       <Input
                         name="address"
                         placeholder="Enter your address!"
@@ -245,7 +291,7 @@ const UserDetail = () => {
                   </Col>
                   <Col md={6}>
                     <FormGroup>
-                      <Label for="examplePassword">Phone number</Label>
+                      <Label for="examplePhone">Phone number</Label>
                       <Input
                         name="phoneNumber"
                         placeholder="Enter your phone number!"
@@ -261,7 +307,7 @@ const UserDetail = () => {
                 <Row>
                   <Col>
                     <FormGroup>
-                      <Label for="exampleCity">Roles</Label>
+                      <Label for="exampleRoles">Roles</Label>
                       <Input
                         name="select"
                         type="select"
@@ -276,7 +322,7 @@ const UserDetail = () => {
                   </Col>
                   <Col>
                     <FormGroup>
-                      <Label for="exampleState">Avatar</Label>
+                      <Label for="exampleAvatar">Avatar</Label>
                       <Input type="file" onChange={handleChangeAvatar} />
                     </FormGroup>
                   </Col>

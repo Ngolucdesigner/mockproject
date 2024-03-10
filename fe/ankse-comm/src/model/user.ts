@@ -11,6 +11,7 @@ export type userPops = {
     address: string,
     role?: string,
     createDate?: number,
+    active?: boolean,
     file?:{
       fileId:string,
       url:string

@@ -151,6 +151,31 @@ public class AccountController {
         return  ResponseEntity.ok().body("Create successfully!");
     }
 
+    @PutMapping("accounts/update-account/{id}")
+    ResponseEntity<?> updateAccount( @PathVariable @AccountIdNotExists int id,
+                                    @RequestParam("avatar") MultipartFile multipartFile,
+                                    @RequestParam @AccountEmailNotExists String username,
+                                    @RequestParam @AccountEmailNotExists String email,
+                                    @RequestParam String password,
+                                    @RequestParam(required = false) String firstName,
+                                    @RequestParam(required = false) String lastName,
+                                    @RequestParam(required = false) String address,
+                                    @RequestParam(required = false) String phone,
+                                    @RequestParam(required = false) String role
+    ) throws Exception{
+
+        AccountForm accountForm = new AccountForm(username,email,firstName,lastName,address,phone,password,role);
+        accountForm.setAccountId(id);
+        AccountForm.FileProduct avatarUpdate = new AccountForm.FileProduct();
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        avatarUpdate.setFileName(fileName);
+        avatarUpdate.setFileType(multipartFile.getContentType());
+        avatarUpdate.setData(multipartFile.getBytes());
+        accountForm.setFileProduct(avatarUpdate);
+        accountServices.updateAccount(accountForm);
+        return ResponseEntity.ok().body("update successfully!");
+    }
+
     @GetMapping("accounts/{id}")
     public ResponseEntity<?> getAccountById (@PathVariable @AccountIdNotExists Integer id) {
 

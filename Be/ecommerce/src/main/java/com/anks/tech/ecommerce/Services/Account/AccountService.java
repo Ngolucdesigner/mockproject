@@ -96,10 +96,44 @@ public class AccountService implements IAccountService {
         }
     }
 
+
     @Override
     public Account getAccountById(Integer id) {
 
         return accountRepository.findById(id).get();
+    }
+
+    @Override
+    public void updateAccount(AccountForm form) {
+        Account accountUpdate = accountRepository.findById(form.getAccountId()).get();
+
+        TypeMap typeMap = modelMapper.getTypeMap(AccountForm.class, Account.class);
+
+        if (typeMap == null) {
+            modelMapper.addMappings(new PropertyMap<AccountForm, Account>() {
+                @Override
+                protected void configure() {
+                    skip(destination.getAccountId()); //bỏ qua mapping password
+                    skip(destination.getCreateDate());
+                    skip(destination.getOtp());
+                    skip(destination.getActive());
+                    if(form.getFileProduct()==null){
+                        skip(destination.getFileProduct());
+                    }
+                    if(form.getPassword()==null){
+                        skip(destination.getPassword());
+                    }
+                }
+            });
+        }
+        accountUpdate = modelMapper.map(form, Account.class);
+        if(form.getFileProduct()!=null){
+            FileProduct avatarUpdate = accountUpdate.getFileProduct();
+            fileProductRespository.save(avatarUpdate);
+        }
+
+        accountRepository.save(accountUpdate);
+
     }
 
     @Override

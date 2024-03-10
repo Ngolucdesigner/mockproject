@@ -29,7 +29,7 @@ public class AccountDTO {
     private Date createDate;
     private String UUIDKey;
     private File file;
-
+    private boolean active;
     @Setter
     @Getter
     @NoArgsConstructor
