@@ -21,6 +21,8 @@ const items = [
     title: homeData.title,
     text: homeData.text,
     caption: "h1",
+    captionHeader: "abc",
+    backgroundColor: "#e2f2b2",
     key: 1,
   },
   {
@@ -28,6 +30,8 @@ const items = [
     title: homeData.title,
     text: homeData.text,
     caption: "h2",
+    captionHeader: "abc",
+    backgroundColor: "#fefefe",
     key: 2,
   },
   {
@@ -35,6 +39,8 @@ const items = [
     title: homeData.title,
     text: homeData.text,
     caption: "h3",
+    captionHeader: "abc",
+    backgroundColor: "#d6e5fb",
     key: 3,
   },
 ];
@@ -71,7 +77,7 @@ const HeroSection = () => {
         onExited={() => setAnimating(false)}
         key={item.key}
       >
-        <section className="hero__section">
+        <section className="hero__section" style={ {background: item.backgroundColor }}>
           <Container>
             <Row>
               <Col lg="6" md="6">
@@ -97,7 +103,7 @@ const HeroSection = () => {
         </section>
         <CarouselCaption
           captionText={item.caption}
-          captionHeader={item.caption}
+          captionHeader={item.captionHeader}
         />
       </CarouselItem>
     );
@@ -105,10 +111,12 @@ const HeroSection = () => {
 
   return (
     <Carousel
+     
       activeIndex={activeIndex}
       next={next}
       previous={previous}
       {...args}
+      interval= {5000}
     >
       <CarouselIndicators
         items={items}

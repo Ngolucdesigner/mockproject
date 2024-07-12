@@ -13,6 +13,9 @@ const Clock = () => {
     interval = setInterval(() => {
       const now = new Date().getTime();
       const different = destination - now;
+
+  
+
       const day = Math.floor(different / (1000 * 60 * 60 * 24));
       const hour = Math.floor(
         (different % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
@@ -20,19 +23,21 @@ const Clock = () => {
       const minute = Math.floor((different % (1000 * 60 * 60)) / (1000 * 60));
       const second = Math.floor((different % (1000 * 60)) / 1000);
 
-      if (destination < 0 ){
+      if (Number(destination)> 0 ){
+
+
+        setDays(day);
+        setHours(hour);
+        setMinutes(minute);
+        setSeconds(second);
+        
+      } 
+      else {
         clearInterval(interval);
         setDays(0);
         setHours(0);
         setSeconds(0);
         setMinutes(0);
-        
-      } 
-      else {
-        setDays(day);
-        setHours(hour);
-        setMinutes(minute);
-        setSeconds(second);
       }
     });
   };

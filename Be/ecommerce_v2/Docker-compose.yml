@@ -1,0 +1,73 @@
+#version: '3.3'
+#services:
+#  ### MySQL Container
+#  mysql:
+#    image: mysql
+#
+#    environment:
+#      - MYSQL_ROOT_PASSWORD: root123
+#      - MYSQL_DATABASE: root
+#      - MYSQL_USER: admin
+#      - MYSQL_PASSWORD: admin
+#    volumes:
+#      - mysql-data:/var/lib/mysql
+#      - ./ecommerce.sql:/docker-entrypoint-initdb.d/init.sql
+#
+#
+#  web:
+#    image: ecommerce:latest
+#    ports:
+#      - 8080:8000
+#    depends_on:
+#      - mysql
+#volumes:
+#  mysql-data:
+
+#version: '3.3'
+#services:
+#  ### MySQL Container
+#  mysql:
+#    container_name: mysql
+#    image: mysql:8.1.0
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root123
+#      MYSQL_USER: root
+#      MYSQL_DATABASE: ecommerce
+#
+#      MYSQL_PASSWORD: root123
+#    volumes:
+#      - mysql_volume:/var/lib/mysql
+#      - ./ecommerce.sql:/docker-entrypoint-initdb.d/init.sql
+#    networks:
+#      - mysql_network
+#volumes:
+#   mysql_volume:
+#networks:
+#    mysql_network:
+#  web:
+#    image: ecommerce:latest
+#    ports:
+#      - 8080:8000
+#    depends_on:
+#      - mysql
+
+version: "3.7"
+services:
+  mysql:
+    image: mysql:8.1.0
+    container_name: database
+    restart: always                       # always restart
+    environment:
+      MYSQL_DATABASE: 'ecommerce'              # name of database
+      MYSQL_USER: 'root'                # sample is the name of user
+      MYSQL_PASSWORD: 'root123'          # password for sample user
+      MYSQL_ROOT_PASSWORD: 'root123'     # password for root user
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - '3306:3306'                       # host port 3306 is mapper to docker port 3306
+    expose:
+      - '3306'
+    volumes:
+      - mysql-db:/var/lib/mysql
+volumes:
+  mysql-db:

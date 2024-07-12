@@ -113,7 +113,6 @@ const Signup = () => {
                 <Form className="auth__form" onSubmit={handleSubmit}>
                   <FormGroup className="form__group">
                     <Input
-                      
                       type="text"
                       placeholder="Username"
                       value={username}

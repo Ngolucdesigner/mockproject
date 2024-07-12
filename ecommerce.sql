@@ -139,7 +139,7 @@ CREATE TABLE `quantity`(
         totalQuantity INT UNSIGNED,
         totalSale INT UNSIGNED,
         productId INT UNSIGNED,
-        FOREIGN KEY(productId) REFERENCES `products`(id) ON DELETE CASCADE
+		FOREIGN KEY(productId) REFERENCES `products`(id) ON DELETE CASCADE
 );
 
 CREATE TABLE `payments`(
@@ -151,4 +151,34 @@ CREATE TABLE `payments`(
         
         FOREIGN KEY(orders_id) REFERENCES `orders`(orderId) ON DELETE CASCADE
         
+);
+
+DROP TABLE IF EXISTS SERVICES;
+
+CREATE TABLE SERVICES(
+	iconId INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    icon VARCHAR(100) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    subTitle TEXT NOT NULL,
+    background VARCHAR(50)
+);
+
+
+DROP TABLE IF EXISTS FOOTERDATA;
+CREATE TABLE FOOTERDATA(
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `description` TEXT NOT NULL,
+    address TEXT NOT NULL,
+    phone VARCHAR(50) NOT NULL,
+    email VARCHAR(150) NOT NULL
+);
+
+DROP TABLE IF EXISTS HerroSection;
+CREATE TABLE HerroSection(
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    img TEXT NOT NULL,
+    title TEXT NOT NULL,
+    subTitle VARCHAR(50) NOT NULL,
+    backgroundColor VARCHAR(150) NOT NULL,
+    captionHeader VARCHAR(150) NOT NULL
 );

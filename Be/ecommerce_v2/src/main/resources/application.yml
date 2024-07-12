@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: Ecommerce
+  profiles:
+    active: dev
+#    active: @spring.profiles.active@
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+open:
+  api:
+    servers:
+      url: http://localhost:8080
+      description : Server dev
+---
+server:
+  port: 8081
+
+spring:
+  config:
+    activate:
+      on-profile: test
+open:
+  api:
+    servers:
+      url: http://localhost:${server.port}
+      description : Server test
+
+---
+server:
+  port: 8082
+spring:
+  config:
+    activate:
+      on-profile: prod
+open:
+  api:
+    servers:
+      url: http://localhost:${server.port}
+      description : Server Prod
